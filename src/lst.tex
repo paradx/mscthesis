@@ -1,0 +1,40 @@
+\subsection{Land Surface Temperature Calculation}
+\subsubsection{Calculation of the Landsat L2 LST}
+The \ac{USGS} provides \ac{LST} data for Landsat 7,8 and 9 Thermal instruments\cite{EROASC2013}\cite{EROASC1999} online after around two weeks after data acquisition. 
+The level two data set uses the top of the atmosphere temperature and calculates the \ac{LST} using atmospheric correction, correction for absorption and emissivity based on ASTER GED data set for radiation temperature.
+%
+\subsubsection{Estimation of the LST temperature based on Landsat L1 Data}\label{sec:lstcalc}
+To check the functionality of the pipeline and create a possibility to create land surface temperature maps from raw data a estimation algorithm was implemented based on the Landsat level 1 data. It was correction for emissivity based on the \ac{NDVI}, this is not as accurate as the ASTER data but provides LST maps quickly and can be derived from a single image data set of the Landsat mission. 
+The landsat intensity value can be converted to a  brightness temperature using \cref{equ:toa}(see \cite{usgsLSTLandsat})
+\begin{equation}
+    \begin{split}\label{equ:toa}
+      L_{\lambda} &= M_L\cdot Q_{cal} + A_L \\
+      BT_{TOA} &= \frac{K2}{\ln(\frac{K1}{L_{\lambda}} + 1)}
+    \end{split}
+\end{equation}
+%
+For the $L_{\lambda}$ the \ac{TOA} radiance is calculated from the $M_L$ parameter from the band meta data file and the additive rescaling factor that is also included in the meta data of the image. 
+Where K1 and K2 are satellite dependent correction parameters and $L_{\lambda}$ is the observed brightness temperature at the satellite instrument. 
+The resulting \ac{TOA} brightness temperature is then corrected using fixed factors based on the \ac{NDVI}. 
+The conversion to \ac{LST} can be done using satellite dependent steps and the correction based on \ac{NDVI} are for Landsat 8  and for Landsat 7. %TODO shown in \cref{equ:lstL8}.
+\begin{equation}\label{equ:lstL8}
+  LST = \frac{T_{TOA}}{1+\frac{\epsilon\cdot T_{TOA}}{1.4388}}
+\end{equation}
+%
+To approximate a proper emissivity correction the \cref{equ:emslstL8}\cite{Sobrino2004} is used.
+\begin{equation}
+\begin{split}\label{equ:emslstL8}
+  \epsilon &= m \cdot P_v + n \\
+  P_v &= \frac{NDVI-NDVI_{min}}{NDVI_{max}- NDVI_{min}}
+\end{split}
+\end{equation}
+With $P_v$ beeing the vegetative fraction 
+where $n$ and $m$ are correction factor for emissivity of partly vegetated areas.  
+%
+For \ac{NDVI} values below 0.2 the surface is assumed to be not populated by any green vegetation and the emissivity is taken from the red band\cite{Nichol1994}.
+For \ac{NDVI} $>$ 0.5 the area of a pixel is assumed to be fully vegetation and the emmissivity can be assumed as 99\%\cite{Sobrino2004} and the values in between can be calculated by the above method with m and n taken from previous research as $m = 0.004$ and $n = 0.986$
+~\cite[equ.~12a\&b]{Sobrino2004}.
+%
+In the following analysis the $BT_{TOA}$ is used without emissivity correction, to test and show that the raw data can be used to detect \acp{UHI}. 
+%The atmospheric influence and the material properties might 
+
