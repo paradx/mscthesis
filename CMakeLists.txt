@@ -22,7 +22,7 @@ SET(BIB_REFERENCE_PATH ${CMAKE_SOURCE_DIR}/src/refs.bib)
 configure_file(${BIB_REFERENCE_PATH} ${OUT_DIRECTORY} @ONLY)
 
 # Latex source file.
-SET( MAIN_TEX_BASE_FILENAME "main")
+SET( MAIN_TEX_BASE_FILENAME "thesis")
 SET( MAIN_TEX "${CMAKE_SOURCE_DIR}/src/${MAIN_TEX_BASE_FILENAME}.tex")
 SET( MAIN_IDX "${LATEX_OUTPUT_PATH}/${MAIN_TEX_BASE_FILENAME}.idx")
 SET( MAIN_AUX "${LATEX_OUTPUT_PATH}/${MAIN_TEX_BASE_FILENAME}.aux")
@@ -40,9 +40,9 @@ ADD_CUSTOM_TARGET( latex-prebuild
 
 # Generate what citation found in the latex file.
 ADD_CUSTOM_TARGET( latex-bibreferences
-			COMMAND ${BIBER_COMPILER} build/main
+			COMMAND ${BIBER_COMPILER} build/thesis
 			COMMENT "Read and create main bib references file."
-			DEPENDS  ${CMAKE_SOURCE_DIR}/build/main.aux
+			DEPENDS  ${CMAKE_SOURCE_DIR}/build/thesis.aux
 			DEPENDS  ${CMAKE_SOURCE_DIR}/src/refs.bib
     )
 ADD_DEPENDENCIES( latex-bibreferences latex-prebuild)
