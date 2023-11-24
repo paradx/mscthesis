@@ -1,30 +1,40 @@
 \documentclass[a4paper, english]{article}
 
+% includes 
 % Language setting
 \usepackage[english]{babel}
-\usepackage[version=4]{mhchem} % for chemical reactions 
+\usepackage{csquotes}
+\usepackage[iso]{isodate}
+\usepackage[version=4]{mhchem} % for chemical reaction formulas
 % Set page size and margins
 \usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+%% images
+\usepackage{graphicx}
+\usepackage{wrapfig}
+%% captions 
 \usepackage{caption}
 \usepackage{subcaption}
+%% tables 
 \usepackage{booktabs}
+%% colors
 \usepackage{xcolor}
-\usepackage{acronym}
-%no blue acros 
-% adjust colour of acronyms
-\makeatletter
-\AtBeginDocument{%
-  \renewcommand*{\AC@hyperlink}[2]{%
-    \begingroup
-      \hypersetup{hidelinks}%
-      \hyperlink{#1}{#2}%
-    \endgroup
-  }%
-}
-\makeatother
-
+%% links and refs and citations 
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage[capitalize]{cleveref}
+\usepackage[backend=biber]{biblatex}
+%% acronyms and glossary 
+\usepackage[automake,acronyms]{glossaries}
+%% include code snippets
 \usepackage{listings}
-\lstdefinestyle{PyStyle}{
+%% maths
+\usepackage{amsmath}
+%% title page
+\usepackage{titling} % for cooler titlepages 
+
+% configuration 
+\bibliography{refs.bib} % Entries are in the refs.bib file
+% configure python code snippets
+\lstdefinestyle{PyStyle}{%
     commentstyle=\color{olive},
     keywordstyle=\color{magenta},
     numberstyle=\tiny\color{gray},
@@ -42,45 +52,34 @@
     tabsize=2,
     language=python
 }
-
-% Useful packages
-\usepackage{amsmath}
-\usepackage{graphicx}
-\usepackage{wrapfig}
-\usepackage[colorlinks=true, allcolors=blue]{hyperref}
-\usepackage[capitalize]{cleveref}
-\usepackage{csquotes}
-\usepackage[iso]{isodate}
-\usepackage[backend=biber]{biblatex}
-
-\usepackage{titling} % for cooler titlepages 
-
-\bibliography{refs.bib} % Entries are in the refs.bib file
-
-\title{\textit{PMA Space Science and Technology M. Sc.} \\ \vspace{1cm}Project Report \\ \vspace{1cm} \textbf{\huge Automated detection of Urban Heat Islands using remote sensing data}\\ \vspace{1.2cm} }
-
+% setup title 
+\title{\textit{} \\ \vspace{1cm}Project Report \\ \vspace{1cm} \textbf{\huge Impact of Climate and Land Cover Change in Urban Heat Islands}\\ \vspace{1.2cm} }
 \author{Linus Andrae (6015384)}
 \date{\today}
 
 \begin{document}
-\input{title}
-\newpage
-\input{abstact}
-\newpage
-\tableofcontents
-\listoffigures
-\listoftables
-\section*{Acronyms}
-\begin{acronym}
-  \acro{USGS}{United States Geological Survey}
-  \acro{LST}{Land Surface Temperature}
-  \acro{LULC}{Land Use/ Land Cover}
-  \acro{UHI}[UHI]{Urban Heat Island}
-  \acro{NDVI}{Normalized Differential Vegetation Index}
-  \acro{NIR}{Near Infrared}
-  \acro{OSM}{Open Street Map}
-  \acro{TOA}{Top of Atmosphere}
-\end{acronym}
+  \input{title}
+  \newpage
+
+  \input{abstact}
+  \newpage
+  % TODO insert Eigenständigkeitserklärung
+
+  \tableofcontents
+  \listoffigures
+  \listoftables
+
+  \section*{Acronyms}
+  \begin{acronym}
+    \acro{USGS}{United States Geological Survey}
+    \acro{LST}{Land Surface Temperature}
+    \acro{LULC}{Land Use/ Land Cover}
+    \acro{UHI}[UHI]{Urban Heat Island}
+    \acro{NDVI}{Normalized Differential Vegetation Index}
+    \acro{NIR}{Near Infrared}
+    \acro{OSM}{Open Street Map}
+    \acro{TOA}{Top of Atmosphere}
+  \end{acronym}
 \newpage
 
 \section{Introduction}
