@@ -23,7 +23,9 @@
 \usepackage[capitalize]{cleveref}
 \usepackage[backend=biber]{biblatex}
 %% acronyms and glossary 
-\usepackage[automake,acronyms]{glossaries}
+\usepackage[automake,acronyms,xindy,translate=babel]{glossaries} % TODO 
+\usepackage{glossaries-extra}
+%\usepackage{acro}
 %% include code snippets
 \usepackage{listings}
 %% maths
@@ -57,6 +59,18 @@
 \author{Linus Andrae (6015384)}
 \date{\today}
 
+\makeglossaries%
+% Acros
+\newabbreviation{USGS} {USGS} {United States Geological Survey}
+\newabbreviation{LST}  {LST}  {Land Surface Temperature}
+\newabbreviation{LULC} {LULC} {Land Use/ Land Cover}
+\newabbreviation{UHI}  {UHI}  {Urban Heat Island}
+\newabbreviation{NDVI} {NDVI} {Normalized Differential Vegetation Index}
+\newabbreviation{NIR}  {NIR}  {Near Infrared}
+\newabbreviation{OSM}  {OSM}  {Open Street Map}
+\newabbreviation{TOA}  {TOA}  {Top of Atmosphere}
+\newabbreviation{ECMWF}{ECMWF}{European Center for Medium-Range Weather Forcasts}
+
 \begin{document}
   \input{title}
   \newpage
@@ -70,16 +84,9 @@
   \listoftables
 
   \section*{Acronyms}
-  \begin{acronym}
-    \acro{USGS}{United States Geological Survey}
-    \acro{LST}{Land Surface Temperature}
-    \acro{LULC}{Land Use/ Land Cover}
-    \acro{UHI}[UHI]{Urban Heat Island}
-    \acro{NDVI}{Normalized Differential Vegetation Index}
-    \acro{NIR}{Near Infrared}
-    \acro{OSM}{Open Street Map}
-    \acro{TOA}{Top of Atmosphere}
-  \end{acronym}
+  \printglossaries
+  %\begin{acronym}
+      %\end{acronym}
 \newpage
 
 \section{Introduction}
@@ -95,11 +102,26 @@
 \section{Theoretical Framework}
     \subsection{Definitions}
     \input{ndvi}
+    \subsubsection{Wet Bulb Globe Temperature}
+    The human body reacts to heat stress differently in different environmental conditions. 
+    Working under heat stress poses a serious health issue, for this the \gls{WBGT} was defined as EN ISO 7243:2017, calculating the thermal load on the human body\cite{isoWBGT}
+    Heat exchange between the human body and the environment is dominated by evaporation of secreted sweat.
+    The efficiency of this process is determined by the vaporation pressure, that is influenced by temperature difference and the humidity difference. %TODO ref paper with caves
+    The Heat Index is a simple way of calculating this efficiency that does not take radiant heat into account, the WBGT does incorperate this effect as well as clothing in this process. 
+
+
+    
     \subsection{Models and Theories}
+
 
 \section{Comparable Definition of Urban Heat Islands}
     \subsection{Introduction}
+    The definitions of \glspl{UHI} in the literature are varying slightly and do not take into account that, using remote sensing techniques most definitions do not allow easy comparison between different areas or times.
+    %TODO add sources, maybe add examples? 
+    The definition of the U.S.~EPA\cite{epaUHIDef} and the German Weather Service (DWD) both say it is an feature defined by increased temperature between the urbanized areas compared to the sourrounding. % TODO cite  
+    Different studies analyzing \glspl{UHI} 
     \subsection{Analysis}
+    
     \subsection{Conclusions}
 
 \section{Impact of Climate Change on UHIs}
@@ -138,16 +160,16 @@
 %Kataster data from Bremen as well as with OSM data. % todo do 
 %
 %Ziel Projekt teil: 
-%- detection and error margins in \ac{UHI} detection using remote sensing data 
-%- data pipeline to create maps of \ac{UHI} in areas 
+%- detection and error margins in UHI detection using remote sensing data 
+%- data pipeline to create maps of UHI in areas 
 %- surface classification based on remote sensing data correlated with 2nd and 3rd sources (kataster/ OSM) 
-%- \ac{UHI} "cores" identification 
+%- UHI "cores" identification 
 %
 %Master Fragestellungen: 
-%- Correlation zw. \ac{UHI} und Pollutants? 
+%- Correlation zw. UHI} und Pollutants? 
 %https://pubs.acs.org/doi/epdf/10.1021/cr5006815 
-%- Real time \ac{UHI} size/occurrence prediction based on ground temperature stations (Bremen Airport) and pollutant levels? 
-%- \ac{UHI} classification in different environments, causes and effects, mitigation stategies? (e.g. Classification of Surface types, vegetation etc. within different climate zones (Phoenix, Bremen, Karlruhe, Essen, Something meditareiean, Afrika (coastal, arid, etc) /paper with adis abbeba)
+%- Real time UHI size/occurrence prediction based on ground temperature stations (Bremen Airport) and pollutant levels? 
+%- UHI classification in different environments, causes and effects, mitigation stategies? (e.g. Classification of Surface types, vegetation etc. within different climate zones (Phoenix, Bremen, Karlruhe, Essen, Something meditareiean, Afrika (coastal, arid, etc) /paper with adis abbeba)
 %
 %\subsection{}
 

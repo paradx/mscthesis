@@ -47,13 +47,24 @@ ADD_CUSTOM_TARGET( latex-bibreferences
     )
 ADD_DEPENDENCIES( latex-bibreferences latex-prebuild)
 
+# Generate the glossary 
+ADD_CUSTOM_TARGET( latex-glossaries
+      COMMAND makeglossaries thesis 
+      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/build
+			COMMENT "Create glossary."
+			DEPENDS  ${CMAKE_SOURCE_DIR}/build/thesis.gls
+			DEPENDS  ${CMAKE_SOURCE_DIR}/build/thesis.xdy
+    )
+ADD_DEPENDENCIES( latex-glossaries latex-prebuild)
+
+
 # Second pass - generate the final pdf.
 ADD_CUSTOM_TARGET( latex-pdf	
 			COMMAND ${PDFLATEX_COMPILER} -output-directory ${OUT_DIRECTORY} ${MAIN_TEX} 
 			WORKING_DIRECTORY ${WORKINGDIR}
 			COMMENT "Assembling the final pdf file."
 			DEPENDS  ${MAIN_TEX})
-ADD_DEPENDENCIES( latex-pdf latex-prebuild latex-bibreferences)
+ADD_DEPENDENCIES( latex-pdf latex-prebuild latex-bibreferences latex-glossaries)
 
 ADD_CUSTOM_TARGET(all-formats ALL) # Entry point of execution.
 ADD_DEPENDENCIES( all-formats latex-pdf)

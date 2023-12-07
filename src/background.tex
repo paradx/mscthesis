@@ -1,13 +1,13 @@
 \section{Background}
 \subsection{Urban Heat Islands}
-The phenomenon of \acp{UHI} has been studied for the past 30 years. 
+The phenomenon of \glspl{UHI} has been studied for the past 30 years. 
 Due to increase in global temperature as well as increased occurrence of extreme weather and periods of heatwaves, this phenomenon will likely increase in intensity and will also occur in cities at higher latitudes~\cite{Sachindra2016}\cite[p.~904]{Wilby2008}.
-\acp{UHI} are a spacial phenomenon that occurs on different scales and intensities, this makes observation using remote sensing data a good and widely used approach~\cite{Weng2003}.\\
-\acp{UHI} are distinguished into surface and atmospheric \acp{UHI}.
-Within this context we will only investigate surface \acp{UHI}. 
-Surface \acp{UHI} are areas of higher surface temperatures within urban areas compared to rural areas due to the materials used and heat from mobility, electrical appliances, heating and cooling as well as less vegetation and higher sealed surfaces that reduce surface water availability\cite[pp. 7-12]{EPA2008}. 
-The surface \acp{UHI} are longer term phenomenon that are most intense in summer. 
-Atmospheric \acp{UHI} are more dependent on weather and local topology and are in part a side effect of the slower cooling of the city air due to the higher thermal capacity and wind obstruction.
+\glspl{UHI} are a spacial phenomenon that occurs on different scales and intensities, this makes observation using remote sensing data a good and widely used approach~\cite{Weng2003}.\\
+\glspl{UHI} are distinguished into surface and atmospheric \glspl{UHI}.
+Within this context we will only investigate surface \glspl{UHI}. 
+Surface \glspl{UHI} are areas of higher surface temperatures within urban areas compared to rural areas due to the materials used and heat from mobility, electrical appliances, heating and cooling as well as less vegetation and higher sealed surfaces that reduce surface water availability\cite[pp. 7-12]{EPA2008}. 
+The surface \glspl{UHI} are longer term phenomenon that are most intense in summer. 
+Atmospheric \glspl{UHI} are more dependent on weather and local topology and are in part a side effect of the slower cooling of the city air due to the higher thermal capacity and wind obstruction.
 This phenomenon is not investigated by this work, since the air temperature can not be directly observed by remote sensing data.
 %Under certain conditions the increased temperature will form a hot air pocket, that will trap the head and reduce airflow from and to the area. \\
 The main factors in forming urban heat islands is the thermal storage capacity of materials used in urban areas like concrete, asphalt and steel, that have a high heat capacity and heat up quickly during the day and emit the stored thermal energy as sensible heat with a delay (eg.~during the night)\cite{Ramamurthy2014}. 
@@ -19,9 +19,21 @@ The emitted thermal energy of these heat pumps further increases the surrounding
 There are multiple adverse effects and possible mitigation techniques for the mitigation and reduction of urban heat islands have been studied extensively since the 1970s\cite{Nichol1994}\cite{Stewart2011}. % list studies.  
 Advective cooling can be observed when the temperature gradient generated airflow from the cooler surrounding areas towards the hot areas within the city, cooling it down\cite{HaegerEugensson1999}. \\
 Urban areas with no close water body (generating sea breezes as well as latent heat transport) and with lower average wind speed are more likely to be affected by urban heat islands\cite{Ramamurthy2017}. 
-Higher temperatures due to \acp{UHI} cause stress to animals and humans increasing health risk due to heat stroke and increased surface level ozone concentration\cite{Santamouris2020}.
+Higher temperatures due to \glspl{UHI} cause stress to animals and humans increasing health risk due to heat stroke and increased surface level ozone concentration\cite{Santamouris2020}.
 \subsection{Land Surface Temperature}
 Land surface temperature is the temperature at which an object emits infrared radiation according to plank's law\cite{Liang2020}. 
-Using remote sensing methods this quantity can not be directly observed since the satellite is observing \ac{TOA} brightness temperature. 
-This temperature can be transformed to a \ac{LST} using atmospheric correction and correction for the emissivity of the ground.
+Using remote sensing methods this quantity can not be directly observed since the satellite is observing \gls{TOA} brightness temperature. 
+This temperature can be transformed to a \gls{LST} using atmospheric correction and correction for the emissivity of the ground.
 The conversion factor is data source dependent and can be found in \cref{sec:lstcalc}.
+
+\subsection{Air Temperature}
+Urban heat islands that impact human health are the atmospheric urban heat islands. 
+These are defined by the air temperature of the urban area and the air temperature outside that area. %todo fix a bit 
+
+During the day the air temperature is lower then the surface temperature\cite{epa}, during the night the hot surfaces radiate off the energy heating the surrounding air. 
+
+There are multiple factors impacting urban air temperature. 
+Combustion from traffic and industrial processes, produce heat as a by product that heats the surrounding air. 
+HVAC systems also produce heat, when cooling buildings. This further increases the air temperature increasing cooling need within the urban area. 
+
+

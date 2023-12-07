@@ -1,0 +1,12 @@
+* Masterthesis Impact of Climate and Land Use Land Cover Change on Urban Heat
+  Islands 
+
+** Step 1: UHI Definition for Reproducibility 
+1. Grab an Image from a Satellite 
+2. Land Use Land Cover Classification using as much parameters as possible
+(or external source?) 
+3. Prepare LULC to binary and Watershed it 
+4. Identify Urban core areas and sourrounding areas 
+5. Calculate Mean Temperature of Sourrunding 
+6. Calclulate UHIs based on that 
+
