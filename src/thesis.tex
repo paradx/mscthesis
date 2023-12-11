@@ -84,7 +84,7 @@
   \listoftables
 
   \section*{Acronyms}
-  \printglossaries
+  \printglossaries%
   %\begin{acronym}
       %\end{acronym}
 \newpage
@@ -119,8 +119,23 @@
     The definitions of \glspl{UHI} in the literature are varying slightly and do not take into account that, using remote sensing techniques most definitions do not allow easy comparison between different areas or times.
     %TODO add sources, maybe add examples? 
     The definition of the U.S.~EPA\cite{epaUHIDef} and the German Weather Service (DWD) both say it is an feature defined by increased temperature between the urbanized areas compared to the sourrounding. % TODO cite  
-    Different studies analyzing \glspl{UHI} 
+    Different studies analyzing \glspl{UHI} use difference referenece tempereatures.
+    The first goal of this work is defining a systematic reproducable aproach to measure urban heat island intensity based on land usage. 
+    \subsection{Approach}
+    To make the approach comparable previous work was done takeling the problem using a comparable definition for comparing \gls{SUHI} around the world using Sentinel images\cite{Sobrino2020}.
+    The landcover indicating urban areas is identified and the urban area polygon is extended by buffer zones. 
+    In~\cite{Sobrino2020} urban adjacent, future urban adjacent and peri-urban areas are defined.
+    The used approach was adapted by removing the urban growth projection (the paper investigated \glspl{SUHI} in 2050).
+    For \gls{LULC} Landsat 8/9 data was used combined with a SVM (see \cref{sec:svm}). 
+
+    
+
     \subsection{Analysis}
+    \subsubsection{SVM}\label{sec:svm}
+    For classifing surfaces a \gls{SVM} was used, that utilized multiple multispectral input images of the same city at different seasons as training material.
+    The SVM uses a lagrange multiplication to optimize a minimiziation problem for a grouping a given set of multi-dimentional parameters. 
+    In the case of the used multi spectral landsat dataset, the value of each image pixel for each band is used creating a vector of band 1--7 of the OLI instrument. 
+    
     
     \subsection{Conclusions}
 
