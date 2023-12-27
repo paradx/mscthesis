@@ -120,14 +120,17 @@
     %TODO add sources, maybe add examples? 
     The definition of the U.S.~EPA\cite{epaUHIDef} and the German Weather Service (DWD) both say it is an feature defined by increased temperature between the urbanized areas compared to the sourrounding. % TODO cite  
     Different studies analyzing \glspl{UHI} use difference referenece tempereatures.
-    The first goal of this work is defining a systematic reproducable aproach to measure urban heat island intensity based on land usage. 
+    The first goal of this work is defining a systematic reproducable aproach to measure urban heat island intensity based on land usage.
+
     \subsection{Approach}
     To make the approach comparable previous work was done takeling the problem using a comparable definition for comparing \gls{SUHI} around the world using Sentinel images\cite{Sobrino2020}.
     The landcover indicating urban areas is identified and the urban area polygon is extended by buffer zones. 
-    In~\cite{Sobrino2020} urban adjacent, future urban adjacent and peri-urban areas where used.
-    The used approach was adapted by removing the urban growth projection (the paper investigated \glspl{SUHI} in 2050), to allow historical analysis of \glspl{SUHI} development.
-    For \gls{LULC} Landsat 8/9 data was used combined with other data sources (see \cref{sec:svm}). 
-
+    In~\cite{Sobrino2020} urban adjacent, future urban adjacent and peri-urban areas are defined.
+    The used approach was adapted by removing the urban growth projection (the paper investigated \glspl{SUHI} in 2050).
+    For \gls{LULC} Landsat 8/9 data was used combined with a SVM (see \cref{sec:svm}). 
+    \subsubsection{Used Satellites}
+    Using remote sensing data to detect and analyse \gls{SUHI} requires devices that detect thermal infrared radiation. 
+    Satellites that are equipt with thermal infrared sensors that are able to detect upwelling emmission from the surface temperature within the $ 8 < \lambda < 12 \mu m $ range
     \subsection{Analysis}
     \subsubsection{SVM}\label{sec:svm}
     For classifing surfaces a \gls{SVM} was used, that utilized multiple multispectral input images of the same city at different seasons as training material.
