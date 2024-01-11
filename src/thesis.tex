@@ -71,6 +71,7 @@
 \newabbreviation{NIR}  {NIR}  {Near Infrared}
 \newabbreviation{OSM}  {OSM}  {Open Street Map}
 \newabbreviation{TOA}  {TOA}  {Top of Atmosphere}
+\newabbreviation{ML}   {ML}  {Machine Learning}
 \newabbreviation{SVM}  {SVM}  {Support Vector Machine}
 \newabbreviation{ECMWF}{ECMWF}{European Center for Medium-Range Weather Forcasts}
 \newabbreviation{WBGT}{WBGT}{Wet Bulb Globe Temperature}
@@ -180,18 +181,24 @@
     \end{figure}
     In~\cite{Sobrino2020} urban adjacent, future urban adjacent and peri-urban areas are defined.
     The used approach was adapted by removing the urban growth projection (the paper investigated \glspl{SUHI} in 2050).
-    For \gls{LULC} Landsat 8/9 data was used combined with a SVM (see \cref{sec:svm}). 
+    For \gls{LULC} Landsat 8/9 data was used combined with different \gls{ML} techniques for surface classification (see \cref{sec:svm}). % TODO 
+
+    
     \subsubsection{Used Satellites}
     Using remote sensing data to detect and analyse \gls{SUHI} requires devices that detect thermal infrared radiation. 
-    Satellites that are equipt with thermal infrared sensors that are able to detect upwelling emmission from the surface temperature within the $ 8 < \lambda < 12 \mu m $ range
+    Satellites that are equipt with thermal infrared sensors that are able to detect upwelling emmission from the surface temperature within the $ 8 < \lambda < 12 \mu m $ range. 
+    Commonly used instruments used for measureing UHIs are Landsat, MODIS, ASTER and Sentinel-3. 
+    
     \subsection{Analysis}
-    \subsubsection{SVM}\label{sec:svm}
+    \subsubsection{KMeans}\label{sec:kmeans}
+    Initially an unsupervised kmeans clustering algorithm was used for surface clasisfication, this was compared with. 
+    
+    \subsubsection{ML Classification }\label{sec:svm}
     For classifing surfaces a \gls{SVM} was used, that utilized multiple multispectral input images of the same city at different seasons as training material.
     The SVM uses a lagrange multiplication to optimize a minimiziation problem for a grouping a given set of multi-dimentional parameters. 
     In the case of the used multi spectral landsat dataset, the value of each image pixel for each band is used creating a vector of band 1--7 of the OLI instrument. 
-    
-    
     \subsection{Conclusions}
+    
 
 \section{Impact of Climate Change on UHIs}
     \subsection{Introduction}
