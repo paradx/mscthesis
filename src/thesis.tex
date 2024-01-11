@@ -11,6 +11,7 @@
 %% images
 \usepackage{graphicx}
 \usepackage{wrapfig}
+\usepackage[inkscapeformat=png]{svg}
 %% captions 
 \usepackage{caption}
 \usepackage{subcaption}
@@ -21,7 +22,7 @@
 %% links and refs and citations 
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 \usepackage[capitalize]{cleveref}
-\usepackage[backend=biber, style=alphabetic]{biblatex}
+\usepackage[backend=biber, style=authoryear]{biblatex}
 %% acronyms and glossary 
 \usepackage[automake,acronyms,xindy,translate=babel]{glossaries} 
 \usepackage{glossaries-extra}
@@ -55,7 +56,7 @@
     language=python
 }
 % setup title 
-\title{\textit{} \\ \vspace{1cm}Project Report \\ \vspace{1cm} \textbf{\huge Impact of Climate and Land Cover Change in Urban Heat Islands}\\ \vspace{1.2cm} }
+\title{\textit{} \\ \vspace{1cm}Master Of Science: Space Science and Technology\\ \vspace{1cm} \textbf{\huge Impact of Climate and Land Cover Change in Urban Heat Islands}\\ \vspace{1.2cm} }
 \author{Linus Andrae (6015384)}
 \date{\today}
 
@@ -94,32 +95,52 @@
 \newpage
 
 \section{A historical introduction of urban heat island research}
-The scientific investigation of the urban climate and the influence of human settlements and activity on the local atmosphere and temperature has been studied for more then 200 years. 
-\cite{Howard1833} investigated the climate of London in a study from 1819 to 1827 and a similar study was conducted in Paris in the 1850s\cite{renou1862differences}. 
-The first mobile measurement campaigns\cite{peppler1929auto} and investigations of the spacial distribution of temperatures where conducted in the 1920s in Germany and Austria \cite{tollner1932untersuchungen}, and where repeated in multiple cities around the globe. %todo add more refs? 
-The term Urban Heat Island was coined in the 1960s in publications regarding case studies in London\cite{Chandler1961} and Montreal \cite{Oke1968}.
-During this time the influences and understanding of the interaction between the human industrial activity, the land change and the influence on temperatures was investigated by numerous case studies using fixed or mobile weather stations. 
-The first use of helicopters and airplanes to measure vertical temperature profiles where documented in the 1950s 
-%TODO add source 
-All these studies focused on the atmospheric heat distribution over urban areas and resulted in the development of physical energy transport models for these. 
-These models required a deeper understanding of the surface properties and the temperature distribution within the urban area. 
+  The scientific investigation of the urban climate and the influence of human settlements and activity on the local atmosphere and temperature has been studied for more then 200 years. 
+  \cite{Howard1833} investigated the climate of London in a study from 1819 to 1827 and a similar study was conducted in Paris in the 1850s\cite{renou1862differences}. 
+  The first mobile measurement campaigns\cite{peppler1929auto} and investigations of the spacial distribution of temperatures where conducted in the 1920s in Germany and Austria \cite{tollner1932untersuchungen}, and where repeated in multiple cities around the globe. %todo add more refs? 
+  The term Urban Heat Island was coined in the 1960s in publications regarding case studies in London\cite{Chandler1961} and Montreal \cite{Oke1968}.
+  During this time the influences and understanding of the interaction between the human industrial activity, the land change and the influence on temperatures was investigated by numerous case studies using fixed or mobile weather stations. 
+  The first use of helicopters and airplanes to measure vertical temperature profiles where documented in the 1950s 
+  %TODO add source 
+  All these studies focused on the atmospheric heat distribution over urban areas and resulted in the development of physical energy transport models for these. 
+  These models required a deeper understanding of the surface properties and the temperature distribution within the urban area. 
+  % 
+  Then newly available remote sensing devices such as infrared imagers made it possible to observe the urban environment from above and detect temperature hot spots using airborne and satellite images.  
+  %  
+  First investigations regarding the feasibility of this approach where proposed in the late 70s (\cite{Watson1975}, \cite{Carlson1977} and \cite{Block1978}) but the resolution of satellite images insufficient for detailed investigations of Urban Heat Islands.
+  A first study using satellite infrared imagery where conducted in 1978 using the NOAA 5 Satellite (with a spacial resolution of 1km)\cite{Matson1978}. 
+  Multiple studies in the 70s and 80s used images taken from planes or helicopters to aid the investigation of smaller scale effects within the urban surface temperature distribution (e.g. \cite{Landsberg1979}, \cite{ljungberg1980use} and \cite{Foster1981}).
+  With advances in satellite technology the resolution and data availability increased. 
+  The Landsat program stared in 1975 and since \textit{Landsat 4} was launched in 1982 the landsat program continuously provides thermal infrared data of the whole planet. 
+  The increased resolution that allows pixel sizes between 60 m(Landsat 7) and 120 m (Landsat 4 and 5), allows investigation of smaller patterns within urban areas. 
+  Increased revisit frequency of roughly two weeks made remote satellite data a more useful and widely used tool in the research of urban meteorology and urban heat islands. 
+  %
+  \subsection{Research Question}
+  In this thesis the impact of change in land cover (urbanisation, urban development and other land use changes) and the impact of rising average temperature shall be investigated with regards to the urban heat island phenomena. 
 
-Then newly available remote sensing devices such as infrared imagers made it possible to observe the urban environment from above and detect temperature hot spots using airborne and satellite images.  
+ 
+    \subsection{Methodology}
+    % SUHI measurements using Thermal Infrared Satellite Data 
+    
+    % LULC impact using ML algorithm to create time lines of LULC of example cities
 
-First investigations regarding the feasibility of  this approach where proposed in the late 70s (\cite{Watson1975}, \cite{Carlson1977} and \cite{Block1978}) but the resolution of satellite images insufficient for detailed investigations of Urban Heat Islands.
-A first study using satellite infrared imagery where conducted in 1978 using the NOAA 5 Satellite (with a spacial resolution of 1km)\cite{Matson1978}. 
-Multiple studies in the 70s and 80s used images taken from planes or helicopters to aid the investigation of smaller scale effects within the urban surface temperature distribution (e.g. \cite{Landsberg1979}, \cite{ljungberg1980use} and  ).
-With advances in satellite technology, resolution and data availability increased. 
-The Landsat program stared in 1975 and since Landsat 4 in 1982 continuously provides thermal infrared data of the whole planet. 
-The increased resolution that allows pixel sizes between 60 m(Landsat 7) and 120 m (Landsat 4 and 5), allows investigation of smaller patterns within urban areas.
-The 
+    % Measurment of UHI intesity over time 
 
+    % Modelling of UHI into the future 
+
+    % Application of different Indicies for measuring heat stress and other parameters for juding UHI intesity
+
+    % Outlook and further research
+
+    \subsection{Structure of the Thesis}
+    In the introduction as well as \cref{sec:background} previous work and an overview of the current understanding of the urban heat island effect and research in this area is accessed. 
+%comparable definition
+    \Cref{sec:definition} combines the work of~\cite{Sobrino2020} and %TODO 
+    to create a definition of surface urban heat islands that is usable for comparing \glspl{UHI} in different cities.  
+    \Cref{sec:LULC} measures and investigates the impact of land use and land cover changes by building
+    In \Cref{sec:UHIInt} the impact of changing temperatures an increase of extreme weather phenomena on the intensity and seasonal variety of \glspl{UHI} is investigated 
 
    \input{background}
-    \subsection{Research Question}
-    
-    \subsection{Methodology}
-    \subsection{Structure of the Thesis}
 
 \section*{Acknowledgements}
 
@@ -152,7 +173,11 @@ The
 
     \subsection{Approach}
     To make the approach comparable previous work was done takeling the problem using a comparable definition for comparing \gls{SUHI} around the world using Sentinel images\cite{Sobrino2020}.
-    The landcover indicating urban areas is identified and the urban area polygon is extended by buffer zones. 
+    The land cover classes indicating urban areas is identified and the urban area polygon is extended by buffer zones. 
+    \begin{figure}
+      \includesvg[width=\textwidth]{img/UrbanAreaBremen}
+      \caption{Urban Area of Bremen, with buffer zones for Adjacent and Peri Urban Area}
+    \end{figure}
     In~\cite{Sobrino2020} urban adjacent, future urban adjacent and peri-urban areas are defined.
     The used approach was adapted by removing the urban growth projection (the paper investigated \glspl{SUHI} in 2050).
     For \gls{LULC} Landsat 8/9 data was used combined with a SVM (see \cref{sec:svm}). 

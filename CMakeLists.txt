@@ -31,9 +31,10 @@ SET( MAIN_AUX "${LATEX_OUTPUT_PATH}/${MAIN_TEX_BASE_FILENAME}.aux")
 SET( WORKINGDIR "${CMAKE_SOURCE_DIR}/src" )
 
 # First pass.
+# enabled shell-escape since I use the SVG pkg
 ADD_CUSTOM_TARGET( latex-prebuild
-		COMMAND ${PDFLATEX_COMPILER}  -output-directory ${OUT_DIRECTORY} -draftmode -interaction=nonstopmode ${MAIN_TEX}
-		COMMAND ${PDFLATEX_COMPILER}  -output-directory ${OUT_DIRECTORY} -draftmode -interaction=nonstopmode ${MAIN_TEX}
+		COMMAND ${PDFLATEX_COMPILER} -shell-escape -output-directory ${OUT_DIRECTORY} -draftmode -interaction=nonstopmode ${MAIN_TEX}
+		COMMAND ${PDFLATEX_COMPILER} -shell-escape -output-directory ${OUT_DIRECTORY} -draftmode -interaction=nonstopmode ${MAIN_TEX}
 		COMMENT "Starting Prebuild."
 		WORKING_DIRECTORY ${WORKINGDIR}
 		DEPENDS ${MAIN_TEX})
