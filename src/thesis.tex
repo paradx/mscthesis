@@ -26,14 +26,12 @@
 %% acronyms and glossary 
 \usepackage[automake,acronyms,xindy,translate=babel]{glossaries} 
 \usepackage{glossaries-extra}
-%\usepackage{acro}
 %% include code snippets
 \usepackage{listings}
 %% maths
 \usepackage{amsmath}
 %% title page
 \usepackage{titling} % for cooler titlepages 
-
 % configuration 
 \bibliography{refs.bib} % Entries are in the refs.bib file
 % configure python code snippets
@@ -56,7 +54,7 @@
     language=python
 }
 % setup title 
-\title{\textit{} \\ \vspace{1cm}Master Of Science: Space Science and Technology\\ \vspace{1cm} \textbf{\huge Impact of Climate and Land Cover Change in Urban Heat Islands}\\ \vspace{1.2cm} }
+\title{\vspace{1cm}Master Of Science: Space Science and Technology\\ \vspace{1cm} \textbf{\huge Impact of Climate and Land Cover Change in Urban Heat Islands}\\ \vspace{1.2cm} }
 \author{Linus Andrae (6015384)}
 \date{\today}
 
@@ -96,10 +94,10 @@
 \newpage
 
 \section{A historical introduction of urban heat island research}
-  The scientific investigation of the urban climate and the influence of human settlements and activity on the local atmosphere and temperature has been studied for more then 200 years. 
-  \cite{Howard1833} investigated the climate of London in a study from 1819 to 1827 and a similar study was conducted in Paris in the 1850s\cite{renou1862differences}. 
-  The first mobile measurement campaigns\cite{peppler1929auto} and investigations of the spacial distribution of temperatures where conducted in the 1920s in Germany and Austria \cite{tollner1932untersuchungen}, and where repeated in multiple cities around the globe. %todo add more refs? 
-  The term Urban Heat Island was coined in the 1960s in publications regarding case studies in London\cite{Chandler1961} and Montreal \cite{Oke1968}.
+  The scientific investigation of the urban climate and the influence of human settlements and activity on the local atmosphere and temperature has been studied for more then 200 years.%
+~\cite{Howard1833}~investigated the climate of London in a study from 1819 to 1827 and a similar study was conducted in Paris in the 1850s by~\cite{renou1862differences}.%
+  The first mobile measurement campaigns by~\cite{peppler1929auto} and investigations of the spacial distribution of temperatures where conducted in the 1920s in Germany and Austria~\cite{tollner1932untersuchungen}, and where repeated in multiple cities around the globe.\\%todo add more refs? 
+  The term Urban Heat Island was coined in the 1960s in publications regarding case studies in London~\cite{Chandler1961} and Montreal~\cite{Oke1968}.
   During this time the influences and understanding of the interaction between the human industrial activity, the land change and the influence on temperatures was investigated by numerous case studies using fixed or mobile weather stations. 
   The first use of helicopters and airplanes to measure vertical temperature profiles where documented in the 1950s 
   %TODO add source 
@@ -108,18 +106,18 @@
   % 
   Then newly available remote sensing devices such as infrared imagers made it possible to observe the urban environment from above and detect temperature hot spots using airborne and satellite images.  
   %  
-  First investigations regarding the feasibility of this approach where proposed in the late 70s (\cite{Watson1975}, \cite{Carlson1977} and \cite{Block1978}) but the resolution of satellite images insufficient for detailed investigations of Urban Heat Islands.
+  First investigations regarding the feasibility of this approach where proposed in the late 70s (\cite{Watson1975},~\cite{Carlson1977} and~\cite{Block1978}) but the resolution of satellite images insufficient for detailed investigations of Urban Heat Islands.\\
   A first study using satellite infrared imagery where conducted in 1978 using the NOAA 5 Satellite (with a spacial resolution of 1km)\cite{Matson1978}. 
-  Multiple studies in the 70s and 80s used images taken from planes or helicopters to aid the investigation of smaller scale effects within the urban surface temperature distribution (e.g. \cite{Landsberg1979}, \cite{ljungberg1980use} and \cite{Foster1981}).
+  Multiple studies in the 70s and 80s used images taken from planes or helicopters to aid the investigation of smaller scale effects within the urban surface temperature distribution (e.g.~\cite{Landsberg1979},~\cite{ljungberg1980use} and~\cite{Foster1981}).
   With advances in satellite technology the resolution and data availability increased. 
-  The Landsat program stared in 1975 and since \textit{Landsat 4} was launched in 1982 the landsat program continuously provides thermal infrared data of the whole planet. 
-  The increased resolution that allows pixel sizes between 60 m(Landsat 7) and 120 m (Landsat 4 and 5), allows investigation of smaller patterns within urban areas. 
+  The Landsat program stared in 1975 and since \textit{Landsat 4} was launched in 1982 the Landsat program continuously provides thermal infrared data of the whole planet. 
+  The increased resolution that allows pixel sizes between 60 m (\textit{Landsat 7}) and 120 m (\textit{Landsat 4} and \textit{Landsat 5}), allows investigation of smaller patterns within urban areas.\\
   Increased revisit frequency of roughly two weeks made remote satellite data a more useful and widely used tool in the research of urban meteorology and urban heat islands. 
-  %
+  % Add the 2008 - 2010
+  
   \subsection{Research Question}
-  In this thesis the impact of change in land cover (urbanisation, urban development and other land use changes) and the impact of rising average temperature shall be investigated with regards to the urban heat island phenomena. 
+    In this thesis the impact of change in land cover (urbanisation, urban development and other land use changes) and the impact of rising average temperature shall be investigated with regards to the urban heat island phenomena.
 
- 
     \subsection{Methodology}
     % SUHI measurements using Thermal Infrared Satellite Data 
     
@@ -161,7 +159,74 @@
     Ozone is mainly produced when (antropogenic) NO\textsubscript{x} emmissions react with volatile organic compounds. %todo source
     The creation of ozone is dependent on temperature, increasing between 2.2 and 3.2 ppbv/°C depending on NO\textsubscript{x}
 
-    \subsection{Models and Theories}
+    %\subsection{Models and Theories}
+
+    \subsection{Gabor Feature Detection}\label{sec:gabor}
+    %TODO add image of example kernel
+    The Gabor filter is an linear filter, that uses a convolution of an image with a wavelet created by rotating a sine modulated gaussian, this kernel type is also called the \textit{gabor wavelet}. 
+    In image processing this algorithm is used as an feature extraction algorithm to extract and analyse texture and structures with different sizes within the image~(\cite{Cerdan1993}). 
+    By rotating the kernel and changing the frequency, different textures are extracted from the image.
+%
+    Mathematically the gabor filter is defined by
+    \begin{equation}
+      g(x,y; \lambda, \theta, \phi, \sigma, \gamma) = \exp \left(- \frac{x'^2 + \gamma^2\cdot y'^2}{2\sigma^2}\right) \cdot \exp \left[i \left(2\pi\frac{x}{\lambda} + \phi \right)\right] 
+    \end{equation}
+    With \[ x' = x \cos(\phi) + y \sin(\phi) \text{and}
+    y' = -x \sin(\phi) + y \cos(\phi)\]
+%
+    The x and y parameter determine the kernel size, this parameter should be chosen based on the image size and expected structure length.\\
+    $\gamma$ is the aspect ratio of the kernel, with $\gamma = 1$ the kernel is round, for smaller $\gamma$ the kernel becomes a more eccentric ellipse.\\
+    $\phi$ is the angle of rotation of the sine component of the kernel. \\
+    $\theta$ is the angle of rotation of the kernel, detecting differently oriented features.\\
+    $\lambda$ is the wavelength of the sine wave. \\
+    $\sigma$ is the standard deviation of the Gaussian distribution\\ 
+    %TODO add more accurate description of parameters
+
+    To detect different structures of different scales within the image, a filter bank was created by variation of $\phi$, $\sigma$ and $\theta$.
+
+
+
+    \begin{figure}[!htbp]
+       \centering
+     \begin{subfigure}[b]{0.3\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{img/Features_2_005_0.png}
+         \caption{Kernel with $\sigma$ = 2, f = 0.05 and 0 ° rotation}\label{fig:feat01}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.3\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{img/Features_2_015_0.png}
+         \caption{Kernel with $\sigma$ = 2, f = 0.15 and 0 ° rotation}\label{fig:feat02}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.3\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{img/Features_4_005_0.png}
+         \caption{Kernel with $\sigma$ = 4, f = 0.05 and 0 ° rotation}\label{fig:feat03}
+     \end{subfigure}
+
+     \begin{subfigure}[b]{0.3\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{img/Features_2_005_90.png}
+         \caption{Kernel with $\sigma$ = 2, f = 0.05 and 90 ° rotation}\label{fig:feat04}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.3\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{img/Features_2_015_90.png}
+         \caption{Kernel with $\sigma$ = 2, f = 0.15 and 90 ° rotation}\label{fig:feat05}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.3\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{img/Features_4_015_0.png}
+         \caption{Kernel with $\sigma$ = 4, f = 0.15 and 0 ° rotation}\label{fig:feat06}
+     \end{subfigure}
+        \caption{Result of convolving differently oriented gabor wavelets with an Landsat-8 image of Bremen}\label{fig:gaborExample}
+    \end{figure}
+
+
 
 
 \section{Comparable Definition of Urban Heat Islands}
@@ -181,7 +246,7 @@
     \end{figure}
     In~\cite{Sobrino2020} urban adjacent, future urban adjacent and peri-urban areas are defined.
     The used approach was adapted by removing the urban growth projection (the paper investigated \glspl{SUHI} in 2050).
-    For \gls{LULC} Landsat 8/9 data was used combined with different \gls{ML} techniques for surface classification (see \cref{sec:svm}). % TODO 
+    For \gls{LULC} Landsat 8/9 data was used combined with different \gls{ML} techniques for surface classification (see \cref{sec:classification}). % TODO 
 
     
     \subsubsection{Used Satellites}
@@ -190,23 +255,61 @@
     Commonly used instruments used for measureing UHIs are Landsat, MODIS, ASTER and Sentinel-3. 
     
     \subsection{Analysis}
-    \subsubsection{KMeans}\label{sec:kmeans}
-    Initially an unsupervised kmeans clustering algorithm was used for surface clasisfication, this was compared with. 
+%    \subsubsection{KMeans}\label{sec:kmeans}
+%    Initially an unsupervised kmeans clustering algorithm was used for surface clasisfication, this was compared with. 
     
-    \subsubsection{ML Classification }\label{sec:svm}
-    For classifing surfaces a \gls{SVM} was used, that utilized multiple multispectral input images of the same city at different seasons as training material.
-    The SVM uses a lagrange multiplication to optimize a minimiziation problem for a grouping a given set of multi-dimentional parameters. 
-    In the case of the used multi spectral landsat dataset, the value of each image pixel for each band is used creating a vector of band 1--7 of the OLI instrument. 
+    \subsubsection{Classification }\label{sec:classification}
+    For classifying surfaces a mixed approach of clustering and unsupervised machine learning was used. 
+    As input, the multispectral data from Landsat where used.// 
+    The multi band image was loaded and cut to match one of the used training areas (%TODO ref picture
+). 
+    Each band of the image was then processed using a Gabor Feature Extraction algorithm (s. \cref{sec:gabor}) with different parameter sets. 
+    To judge results this was compared to the ESA CCI Land Use Data Set~\cite{landformclassicationusingfuzzykmeans2000} that was scaled up to the used image resolution . %TODO check if correct reference
+
+    It was found, by variation of parameters, that the highest score was archived using 
+%TODO try 
+    rotations of the kernel, a kernel size of 
+%TODO find 
+    and (only circular kernel where used) with a $\lambda$ of 2 and 4. %TODO check 
+    The frequencies of the sine wave where varied between 0.05 and 0.15. 
+
+
     \subsection{Conclusions}
     
 
 \section{Impact of Climate Change on UHIs}
     \subsection{Introduction}
+    The interaction between global and local climate is a complicated process that has multiple parameters, that are not completely understood nor are they all easily measurable. 
+    In central Europe the climate is governed by seasonality typical for the northern hemisphere but al
+    A climate tipping point (see~\cite{Lenton2008}) that could cause severe cooling in northern Europe is the breakdown of the Atlantic Thermohaline circulation\cite{Rahmstorf1999}.
+    %TODO add a sentence for why
+    But since the European climate is still under influence by the warm ocean currents, the temperatures in major European cities have increased at a similar pace then the global mean temperatures. 
+    The cities covered by this study observed an average increase from 1990 to 2020 of %TODO 
+    \textdegree C. 
+
+
+
+%
+    %:\\ 
+    The hypothesis is that the rising temperatures observed over the past 30 years have increased heat island severity and size. 
+    \subsection{Methodology}
+    This was done by creating a time series of land surface temperatures and urban heat islands from 1990 to 2020 using Landsat 7 and Landsat 8 and 9 data. 
+    The data was then correlated with air temperature data of local measurement stations. 
+
+
     \subsection{Analysis}
     \subsection{Conclusions}
 
 \section{Impact of Land Use Land Cover Changes on UHIs}
     \subsection{Introduction}
+    Soil properties impact the emissivity, thermal conductivity and heat capacity of an area.
+    \subsubsection{Land cover classification}
+    To differentiate between different surface types different approaches where used. 
+    
+    %The data foundation for the land cover classification where Landsat images of different areas, the dataset was multitemporal, multispectral images of the same area.
+    %Each Dataset was then preprocessed with a gabor feature detection algorithm (see \cref{sec:gabor}) as 
+
+
     \subsection{Analysis}
     \subsection{Conclusions}
 
