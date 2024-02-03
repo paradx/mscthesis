@@ -7,7 +7,7 @@
 \usepackage[iso]{isodate}
 \usepackage[version=4]{mhchem} % for chemical reaction formulas
 % Set page size and margins
-\usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage[top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
 %% images
 \usepackage{graphicx}
 \usepackage{wrapfig}
@@ -64,8 +64,9 @@
 \newabbreviation{LST}  {LST}  {Land Surface Temperature}
 \newabbreviation{LULC} {LULC} {Land Use/ Land Cover}
 \newabbreviation{UHI}  {UHI}  {Urban Heat Island}
-\newabbreviation{SUHI}  {SUHI}  {Surface Urban Heat Island}
+\newabbreviation{SUHI} {SUHI}  {Surface Urban Heat Island}
 \newabbreviation{NDVI} {NDVI} {Normalized Differential Vegetation Index}
+\newabbreviation{HI}   {HI} {Heat Index}
 \newabbreviation{NIR}  {NIR}  {Near Infrared}
 \newabbreviation{OSM}  {OSM}  {Open Street Map}
 \newabbreviation{TOA}  {TOA}  {Top of Atmosphere}
@@ -141,17 +142,23 @@
 
    \input{background}
 
-\section*{Acknowledgements}
+%\section*{Acknowledgements}
 
 \section{Theoretical Framework}
     \subsection{Definitions}
     \input{ndvi}
+    \newpage
+    \subsubsection{Heat Index}
+    The \gls{HI}is a temperature index that takes sultriness into account and rates the impact of temperature and air humidity of the human body. 
+    The output of this temperature scale (given in °C) is the apparent temperature, depending on relative air humidity. 
+    The defined range is between 20 °C and 50°C dry bulb temperature and up to 90\% relative humidity~\cite[p. 862]{Steadman1979}
     \subsubsection{Wet Bulb Globe Temperature}
     The human body reacts to heat stress differently in different environmental conditions. 
     Working under heat stress poses a serious health issue, for this the \gls{WBGT} was defined as EN ISO 7243:2017, calculating the thermal load on the human body\cite{14001700}
     Heat exchange between the human body and the environment is dominated by evaporation of secreted sweat.
     The efficiency of this process is determined by the vapor pressure, that is influenced by temperature difference and the humidity difference. %TODO ref paper with caves
     The Heat Index is a simple way of calculating this efficiency that does not take radiant heat into account, the WBGT does incorporated this effect as well as clothing in this process. 
+
 
     \subsubsection{Urban Airquality}
     Large Urbanized Areas are suceptable to air pollution due to increased combustion and industrial activity. % TODO Numerous studies \cite{Kanakidou2011}
@@ -171,8 +178,7 @@
     \begin{equation}
       g(x,y; \lambda, \theta, \phi, \sigma, \gamma) = \exp \left(- \frac{x'^2 + \gamma^2\cdot y'^2}{2\sigma^2}\right) \cdot \exp \left[i \left(2\pi\frac{x}{\lambda} + \phi \right)\right] 
     \end{equation}
-    With \[ x' = x \cos(\phi) + y \sin(\phi) \text{and}
-    y' = -x \sin(\phi) + y \cos(\phi)\]
+    With $ x' = x \cos(\phi) + y \sin(\phi)~\text{and}~y' = -x \sin(\phi) + y \cos(\phi)$.
 %
     The x and y parameter determine the kernel size, this parameter should be chosen based on the image size and expected structure length.\\
     $\gamma$ is the aspect ratio of the kernel, with $\gamma = 1$ the kernel is round, for smaller $\gamma$ the kernel becomes a more eccentric ellipse.\\
@@ -181,10 +187,14 @@
     $\lambda$ is the wavelength of the sine wave. \\
     $\sigma$ is the standard deviation of the Gaussian distribution\\ 
     %TODO add more accurate description of parameters
-
-    To detect different structures of different scales within the image, a filter bank was created by variation of $\phi$, $\sigma$ and $\theta$.
-
-
+%
+    To detect different structures of different scales within the image, a filter bank can be created by combining multiple filters and varying $\phi$, $\sigma$ and $\theta$.\\
+%
+    After the convolution of the image with the filter bank, the resulting set of detected features can be used as an input into different algorithms.
+    \Cref{fig:gaborExample} shows different kernel sizes and rotations on an satellite image of Bremen. 
+    It can be seen that the different structures such as fields (seen in \cref{fig:feat02} and \cref{fig:feat05}) or larger structures and water bodies (seen in \cref{fig:feat01} and \cref{fig:feat03}).
+    The output of the filter is an tensor that contains a binary image sized matrix per filter. Each layer provides meta information for each pixel, if it is part of a larger scale texture or pattern. 
+    This meta information is used in surface classification (\cref{sec:classification}).
 
     \begin{figure}[!htbp]
        \centering
