@@ -54,7 +54,7 @@
     language=python
 }
 % setup title 
-\title{\vspace{1cm}Master Of Science: Space Science and Technology\\ \vspace{1cm} \textbf{\huge Impact of Climate and Land Cover Change in Urban Heat Islands}\\ \vspace{1.2cm} }
+\title{\textbf{\huge Impact of Climate and Land Cover Change in Urban Heat Islands}\\ \vspace{1.2cm} }
 \author{Linus Andrae (6015384)}
 \date{\today}
 
@@ -64,16 +64,17 @@
 \newabbreviation{LST}  {LST}  {Land Surface Temperature}
 \newabbreviation{LULC} {LULC} {Land Use/ Land Cover}
 \newabbreviation{UHI}  {UHI}  {Urban Heat Island}
-\newabbreviation{SUHI} {SUHI}  {Surface Urban Heat Island}
+\newabbreviation{SUHI} {SUHI} {Surface Urban Heat Island}
 \newabbreviation{NDVI} {NDVI} {Normalized Differential Vegetation Index}
-\newabbreviation{HI}   {HI} {Heat Index}
+\newabbreviation{HI}   {HI}   {Heat Index}
 \newabbreviation{NIR}  {NIR}  {Near Infrared}
 \newabbreviation{OSM}  {OSM}  {Open Street Map}
 \newabbreviation{TOA}  {TOA}  {Top of Atmosphere}
-\newabbreviation{ML}   {ML}  {Machine Learning}
+\newabbreviation{VOC}  {VOC}  {Volatile Organic Compounds}
+\newabbreviation{ML}   {ML}   {Machine Learning}
 \newabbreviation{SVM}  {SVM}  {Support Vector Machine}
 \newabbreviation{ECMWF}{ECMWF}{European Center for Medium-Range Weather Forcasts}
-\newabbreviation{WBGT}{WBGT}{Wet Bulb Globe Temperature}
+\newabbreviation{WBGT} {WBGT} {Wet Bulb Globe Temperature}
 
 
 \begin{document}
@@ -100,7 +101,7 @@
   The first mobile measurement campaigns by~\cite{peppler1929auto} and investigations of the spacial distribution of temperatures where conducted in the 1920s in Germany and Austria~\cite{tollner1932untersuchungen}, and where repeated in multiple cities around the globe.\\%todo add more refs? 
   The term Urban Heat Island was coined in the 1960s in publications regarding case studies in London~\cite{Chandler1961} and Montreal~\cite{Oke1968}.
   During this time the influences and understanding of the interaction between the human industrial activity, the land change and the influence on temperatures was investigated by numerous case studies using fixed or mobile weather stations.
-  The first use of helicopters and airplanes to measure vertical temperature profiles where documented in the 1950s 
+  The first use of helicopters and airplanes to measure vertical temperature profiles where documented in the 1950s  
   %TODO add source 
   All these studies focused on the atmospheric heat distribution over urban areas and resulted in the development of physical energy transport models for these. 
   These models required a deeper understanding of the surface properties and the temperature distribution within the urban area. 
@@ -144,32 +145,44 @@
 
 %\section*{Acknowledgements}
 
-\section{Theoretical Framework}
-    \subsection{Definitions}
+\section{Theoretical Background}
     \input{ndvi}
     \newpage
     \subsubsection{Heat Index}
     The \gls{HI}is a temperature index that takes sultriness into account and rates the impact of temperature and air humidity of the human body. 
     The output of this temperature scale (given in °C) is the apparent temperature, depending on relative air humidity. 
-    The defined range is between 20 °C and 50°C dry bulb temperature and up to 90\% relative humidity~\cite[p. 862]{Steadman1979}
+    The defined range is between 20 °C and 50°C dry bulb temperature and up to 90\% relative humidity~\cite[p. 862]{Steadman1979}. 
+    The proposed heat index is based on a model human and takes wind chill and clothing into account, to produce a apparent temperature of human. 
+    The heat index can be used as a good reference for non-extreme conditions. 
+    Its biggest downside is the missing account for direct insolation on body temperature and comfort.
+    The Heat Index later is used to compare different \glspl{UHI} with each other.
+
+
     \subsubsection{Wet Bulb Globe Temperature}
-    The human body reacts to heat stress differently in different environmental conditions. 
+    To account the impact of insolation on the human body and how it reacts to heat stress differently in different environmental conditions, the Wet Bulb Globe Temperature was developed. 
     Working under heat stress poses a serious health issue, for this the \gls{WBGT} was defined as EN ISO 7243:2017, calculating the thermal load on the human body\cite{14001700}
     Heat exchange between the human body and the environment is dominated by evaporation of secreted sweat.
     The efficiency of this process is determined by the vapor pressure, that is influenced by temperature difference and the humidity difference. %TODO ref paper with caves
     The Heat Index is a simple way of calculating this efficiency that does not take radiant heat into account, the WBGT does incorporated this effect as well as clothing in this process. 
 
 
-    \subsubsection{Urban Airquality}
-    Large Urbanized Areas are suceptable to air pollution due to increased combustion and industrial activity. % TODO Numerous studies \cite{Kanakidou2011}
-    One major pollutant with a significant health impact is tropospheric ozone (\cite{Ebi2008}). 
-    Ozone is mainly produced when (antropogenic) NO\textsubscript{x} emmissions react with volatile organic compounds. %todo source
+    \subsubsection{Urban Air Quality}
+    Large urbanized areas are susceptible to air pollution due to increased combustion and industrial activity. % TODO Numerous studies \cite{Kanakidou2011}
+    One major pollutant with a significant health impact is tropospheric ozone that is produced in larger quantities within higher temperature environments (see~\cite{Ebi2008}). 
+    Ozone is mainly produced when (anthropogenic) NO\textsubscript{x} emissions and other \glspl{VOC} react with volatile organic compounds. %todo source
     The creation of ozone is dependent on temperature, increasing between 2.2 and 3.2 ppbv/°C depending on NO\textsubscript{x}
 
     %\subsection{Models and Theories}
+    \section{Image Processing}\label{sec:imgProcessing}
+    Using remote sensing data for scientific purposes requires a (a) systematic, (b) reproducable, (c) verifiable way of detecting patterns and information within the data. \\ 
+    The field of image processing and machine learning has developed a wide range of tools that are used in many different fields over the past decades. % TODO might want to add examples here ? 
+    \subsection{Machine Learning}\label{sec:ml}
+    The term machine learning describes a set of algorithms that use a set of training data, detect statistical correlations using different weights to approximate this data. %TODO external source 
+    These approximations can be stored and be used to detect the same features within new but similar data.
+    
+    In the next sections the image processing steps are described from a technical perspective and the underlying mathematical frameworks are discussed.
 
     \subsection{Gabor Feature Detection}\label{sec:gabor}
-    %TODO add image of example kernel
     The Gabor filter is an linear filter, that uses a convolution of an image with a wavelet created by rotating a sine modulated gaussian, this kernel type is also called the \textit{gabor wavelet}. 
     In image processing this algorithm is used as an feature extraction algorithm to extract and analyse texture and structures with different sizes within the image~(\cite{Cerdan1993}). 
     By rotating the kernel and changing the frequency, different textures are extracted from the image.
