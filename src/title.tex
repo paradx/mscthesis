@@ -1,8 +1,6 @@
 \begin{titlingpage} %This starts the title page
 \pagenumbering{Alph}
 \thispagestyle{empty} 
-\begin{wrapfigure}{r}{0.2\textwidth}
-\end{wrapfigure}
 \begin{center}
 \begin{large}
   \textit{Thesis for the Master of Science}\\
@@ -10,15 +8,27 @@
 \vspace{1cm}Degree Program: Space Science and Technology\\ \vspace{1cm} 
 \vspace{6cm} %You can control the vertical distance
 \begin{large} 
-\textbf{\thetitle} 
+\onehalfspacing%
+\textbf{\thetitle}\\
 \end{large}
+\vspace{1.5cm}
 \theauthor\\
+\vspace{1cm} %You can control the vertical distance
 \thedate\\
-\vspace{13cm} %Put the distance you need.
+\vspace{\fill} %Put the distance you need.
 
-\includegraphics[width=0.3\textwidth]{img/res/uniLogoIUP.png}
-\hspace{4cm}
-\includegraphics[width=0.3\textwidth]{img/res/logo_ohb_digital.png}
+\begin{figure}[!b]
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[height=1.5cm]{img/res/logo.png}
+  \end{subfigure} 
+  \begin{subfigure}{0.10\textwidth}
+    \includegraphics[height=1.5cm]{img/res/logoIUP.png}
+  \end{subfigure}\hspace{0.25\textwidth}
+  \begin{subfigure}{0.35\textwidth}
+    \centering
+\includegraphics[height=1.5cm]{img/res/logo_ohb_digital.png}
+  \end{subfigure}
+\end{figure}
 
 \end{center}
 \end{titlingpage}

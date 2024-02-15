@@ -20,6 +20,9 @@ SET(OUT_DIRECTORY "${CMAKE_SOURCE_DIR}/${LATEX_OUTPUT_PATH}")
 # The source file containing the reference for cites.
 SET(BIB_REFERENCE_PATH ${CMAKE_SOURCE_DIR}/src/refs.bib)
 configure_file(${BIB_REFERENCE_PATH} ${OUT_DIRECTORY} @ONLY)
+# The source file containing the abbreviations
+SET(ABBREV_REF_PART ${CMAKE_SOURCE_DIR}/src/abbrvs.bib)
+configure_file(${ABBREV_REF_PART} ${OUT_DIRECTORY} @ONLY)
 
 # Latex source file.
 SET( MAIN_TEX_BASE_FILENAME "thesis")
