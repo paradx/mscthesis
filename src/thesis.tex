@@ -33,6 +33,17 @@
 \usepackage[protrusion=true,expansion]{microtype}
 %% maths
 \usepackage{amsmath}
+%% Tikz
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+%% Some diagram definitions
+  %
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
 %% title page
 \usepackage{titling} % for cooler titlepages 
 % configuration 
@@ -80,6 +91,12 @@
 \newacronym{ECMWF}{ECMWF}{European Center for Medium-Range Weather Forcasts}
 \newacronym{WBGT} {WBGT} {Wet Bulb Globe Temperature}
 
+
+\newglossaryentry{lib}%
+{%
+  name={library},
+  description={a bundled collection of resources (e.g. algorithm) to be ease software development}
+}
 
 \newglossaryentry{sentinel3}%
 {%
@@ -195,12 +212,35 @@
     %\subsection{Models and Theories}
     \section{Image Processing}\label{sec:imgProcessing}
     Using remote sensing data for scientific purposes requires a (a) systematic, (b) reproducable, (c) verifiable way of detecting patterns and information within the data. \\ 
-    The field of image processing and machine learning has developed a wide range of tools that are used in many different fields over the past decades. % TODO might want to add examples here ? 
+    The field of image processing and machine learning has developed a wide range of tools that are used in many different fields over the past decades. % TODO might want to add examples here ?
+
     \subsection{Machine Learning}\label{sec:ml}
     The term machine learning describes a set of algorithms that use a set of training data, detect statistical correlations using different weights to approximate this data. %TODO external source 
     These approximations can be stored and be used to detect the same features within new but similar data.
     
     In the next sections the image processing steps are described from a technical perspective and the underlying mathematical frameworks are discussed.
+    \subsection{Data Processing Pipeline}
+    An image or data processing pipeline is a chained list of processing steps, that allows to feed different data through the same algorithm. 
+    Many different data processing and machine learning \glspl{lib} use these to allow flexibility and modularity of the steps in data processing (e.g.\ the used~\cite{scikit},~\cite{keras} or~\cite{gluon}). 
+    The data processing was used using scikit-learn pipeline for data analysis as well as multiple other \glspl{lib}. 
+    In \cref{fig:pipeline} the overview of the different steps within the data processing can be seen.
+
+    \begin{figure}[!htbp]
+       \centering
+     \begin{subfigure}[b]{\textwidth}
+         \centering
+         \input{pipelinetrain.tikz.tex}
+         %\includegraphics[width=\textwidth]{img/DiagPipeline.png}
+         \caption{Processing pipeline for developing the model}\label{fig:pipelineTraining}
+     \end{subfigure}
+
+     \begin{subfigure}[b]{\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{img/DiagPipeline.png}
+         \caption{Data Processing pipeline with the trained Model}\label{fig:pipelineTrained}
+     \end{subfigure}
+     \caption{The image processing overview\label{fig:pipeline}}
+     \end{figure}
 
     \subsection{Gabor Feature Detection}\label{sec:gabor}
     The Gabor filter is an linear filter, that uses a convolution of an image with a wavelet created by rotating a sine modulated gaussian, this kernel type is also called the \textit{gabor wavelet}. 
