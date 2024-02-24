@@ -1,13 +1,34 @@
-\documentclass[a4paper, english]{article}
-
+\documentclass[12pt,a4paper, english]{article}
 % includes 
 % Language setting
 \usepackage[english]{babel}
 \usepackage{csquotes}
 \usepackage[iso]{isodate}
-\usepackage[version=4]{mhchem} % for chemical reaction formulas
+% Font configuration according to uni specs 
+%% Calibri or Arial 11pt or Times New Roman 12pt
+%\usepackage{fontspec}
+%\defaultfontfeatures{Ligatures=TeX}
+%\setsansfont{Calibri}
+%\setmainfont{Times New Roman}
+\usepackage[automark, autooneside=true]{scrlayer-scrpage}
+\KOMAoptions{%
+   headsepline = true,
+   footsepline = true,
+   plainheadsepline = true,
+   plainfootsepline = true,
+} 
+\renewcommand\sectionmark[1]{\markright{\MakeMarkcase {\thesection\hskip .5em\relax#1}}}
+\ihead*{}%\leftmark}
+\ohead*{\rightmark}
+\chead{}
+
+\cfoot[]{}
+\ifoot[Linus Andrae]{Linus Andrae}
+\ofoot[\thepage]{\thepage}%\ of \pageref*{LastPage}]{\thepage \ of \pageref*{LastPage}}
+
+
 % Set page size and margins
-\usepackage[top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage[top=2cm,bottom=2cm,left=5cm,right=2cm,head=18pt]{geometry}
 %% images
 \usepackage{graphicx}
 \usepackage{wrapfig}
@@ -17,33 +38,36 @@
 \usepackage{subcaption}
 %% tables 
 \usepackage{booktabs}
+%% maths
+\usepackage{amsmath}
 %% colors
 \usepackage{xcolor}
 %% links and refs and citations 
 \usepackage{setspace}
-\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage[colorlinks=true, allcolors=black]{hyperref}
 \usepackage[capitalize]{cleveref}
 \usepackage[backend=biber, style=authoryear]{biblatex}
 %% acronyms and glossary 
 %\usepackage[acronym,]{glossaries} 
 \usepackage[automake,acronym,postdot,stylemods,translate=babel]{glossaries-extra}
+% varwidth
+\usepackage{varwidth}
 %% include code snippets
 \usepackage{listings}
 %% Kerning
 \usepackage[protrusion=true,expansion]{microtype}
-%% maths
-\usepackage{amsmath}
 %% Tikz
 \usepackage{tikz}
-\usetikzlibrary{shapes.geometric, arrows}
+\usetikzlibrary{shapes.geometric, arrows, backgrounds, automata, positioning}
 %% Some diagram definitions
   %
 \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
 \tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
 \tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
 \tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
-\tikzstyle{arrow} = [thick,->,>=stealth]
+\tikzstyle{arrow} = [thick,->, > = stealth]
 
+\usepackage[version=4]{mhchem} % for chemical reaction formulas
 %% title page
 \usepackage{titling} % for cooler titlepages 
 % configuration 
@@ -67,10 +91,25 @@
     tabsize=2,
     language=python
 }
-% setup title 
-\title{\textbf{\huge Impact of Climate and Land Cover Change in Urban Heat Islands} }
-\author{Linus Andrae (6015384)}
 \date{\today}
+% setup title 
+\title{\textbf{\huge Impact of Climate and \\Land Cover Change\\ in Urban Heat Islands} }
+\author{%
+\begin{tabular}{ll}
+Supervisor: &Prof.\ Dr.\ Annette Ladstätter-Weißenmayer\\
+Secondary Supervisor: &Dr.\ Adrian Fessel\\ 
+Submission Date:\ &30.04.2024\\
+\ &\ \\
+\ &\ \\
+\ &\ \\
+\ &\ \\
+Linus Andrae &  \\%
+Hegelstraße 24& \\ 
+28201 Bremen&  \\
+Matriculation Number: & 6015384 \hfill\\
+Current Date:&\thedate\\
+\end{tabular}
+}%
 
 \makeglossaries%
 \setabbreviationstyle[acronym]{long-short}
@@ -94,8 +133,14 @@
 
 \newglossaryentry{lib}%
 {%
-  name={library},
-  description={a bundled collection of resources (e.g. algorithm) to be ease software development}
+  name={Library},
+  description={a bundled collection of resources (e.g.\ algorithm) to be ease software development}
+}
+
+\newglossaryentry{DWD}%
+{%
+name = {Deutscher Wetter Dienst},
+description= {German Meterological Service, the german meterological society}
 }
 
 \newglossaryentry{sentinel3}%
@@ -105,12 +150,10 @@
 }
 \begin{document}
   \input{title}
-  \singlespacing%
   \newpage
 
   \input{abstact}
   \newpage
-  % TODO insert Eigenständigkeitserklärung
 
   \tableofcontents
   \listoffigures
@@ -122,22 +165,27 @@
   %then the main glossary
   \printglossary%
 \newpage
+\onehalfspacing%
 
-\section{A historical introduction of urban heat island research}
+\section{Introduction}\label{sec:intro}
+\subsection{A historical introduction of urban heat island research}
   The scientific investigation of the urban climate and the influence of human settlements and activity on the local atmosphere and temperature has been studied for more then 200 years.%
   \cite{Howard1833}~investigated the climate of London in a study from 1819 to 1827 and a similar study was conducted in Paris in the 1850s by~\cite{renou1862differences}.%
-  The first mobile measurement campaigns by~\cite{peppler1929auto} and investigations of the spacial distribution of temperatures where conducted in the 1920s in Germany and Austria~\cite{tollner1932untersuchungen}, and where repeated in multiple cities around the globe.\\%todo add more refs? 
-  The term Urban Heat Island was coined in the 1960s in publications regarding case studies in London~\cite{Chandler1961} and Montreal~\cite{Oke1968}.
-  During this time the influences and understanding of the interaction between the human industrial activity, the land change and the influence on temperatures was investigated by numerous case studies using fixed or mobile weather stations.
-  The first use of helicopters and airplanes to measure vertical temperature profiles where documented in the 1950s  
+  The first mobile measurement campaigns around the topic of urban climate were conducted by~\cite{peppler1929auto} and ~\cite{tollner1932untersuchungen} and investigated the spacial distribution of temperatures within urban areas  in the 1920s in Germany and Austria. 
+  This type of measurmenet were repeated in multiple cities around the globe at the time.\\
+  The term Urban Heat Island was coined in the 1960s in publications regarding case studies in London~\cite{Chandler1961} and Montreal~\cite{Oke1968}. % TODO there was a paper claiming otherwise
+  During this time the influences and understanding of the interaction between the human industrial activity, the land change by urbanisation and industrialization and the influence thereof on temperatures and pollution was investigated by numerous case studies using fixed or mobile weather stations.
+  Often health problems within industrial areas or incidence like the 1930 meuse valley fog catastrophe, in which exhaust gases, including fluorine gas, combined with an inversion weather condition, forming a cloud over the area causing the death of at least 60 people.
+  The \textit{great smog} in 1952 in London and the meuse valley fog triggered an scientific intrest in the interaction between human settlement, pollution and meterological phenomena on human health and the environment, shaping the idea of an urban climate.\\ \\ 
+  To understand the urban meterology the first use of helicopters and air planes to measure vertical temperature profiles were documented in the 1950s  
   %TODO add source 
   All these studies focused on the atmospheric heat distribution over urban areas and resulted in the development of physical energy transport models for these. 
-  These models required a deeper understanding of the surface properties and the temperature distribution within the urban area. 
+  These models required a deeper understanding of the surface properties and the temperature distribution within the urban area.\\ \\
   % 
   Then newly available remote sensing devices such as infrared imagers made it possible to observe the urban environment from above and detect temperature hot spots using airborne and satellite images.  
   %  
-  First investigations regarding the feasibility of this approach where proposed in the late 70s (\cite{Watson1975},~\cite{Carlson1977} and~\cite{Block1978}) but the resolution of satellite images insufficient for detailed investigations of Urban Heat Islands.\\
-  A first study using satellite infrared imagery where conducted in 1978 using the NOAA 5 Satellite (with a spacial resolution of 1km)\cite{Matson1978}. 
+  First investigations regarding the feasibility of this approach were proposed in the late 70s (\cite{Watson1975},~\cite{Carlson1977} and~\cite{Block1978}) but the resolution of satellite images insufficient for detailed investigations of Urban Heat Islands.\\
+  A first study using satellite infrared imagery were conducted in 1978 using the NOAA 5 Satellite (with a spacial resolution of 1km)\cite{Matson1978}. 
   Multiple studies in the 70s and 80s used images taken from planes or helicopters to aid the investigation of smaller scale effects within the urban surface temperature distribution (e.g.~\cite{Landsberg1979},~\cite{ljungberg1980use} and~\cite{Foster1981}).
   With advances in satellite technology the resolution and data availability increased. 
   The Landsat program stared in 1975 and since \textit{Landsat 4} was launched in 1982 the Landsat program continuously provides thermal infrared data of the whole planet. 
@@ -152,24 +200,36 @@
   \end{figure}
   The rise in availability on the one hand makes it easier for researchers and companies to use the data, but requires increased computing and storage availability, to manage the increased data amount.
   This offers the possibility of creating scientific studies covering a wide range of cities over time, using the same sensor and tools. 
-  \Cite{Sobrino2020} suggested a methodology to compare \glspl{UHI} using \gls{sentinel3}
-  
+  \Cite{Sobrino2020} suggested a methodology to compare \glspl{UHI} using \gls{sentinel3} images and conducted a broad study of \glspl{UHI} severity in cities around the world. 
+In conclusion, the advancement of remote sensing technology, particularly the availability of infrared imagers and satellite imagery, has revolutionized the study of urban heat islands. 
+From the early investigations and roots of the field in meterology and public health the research field expanded touching urban development, climate science, atmospheric chemistry and medicine as well as social sciences.
+The scope of studies from case studies conducted in the 70s to the current abundance of data provided by satellites like Landsat 8 and 9, researchers now have the tools to analyze urban surface temperature distribution with unprecedented detail and accuracy.
+The increase in data availability has not only facilitated research on urban meteorology and heat islands but has also presented new challenges in terms of data management and analysis.
+Despite these challenges, the potential for conducting comprehensive studies across various cities using consistent sensors and methodologies is now within reach.
+%As demonstrated by studies such as the one conducted by \cite{Sobrino2020} using Sentinel-3 images, the future of urban heat island research holds promise for gaining deeper insights into the impacts of urbanization on local climate patterns worldwide.
+% TODO more and finish
+The next step in advancing the comprehension of \glspl{UHI} involves gaining a deeper understanding of how various parameters contribute to the formation and intensity of \glspl{UHIs}.
+With the widespread introduction of countermeasures to \glspl{UHI} and climate change resilience techniques in different cities, continuous monitoring of statistical parameters and indices becomes more relevant in order to assess the effectiveness of the mitigation strategies. 
+
   \subsection{Research Question}
     In this thesis the impact of change in land cover (urbanisation, urban development and other land use changes) and the impact of rising average temperature shall be investigated with regards to the urban heat island phenomena.
-
+    More specific the questions: 
+    \begin{itemize}
+      \item Is there an impact on the size of urban heat islands by urbanisation? 
+      \item If so, how big is the impact in absolute and relative temperatures? 
+      \item How big is the effect of rising average temperatures in European Cities on the Urban Heat Island effect? 
+      \item Can UHIs be modelled using the found average impact for temperature and land use change? 
+    \end{itemize}
+%
   \subsection{Methodology}
-    % SUHI measurements using Thermal Infrared Satellite Data 
-    
-    % LULC impact using ML algorithm to create time lines of LULC of example cities
-
-    % Measurment of UHI intesity over time 
-
-    % Modelling of UHI into the future 
-
-    % Application of different Indicies for measuring heat stress and other parameters for juding UHI intesity
-
-    % Outlook and further research
-
+  \begin{enumerate} 
+   \item SUHI measurements using Thermal Infrared Satellite Data 
+   \item LULC impact using ML algorithm to create time lines of LULC of example cities
+   \item Measurement of UHI intesity over time 
+   \item Modelling of UHI into the future 
+   \item Application of different Indicies for measuring heat stress and other parameters for juding UHI intesity
+   \item Outlook and further research
+ \end{enumerate}
   \subsection{Structure of the Thesis}
     In the introduction as well as \cref{sec:background} previous work and an overview of the current understanding of the urban heat island effect and research in this area is accessed. 
   %comparable definition
@@ -177,12 +237,56 @@
     \Cref{sec:LULC} explains how the measurements  and investigations of the impact of land use and land cover changes by build up where done.
     In \Cref{sec:UHITempImp} the impact of changing temperatures an increase of extreme weather phenomena on the intensity and seasonal variety of \glspl{UHI} was investigated. 
     After these the \cref{sec:conclusion} combines the findings of the previous chapters, shows what other investigations should be investigated further and where the research could be improved. 
-
-   \input{background}
-
+%
+%
+\section{Background}\label{sec:background}
 %\section*{Acknowledgements}
+\subsection{Urban Heat Islands}
+%
+Due to increase in global temperature as well as increased occurrence of extreme weather and periods of heatwaves, this phenomenon will likely increase in intensity and will also occur in cities at higher latitudes~\cite{Sachindra2016}\cite[p.~904]{Wilby2008}.
+\glspl{UHI} are a spacial phenomenon that occurs on different scales and intensities, this makes observation using remote sensing data a good and widely used approach~\cite{Weng2003}.\\
+\glspl{UHI} are distinguished into surface and atmospheric \glspl{UHI} as discussed in the sections below. 
+Since the phenomenon is known for a long time, mitigation strategies have been proposed to reduce the impact on well-being and intensity of the UHIs.
+%
+\subsubsection{Surface Urban Heat Islands}\label{sec:suhi}
+\glspl{SUHI} are areas of higher surface temperatures within urban areas compared to rural areas due to the materials used and heat from mobility, electrical appliances, heating and cooling as well as less vegetation and higher sealed surfaces that reduce surface water availability\cite[pp. 7-12]{EPA2008}. 
+The \glspl{SUHI} are a small scale phenomenon that has a high seasonal variability and is most intense in summer.
+%
+\subsubsection{Atmospheric Urban Heat Islands}\label{sec:at_uhi}
+Atmospheric \glspl{UHI} is the increased air temperature within an urban area. 
+This are more dependent on weather and local topology and are in part caused by the slower cooling rate of build up land causing responsible for \glspl{SUHI}.
+%Under certain conditions the increased temperature will form a hot air pocket, that will trap the head and reduce airflow from and to the area. \\
+The main factors in forming urban heat islands is the thermal storage capacity of materials used in urban areas like concrete, asphalt and steel, that have a high heat capacity and heat up quickly during the day and emit the stored thermal energy as sensible heat with a delay (eg.~during the night)\cite{Ramamurthy2014}. 
+High surface sealing and lack of vegetation reduce surface water availability and diminish evaporation and the cooling effect of latent heat causing more thermal energy to be available as sensible heat. %todo source (sailor?  or first source)
+Another factor is the heat produced by human activity such as industrial processes and combustion engines.
+As a consequence of higher temperatures, active cooling devices are more frequently used for buildings and vehicles. 
+The emitted thermal energy of these heat pumps further increases the surrounding temperature, reinforcing the effect.
+\\
+There are multiple adverse effects and possible mitigation techniques for the mitigation and reduction of urban heat islands have been studied extensively since the 1970s\cite{Nichol1994}\cite{Stewart2011}. % list studies.  
+Advective cooling can be observed when the temperature gradient generated airflow from the cooler surrounding areas towards the hot areas within the city, cooling it down\cite{HaegerEugensson1999}. \\
+Urban areas with no close water body (generating sea breezes as well as latent heat transport) and with lower average wind speed are more likely to be affected by urban heat islands\cite{Ramamurthy2017}. 
+Higher temperatures due to \glspl{UHI} cause stress to animals and humans increasing health risk due to heat stroke and increased surface level ozone concentration~\cite{Santamouris2020}.
+%
+\subsubsection{Pollution and Urban Heat Islands}
 
-\section{Theoretical Background}
+
+\subsubsection{Mitigation techniques for Urban Heat Islands}
+
+\subsection{Land Surface Temperature}
+Land surface temperature is the temperature at which an object emits infrared radiation according to plank's law\cite{Liang2020}. 
+Using remote sensing methods this quantity can not be directly observed since the satellite is observing \gls{TOA} brightness temperature. 
+This temperature can be transformed to a \gls{LST} using atmospheric correction and correction for the emissivity of the ground.
+The conversion factor is data source dependent and can be found in \cref{sec:lstcalc}.
+%
+\subsection{Air Temperature}
+Urban heat islands that impact human health are the atmospheric urban heat islands. 
+These are defined by the air temperature of the urban area and the air temperature outside that area. %todo fix a bit 
+%
+During the day the air temperature is lower then the surface temperature\cite{EPA2008}, during the night the hot surfaces radiate off the energy heating the surrounding air.\\
+%
+There are multiple factors impacting urban air temperature. 
+Combustion from traffic and industrial processes, produce heat as a by product that heats the surrounding air. 
+HVAC systems also produce heat, when cooling buildings. This further increases the air temperature increasing cooling need within the urban area. 
     \input{ndvi}
     \newpage
     \subsubsection{Heat Index}
@@ -193,61 +297,63 @@
     The heat index can be used as a good reference for non-extreme conditions. 
     Its biggest downside is the missing account for direct insolation on body temperature and comfort.
     The Heat Index later is used to compare different \glspl{UHI} with each other.
-
-
-    \subsubsection{Wet Bulb Globe Temperature}
+    \subsection{Wet Bulb Globe Temperature}
     To account the impact of insolation on the human body and how it reacts to heat stress differently in different environmental conditions, the Wet Bulb Globe Temperature was developed. 
     Working under heat stress poses a serious health issue, for this the \gls{WBGT} was defined as EN ISO 7243:2017, calculating the thermal load on the human body\cite{Iso7243_2017}
     Heat exchange between the human body and the environment is dominated by evaporation of secreted sweat.
     The efficiency of this process is determined by the vapor pressure, that is influenced by temperature difference and the humidity difference. %TODO ref paper with caves
     The Heat Index is a simple way of calculating this efficiency that does not take radiant heat into account, the WBGT does incorporated this effect as well as clothing in this process. 
-
-
-    \subsubsection{Urban Air Quality}
+    \subsection{Urban Air Quality}
     Large urbanized areas are susceptible to air pollution due to increased combustion and industrial activity. % TODO Numerous studies \cite{Kanakidou2011}
     One major pollutant with a significant health impact is tropospheric ozone that is produced in larger quantities within higher temperature environments (see~\cite{Ebi2008}). 
     Ozone is mainly produced when (anthropogenic) NO\textsubscript{x} emissions and other \glspl{VOC} react with volatile organic compounds. %todo source
     The creation of ozone is dependent on temperature, increasing between 2.2 and 3.2 ppbv/°C depending on NO\textsubscript{x}
-
     %\subsection{Models and Theories}
-    \section{Image Processing}\label{sec:imgProcessing}
-    Using remote sensing data for scientific purposes requires a (a) systematic, (b) reproducable, (c) verifiable way of detecting patterns and information within the data. \\ 
+\newpage
+\section{Image Processing}\label{sec:imgProcessing}
+    Using remote sensing data for scientific purposes requires a 
+    \begin{itemize} 
+      \item[a] systematic
+      \item[b] reproducible
+      \item[c] verifiable 
+    \end{itemize}%
+    way of detecting patterns and information within the data. \\
     The field of image processing and machine learning has developed a wide range of tools that are used in many different fields over the past decades. % TODO might want to add examples here ?
 
     \subsection{Machine Learning}\label{sec:ml}
     The term machine learning describes a set of algorithms that use a set of training data, detect statistical correlations using different weights to approximate this data. %TODO external source 
     These approximations can be stored and be used to detect the same features within new but similar data.
-    
-    In the next sections the image processing steps are described from a technical perspective and the underlying mathematical frameworks are discussed.
+    Different machine learning techniques are used for for different use cases and areas.
+    %In total 
+%
+  In the next sections the image processing steps are described from a technical perspective and the underlying mathematical frameworks are discussed.
+%
     \subsection{Data Processing Pipeline}
     An image or data processing pipeline is a chained list of processing steps, that allows to feed different data through the same algorithm. 
-    Many different data processing and machine learning \glspl{lib} use these to allow flexibility and modularity of the steps in data processing (e.g.\ the used~\cite{scikit},~\cite{keras} or~\cite{gluon}). 
+    Many different data processing and machine learning \glspl{lib} use these to allow flexibility and modularity of the steps in data processing (e.g.\ the used~\cite{scikit-learn},~\cite{keras} or~\cite{gluon}). 
     The data processing was used using scikit-learn pipeline for data analysis as well as multiple other \glspl{lib}. 
     In \cref{fig:pipeline} the overview of the different steps within the data processing can be seen.
-
-    \begin{figure}[!htbp]
-       \centering
-     \begin{subfigure}[b]{\textwidth}
-         \centering
-         \input{pipelinetrain.tikz.tex}
-         %\includegraphics[width=\textwidth]{img/DiagPipeline.png}
-         \caption{Processing pipeline for developing the model}\label{fig:pipelineTraining}
-     \end{subfigure}
-
-     \begin{subfigure}[b]{\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{img/DiagPipeline.png}
-         \caption{Data Processing pipeline with the trained Model}\label{fig:pipelineTrained}
-     \end{subfigure}
-     \caption{The image processing overview\label{fig:pipeline}}
-     \end{figure}
-
-    \subsection{Gabor Feature Detection}\label{sec:gabor}
-    The Gabor filter is an linear filter, that uses a convolution of an image with a wavelet created by rotating a sine modulated gaussian, this kernel type is also called the \textit{gabor wavelet}. 
-    In image processing this algorithm is used as an feature extraction algorithm to extract and analyse texture and structures with different sizes within the image~(\cite{Cerdan1993}). 
-    By rotating the kernel and changing the frequency, different textures are extracted from the image.
 %
-    Mathematically the Gabor-filter is defined by
+    \begin{figure}[!htbp]
+       \begin{subfigure}[b]{0.50\textwidth}
+         \input{pipelinetrain.tikz.tex}
+         \caption{Processing pipeline for developing the model}\label{fig:pipelineTraining}
+       \end{subfigure}
+       \begin{subfigure}[b]{0.50\textwidth}
+         \input{pipelinetrained.tikz.tex}
+         \caption{Data Processing pipeline with the trained Model}\label{fig:pipelineTrained}
+       \end{subfigure}
+       \caption{The image processing overview\label{fig:pipeline}}
+     \end{figure}
+%
+\newpage
+\subsection{Gabor Feature Detection}\label{sec:gabor}
+
+The Gabor filter is an linear filter, that uses a convolution of an image with a wavelet created by rotating a sine modulated Gaussian, this kernel type is also called the \textit{gabor wavelet}. 
+In image processing this algorithm is used as an feature extraction algorithm to extract and analyse texture and structures with different sizes within the image~(\cite{Cerdan1993}). 
+By rotating the kernel and changing the frequency, different textures are extracted from the image.
+%
+Mathematically the Gabor-filter is defined by
     \begin{equation}
       g(x,y; \lambda, \theta, \phi, \sigma, \gamma) = \exp \left(- \frac{x'^2 + \gamma^2\cdot y'^2}{2\sigma^2}\right) \cdot \exp \left[i \left(2\pi\frac{x}{\lambda} + \phi \right)\right] 
     \end{equation}
@@ -258,9 +364,9 @@
     $\phi$ is the angle of rotation of the sine component of the kernel. \\
     $\theta$ is the angle of rotation of the kernel, detecting differently oriented features.\\
     $\lambda$ is the wavelength of the sine wave. \\
-    $\sigma$ is the standard deviation of the Gaussian distribution\\ 
-
-    
+    $\sigma$ is the standard deviation of the Gaussian distribution\\ \\
+%
+%    
     %TODO add more accurate description of parameters
 %
     To detect different structures of different scales within the image, a filter bank can be created by combining multiple filters and varying $\phi$, $\sigma$ and $\theta$.\\
@@ -269,59 +375,103 @@
     \Cref{fig:gaborExample} shows different kernel sizes and rotations on an satellite image of Bremen. 
     It can be seen that the different structures such as fields (seen in \cref{fig:feat02} and \cref{fig:feat05}) or larger structures and water bodies (seen in \cref{fig:feat01} and \cref{fig:feat03}).
     The output of the filter is an tensor that contains a binary image sized matrix per filter. Each layer provides meta information for each pixel, if it is part of a larger scale texture or pattern. 
-    This meta information is used in surface classification (\cref{sec:classification}).
-
+    This meta information is used to add additional features for the surface classification (\cref{sec:classification}) using K-Means (in training) and to allow better classification using the random forest model.
+%
     \begin{figure}[!htbp]
        \centering
-     \begin{subfigure}[b]{0.3\textwidth}
+     \begin{subfigure}[b]{0.45\textwidth}
          \centering
          \includegraphics[width=\textwidth]{img/Features_2_005_0.png}
          \caption{Kernel with $\sigma$ = 2, f = 0.05 and 0 ° rotation}\label{fig:feat01}
      \end{subfigure}
      \hfill
-     \begin{subfigure}[b]{0.3\textwidth}
+     \begin{subfigure}[b]{0.45\textwidth}
          \centering
          \includegraphics[width=\textwidth]{img/Features_2_015_0.png}
          \caption{Kernel with $\sigma$ = 2, f = 0.15 and 0 ° rotation}\label{fig:feat02}
      \end{subfigure}
-     \hfill
-     \begin{subfigure}[b]{0.3\textwidth}
+
+     \begin{subfigure}[b]{0.45\textwidth}
          \centering
          \includegraphics[width=\textwidth]{img/Features_4_005_0.png}
          \caption{Kernel with $\sigma$ = 4, f = 0.05 and 0 ° rotation}\label{fig:feat03}
      \end{subfigure}
-
-     \begin{subfigure}[b]{0.3\textwidth}
+     \hfill
+     \begin{subfigure}[b]{0.45\textwidth}
          \centering
          \includegraphics[width=\textwidth]{img/Features_2_005_90.png}
          \caption{Kernel with $\sigma$ = 2, f = 0.05 and 90 ° rotation}\label{fig:feat04}
      \end{subfigure}
-     \hfill
-     \begin{subfigure}[b]{0.3\textwidth}
+
+     \begin{subfigure}[b]{0.45\textwidth}
          \centering
          \includegraphics[width=\textwidth]{img/Features_2_015_90.png}
          \caption{Kernel with $\sigma$ = 2, f = 0.15 and 90 ° rotation}\label{fig:feat05}
      \end{subfigure}
      \hfill
-     \begin{subfigure}[b]{0.3\textwidth}
+     \begin{subfigure}[b]{0.45\textwidth}
          \centering
          \includegraphics[width=\textwidth]{img/Features_4_015_0.png}
          \caption{Kernel with $\sigma$ = 4, f = 0.15 and 0 ° rotation}\label{fig:feat06}
      \end{subfigure}
         \caption{Result of convolving differently oriented gabor wavelets with an Landsat-8 image of Bremen}\label{fig:gaborExample}
     \end{figure}
+%
+\newpage
+ \subsection{K-Means Clustering}\label{sec:kmeans}
+K-means clustering is an unsupervised learning algorithm that is used to partition $n$ observations into $k$ clusters. 
+Each observation belongs to the cluster with the nearest mean, serving as a prototype of the cluster. 
+This method has many applications in data mining, image processing, and pattern recognition.
+The algorithm consists of three steps:
+\begin{enumerate}
+    \item \textbf{Initialization}: Choose $k$ initial centroids from the data points.
+    \item \textbf{Assignment}: Assign each data point to the nearest centroid, forming $k$ clusters.
+    \item \textbf{Update}: Recalculate the centroids as the mean of all data points in the cluster. 
+\end{enumerate}
+This process is repeated until a maximum number of iterations or minimal changes in centroids is reached.\cite{Sinaga2020}\\ % TODO read
+Mathematically a set of observations $(x_1, x_2, \ldots, x_n)$, where each observation is a $d$-dimensional real vector.
+K-means clustering aims to partition the $n$ observations into $k$ ($\leq n$) sets $S = \{S_1, S_2, \ldots, S_k\}$ so as to minimize the within-cluster sum of squares. \\
+The objective is to find:
+\begin{equation}
+    \min_{S} \sum_{i=1}^{k} \sum_{x \in S_i} \| x - \mu_i \|^2
+\end{equation}
+where $\mu_i$ is the mean of points in $S_i$.
+%
+The K-Means clustering algorithm is used for surface classification using the feature enriched multi band satellite data.
+\Cref{fig:kmeansclusters} shows the result of clustering land surface types (the shown clustering did not use feature enhancement with Gabor and only used the band information as basis).%TODO fix that!  
+    \begin{figure}[!htbp]
+      \centering
+      \includegraphics[width=\textwidth]{img/NDVI vs LST.png}
+      \caption{Result of clustering (colored dots) plotted as \gls{NDVI} value and \gls{LST}\label{fig:kmeansclusters}}
+    \end{figure}
 
+ \subsection{Random Forrest Algorithm}\label{sec:randomForrest}
+Random Forest is a versatile ensemble learning method widely used in machine learning for both classification and regression tasks.
+It operates by constructing multiple decision trees during the training phase and outputting the mode of the classes (in classification) or mean prediction (in regression) of the individual trees.
+This method is particularly noted for its robustness and ability to handle large datasets with complex structures.
 
+The algorithm involves creating multiple decision trees using bootstrap aggregating, where each tree is trained on a random subset of the data with replacement, and at each node, a random subset of features is chosen for splitting.
+The ensemble approach mitigates the risk of overfitting, a common problem in individual decision trees, making Random Forest an effective tool even in scenarios with noisy or incomplete data. 
+In the Land Cover use case, this should increase robustness against seasonal variability of surface type appeal and changes due to variation in local climate and geology.\\ \\
 
+One of the strengths of Random Forest lies in its capacity to provides a measure of feature importance, which is valuable for understanding the driving factors in a model and provides a point for further optimization in case the performance is not sufficient.
+The downsides of the algorithm is, that it is computationally intensive, especially with a large number of trees, and the resultant model can be less interpretable compared to simpler models like linear regression or single decision trees.\\
 
-    \section{Comparable Definition of Urban Heat Islands}\label{sec:definition}
+In practical applications, Random Forest has been employed across various domains, ranging from predictive analytics in finance (e.g.\ in~\cite{Zhang2022}) and healthcare (e.g.~\cite{Kane2014}) and natural language processing. 
+It is suitable for usage in time line analysis and was used in this application for predicting the surface types based on the imagery which has been show to be effective in the past in~\cite{Piao2021}.
+%
+Its ability to provide robust and accurate predictions even in the presence of complex data interactions has cemented its place as a staple algorithm in the machine learning toolkit.
+
+\newpage
+\section{Comparable Definition of Urban Heat Islands}\label{sec:definition}
     \subsection{Introduction}
     The definitions of \glspl{UHI} in the literature are varying slightly and do not take into account that, using remote sensing techniques most definitions do not allow easy comparison between different areas or times.
-    %TODO add sources, maybe add examples? 
-    The definition of the U.S.~EPA\cite{EPA2008} and the German Weather Service (DWD) both say it is an feature defined by increased temperature between the urbanized areas compared to the sourrounding. % TODO cite  
+    Local studies either used a single reference measurement station %(TODO ) 
+    or the surface temperature of surrounding rural areas like forests % (e.g.TODO add sources, maybe add examples? 
+    The definition of the U.S.~EPA\cite{EPA2008} and the German Weather Service (\gls{DWD}) both say it is an feature defined by increased temperature between the urbanized areas compared to the sourrounding. % TODO cite  
     Different studies analyzing \glspl{UHI} use difference referenece tempereatures.
     The first goal of this work is defining a systematic reproducable aproach to measure urban heat island intensity based on land usage.
-
+%
     \subsection{Approach}
     To make the approach comparable previous work was done tackeling the problem using a comparable definition for comparing \gls{SUHI} around the world using Sentinel images\cite{Sobrino2020}.
     The land cover classes indicating urban areas is identified and the urban area polygon is extended by buffer zones. 
@@ -332,96 +482,153 @@
     In~\cite{Sobrino2020} urban adjacent, future urban adjacent and peri-urban areas are defined.
     The used approach was adapted by removing the urban growth projection (the paper investigated \glspl{SUHI} in 2050).
     For \gls{LULC} Landsat 8/9 data was used combined with different \gls{ML} techniques for surface classification (see \cref{sec:classification}). % TODO 
-
-    
+%
+%    
     \subsubsection{Used Satellites}
     Using remote sensing data to detect and analyse \gls{SUHI} requires devices that detect thermal infrared radiation. 
-    Satellites that are equipt with thermal infrared sensors that are able to detect upwelling emmission from the surface temperature within the $ 8 < \lambda < 12 \mu m $ range. 
+    Satellites that are equipped with thermal infrared sensors that are able to detect upwelling emission from the surface temperature within the $ 8 < \lambda < 12 \mu m $ range. 
     Commonly used instruments used for measuring \glspl{UHI} are Landsat, MODIS, ASTER and Sentinel-3. 
-    
+%   
     \subsection{Analysis}
     \subsubsection{Land Surface Temperature Calculation}\label{sec:lstcalc}
     The \gls{LST} can not be measured directly by a satellite but must be calculated from the upwelling thermal infrared radiation and corrected for the atmospheric perturbation. For Landsat 7 and Landsat 8 data is provided in different processing levels.
     The Level 1 data provides \gls{TOA} brightness and is corrected for stray light (Landsat 8 specific, see~\cite[p.~67]{Zanter2019}) instrument distortion, geometric and geographic terrain-correction (\cite[p.~44]{Zanter2019}).
-%    \subsubsection{KMeans}\label{sec:kmeans}
-%    Initially an unsupervised kmeans clustering algorithm was used for surface clasisfication, this was compared with. 
     \subsubsection{Classification }\label{sec:classification}
     For classifying surfaces a mixed approach of clustering and unsupervised machine learning was used. 
-    As input, the multispectral data from Landsat where used.// 
+    As input, the multispectral data from Landsat where used.
     The multi band image was loaded and cut to match one of the used training areas (%TODO ref picture
 ). 
     Each band of the image was then processed using a Gabor Feature Extraction algorithm (s. \cref{sec:gabor}) with different parameter sets. 
-    To judge results this was compared to the ESA CCI Land Use Data Set~\cite{landformclassicationusingfuzzykmeans2000} that was scaled up to the used image resolution . %TODO check if correct reference
-
+    To judge results this was compared to the ESA CCI Land Use Data Set~\cite{landformclassicationusingfuzzykmeans2000} that was scaled up to the used image resolution. %TODO check if correct reference
     It was found, by variation of parameters, that the highest score was archived using 
 %TODO try 
     rotations of the kernel, a kernel size of 
 %TODO find 
     and (only circular kernel where used) with a $\lambda$ of 2 and 4. %TODO check 
     The frequencies of the sine wave where varied between 0.05 and 0.15. 
-
-
     \subsection{Conclusions}
-    
-    \section{Impact of Land Use Land Cover Changes on \texorpdfstring{\glsxtrlongpl{UHI}}{Urban Heat Islands}}\label{sec:LULC}
+%    
+\newpage
+\section{Impact of Land Cover Changes on Urban Heat Islands}\label{sec:LULC}
     \subsection{Introduction}
-    Soil properties impact the emissivity, thermal conductivity and heat capacity of an area.
+  One of the key factors influencing the intensity and distribution of UHIs is land cover change, primarily driven by urbanization and associated human activities.
+    Soil properties impact the emissivity, thermal conductivity and heat capacity of an area and increases in build up reduce surface water availability. 
+\\    
+This section looks into the intricate relationship between land cover change and UHI effects using LULC detection based on Landsat images.
+The exploration begins with an overview of the UHI phenomenon, outlining its underlying mechanisms and highlighting the critical role that changes in land cover play in modulating urban thermal environments.
+The discussion extends to the various types of land cover alterations, such as the replacement of natural landscapes with built-up areas, deforestation, and changes in vegetation cover, and how these modifications contribute to the exacerbation or mitigation of UHIs.
 
-    \subsubsection{Land cover classification}
-    To differentiate between different surface types different approaches where used. 
-    
-    %The data foundation for the land cover classification where Landsat images of different areas, the dataset was multitemporal, multispectral images of the same area.
-    %Each Dataset was then preprocessed with a gabor feature detection algorithm (see \cref{sec:gabor}) as 
+Furthermore, the chapter examines the multi-dimensional impact of UHIs under the lens of land cover change.
+This includes the analysis of spatial and temporal patterns of UHIs, the influence of different urban forms and structures, and the effectiveness of various mitigation strategies, such as urban greenery and reflective materials in buildings and pavements.
 
-
-    \subsection{Analysis}
-    \subsection{Conclusions}
-
-
-  \section{Impact of Climate Change on \texorpdfstring{\glsxtrlongpl{UHI}}{Urban Heat Islands}}\label{sec:UHITempImp}
+Through a synthesis of current research findings and case studies, this chapter aims to provide a comprehensive understanding of the dynamics between land cover change and UHIs.
+It also seeks to offer insights into sustainable urban planning and design practices that can mitigate the adverse effects of UHIs, thereby contributing to the development of more livable and resilient urban environments.
+%
+    \subsection{Impact of Land cover/ Surface type on Heat Buildup}
+    %TODO 
+    Todo literature recherche aus Obsidian einfügen... 
+    %TODO 
+    \subsection{Land cover classification}
+    \section{Methodology for Land Cover Classification}
+    The methodology employed for land cover classification involved the multi-step process utilizing satellite imagery, feature enhancement and machine learning techniques shown in \cref{fig:pipeline} and described in \cref{sec:pipelin}.
+The primary data source was 11-band Landsat images, which provided a comprehensive spectral view of the area to be classified.
+To augment the dataset and enhance the classification accuracy, Gabor filtering was applied to the Landsat images (as detailed in \cref{sec:gabor}).
+This step was crucial in extracting and emphasizing spatial patterns and textures, thereby facilitating more distinct classification of land cover types. %TODO citation?
+\\
+The feature enhanced data of images of Bremen, Valencia and TODO where used of multiple years to train an unsupervised K-Means clustering model.%TODO add more 
+This initial clustering served as the foundation for the subsequent Random Forest machine learning model.
+The K-means algorithm was executed with varying numbers of classes – specifically 8, 10, and 11 – to determine the optimal classification schema.
+This model was validated using the Sentinel-2 10m Land Use/Land Cover map (\cite{Zhang}).
+Since the data set only uses 8 classes, the used classes where mapped to the best fitting class (indicated in \cref{tab:land_cover_classes}). 
+Clouds, Cloudshadows and Snow/Ice where not used for verification and removed for the analysis.
+%TODO
+The clustering was ...
+TODO THE VALIDATION RESULTS STILL TBD... :/ 
+\\ 
+The Trained model was then used to classify other cities and datasets from different times. 
+Part of the training data as well as different time data from the same area was used and Feature enhanced using the same Gabor-Filter bank.
+Feeding the enhanced data into the random forests model was then used to determine the land cover classes for the next step of the analysis.
+\begin{table}[h]
+\centering
+\caption{Land Cover Classes Identified\label{tab:land_cover_classes}}
+\begin{tabular}{lp{4cm}l}
+\toprule
+\textbf{Class Number} & \textbf{Land Cover Type} & \textbf{ESRI Class}\\
+\midrule
+1 &  Allotments and vegetation rich residential area  & Build Area\\
+2 &  Industry Halls & Build Area\\
+3 &  Forest and dense vegetation& Trees \& Crops\\
+4 &  Agricultural Land & Crops\\
+5 &  Water& Water / Flooded Vegetation\\
+6 &  Industrial& Build Area\\
+7 &  Bare Soil, Rock & Bare \\
+8 &  Cloud Shadows & Clouds \& Any \\
+9 &  Fields and meadows& Rangeland \&Crops \\
+10 &  Clouds & Clouds \\
+11 &  Residential/ Build-up& Build Area\\
+\bottomrule
+\end{tabular}
+\end{table}
+For the labeling of these land cover classes, the Normalized Difference Vegetation Index (NDVI) and the Normalized Difference Built-up Index (NDBI) bands were utilized.
+These indices were instrumental in differentiating vegetated areas from built-up regions, thereby aiding in the accurate categorization of land cover types.
+The classification labels were assigned based on the proximity of the NDVI and NDBI values to the cluster centers derived from the K-means model.
+This approach ensured that each land cover class was consistently labelled independent of the study area.\\
+%
+  \subsection{Analysis}\label{sec:landcoverAnalysis}
+TODO Daten einfügen und analyse ergebnisse
+  \subsection{Conclusions}
+In summary, the integration of enhanced Landsat imagery, Gabor filtering, K-means clustering, and Random Forest classification constituted a robust methodology for land cover classification.
+This process not only facilitated a detailed and accurate representation of the study area's land cover but also demonstrated the efficacy of combining various remote sensing and machine learning techniques for environmental analysis.
+TODO evetuell nochmal etwas genauer beschreiben. ADD DATEN und Bilder! 
+%
+\newpage
+  \section{Impact of Climate Change on Urban Heat Islands}\label{sec:UHITempImp}
     \subsection{Introduction}
     The interaction between global and local climate is a complicated process that has multiple parameters, that are not completely understood nor are they all easily measurable. 
-    In central Europe the climate is governed by seasonality typical for the northern hemisphere but al
+    In central Europe the climate is governed by seasonality typical for the northern hemisphere.  
+    According to multiple studies global rise of temperature due to climate change is also increasing temperatures in northern Europe~\cite{Benestad2005} 
+
     A climate tipping point (see~\cite{Lenton2008}) that could cause severe cooling in northern Europe is the breakdown of the Atlantic Thermohaline circulation\cite{Rahmstorf1999}.
     %TODO add a sentence for why
     But since the European climate is still under influence by the warm ocean currents, the temperatures in major European cities have increased at a similar pace then the global mean temperatures. 
     The cities covered by this study observed an average increase from 1990 to 2020 of %TODO 
-    \textdegree C. 
-
-
-
+    \textdegree\ C. 
 %
-    %:\\ 
     The hypothesis is that the rising temperatures observed over the past 30 years have increased heat island severity and size. 
     \subsection{Methodology}
-    This was done by creating a time series of land surface temperatures and urban heat islands from 1990 to 2020 using Landsat 7 and Landsat 8 and 9 data. 
-    The data was then correlated with air temperature data of local measurement stations. 
-
-
-    \subsection{Analysis}
-    \subsection{Conclusions}
-
-    \section{Simulation and Modeling of \texorpdfstring{\glsxtrlongpl{UHI}}{Urban Heat Islands}}\label{sec:modelling}
-    \subsection{Introduction}
-    \subsection{Analysis}
-    \subsection{Conclusions}
-
-\section{Discussion}\label{sec:discussion}
-    \subsection{Synthesis of Findings}
-    \subsection{Implications}
-
+    Measurement of the impact on rising temperatures have to be done after correcting for other variables such as urban development, meterological impact factors such as wind and rain. 
+    To archive this a time series of land surface temperatures and urban heat islands from 1990 to 2022 was created using Landsat 7 and Landsat 8 and 9 data.
+    Data from weather stations in the areas where used to calculate the trend of mean temperature over the time. 
+    The \glspl{UHI} data was then correlated with the air temperature data of the local measurement stations and corrected for size increases of urban heat island impacted by land cover change in the previous step. 
+    This way in the statistical analysis all \glspl{UHI} that would be impacted by urbanisation or change of surface type where excluded from the analysis.
+%
+    %\subsection{Analysis}
+    %\subsection{Conclusions}{sec:conclusion}
+%    \section{Simulation and Modeling of \texorpdfstring{\glsxtrlongpl{UHI}}{Urban Heat Islands}}\label{sec:modelling}
+%    \subsection{Introduction}
+%
+%    \subsection{Analysis}
+%    \subsection{Conclusions}
+%\newpage
+%\section{Discussion}\label{sec:discussion}
+%    \subsection{Synthesis of Findings}
+%    \subsection{Implications}
+%
 \section{Conclusion}\label{sec:conclusion}
-
-    \subsection{Summary}
-    \subsection{Future Work}
-
-\section{Appendix}
-    \subsection{Data}
-    \subsection{Code}
-
-
+%    \subsection{Summary}
+%    \subsection{Future Work}
+%%
 \newpage
-\printbibliography
+\section{Appendix}
+%    \subsection{Data}
+%    \subsection{Code}
+%
+%
+\newpage
+\printbibliography%
+\newpage
+\section*{Eigenständigkeitserklärung}
+  % TODO insert Eigenständigkeitserklärung
 \end{document}
 
 %The surface classes where correlated with the %TODO check 

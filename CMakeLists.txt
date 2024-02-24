@@ -4,7 +4,7 @@ PROJECT(LatexProject NONE)
 FIND_PACKAGE(LATEX)
 IF(LATEX_FOUND)
   IF(PDFLATEX_FOUND)
-		MESSAGE(STATUS "pdflatex found - ${PDFLATEX_COMPILER}")
+  	MESSAGE(STATUS "pdflatex found - ${PDFLATEX_COMPILER}")
 	ENDIF()
   IF(BIBER_COMPILER)
 		MESSAGE(STATUS "biber found - ${BIBER_COMPILER}")
@@ -36,8 +36,8 @@ SET( WORKINGDIR "${CMAKE_SOURCE_DIR}/src" )
 # First pass.
 # enabled shell-escape since I use the SVG pkg
 ADD_CUSTOM_TARGET( latex-prebuild
-		COMMAND ${PDFLATEX_COMPILER} -shell-escape -output-directory ${OUT_DIRECTORY} -draftmode -interaction=nonstopmode ${MAIN_TEX}
-		COMMAND ${PDFLATEX_COMPILER} -shell-escape -output-directory ${OUT_DIRECTORY} -draftmode -interaction=nonstopmode ${MAIN_TEX}
+    COMMAND ${PDFLATEX_COMPILER} -shell-escape -output-directory ${OUT_DIRECTORY} -draftmode -interaction=nonstopmode ${MAIN_TEX}
+    COMMAND ${PDFLATEX_COMPILER} -shell-escape -output-directory ${OUT_DIRECTORY} -draftmode -interaction=nonstopmode ${MAIN_TEX}
 		COMMENT "Starting Prebuild."
 		WORKING_DIRECTORY ${WORKINGDIR}
 		DEPENDS ${MAIN_TEX})
