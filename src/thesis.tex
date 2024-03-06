@@ -611,51 +611,51 @@ It also seeks to offer insights into sustainable urban planning and design pract
     The frequencies of the sine wave where varied between 0.05 and 0.15. \\ 
     After the features were added the data was passed through the trained (random forest model \cref{sec:randomForrest}) for classification. 
 
-This step was crucial in extracting and emphasizing spatial patterns and textures, thereby facilitating more distinct classification of land cover types. %TODO citation?
-The classified image has 11 classes that are shown in \cref{tab:land_cover_classes}
-\\
-The feature enhanced data of images of Bremen%, Valencia and TODO 
-were used of multiple years to create an unsupervised K-Means clustering model.%TODO add more 
-This initial clustering served as the foundation for the subsequent Random Forest machine learning model.
-The K-means algorithm was executed with varying numbers of classes – specifically 8, 10, and 11 – to determine the optimal classification schema.
-This model was validated using the Sentinel-2 10m Land Use/Land Cover map (\cite{Zhang}).
-Since the data set only uses 8 classes, the used classes where mapped to the best fitting class (indicated in \cref{tab:land_cover_classes}). 
-Clouds, Cloudshadows and Snow/Ice where not used for verification and removed for the analysis.
-%TODO
-To judge results the output of the kmeans and the random forrest was compared to the ESA CCI Land Use Data Set~\cite{landformclassicationusingfuzzykmeans2000} that was scaled up to the used image resolution. %TODO check if correct reference
-\\
-TODO THE VALIDATION RESULTS STILL TBD... :/ 
-\\ 
-The Trained model was then used to classify other cities and datasets from different times. 
-Part of the training data as well as different time data from the same area was used and Feature enhanced using the same Gabor-Filter bank.
-Feeding the enhanced data into the random forests model was then used to determine the land cover classes for the next step of the analysis.
-\begin{table}[h]
-\centering
-\caption{Land Cover Classes Identified\label{tab:land_cover_classes}}
-\begin{tabular}{lp{4cm}l}
-\toprule
-\textbf{Class Number} & \textbf{Land Cover Type} & \textbf{ESRI Class}\\
-\midrule
-1 &  Allotments and vegetation rich residential area  & Build Area\\
-2 &  Industry Halls & Build Area\\
-3 &  Forest and dense vegetation& Trees \& Crops\\
-4 &  Agricultural Land & Crops\\
-5 &  Water& Water / Flooded Vegetation\\
-6 &  Industrial& Build Area\\
-7 &  Bare Soil, Rock & Bare \\
-8 &  Cloud Shadows & Clouds \& Any \\
-9 &  Fields and meadows& Rangeland \&Crops \\
-10 &  Clouds & Clouds \\
-11 &  Residential/ Build-up& Build Area\\
-\bottomrule
-\end{tabular}
-\end{table}
-For the labeling of these land cover classes, the Normalized Difference Vegetation Index (NDVI) and the Normalized Difference Built-up Index (NDBI) bands were utilized.
-These indices were instrumental in differentiating vegetated areas from built-up regions, thereby aiding in the accurate categorization of land cover types.
-The classification labels were assigned based on the proximity of the NDVI and NDBI values to the cluster centers derived from the K-means model.
-This approach ensured that each land cover class was consistently labelled independent of the study area.\\
-%
-\subsubsection{Urban Area Extraction}
+    This step was crucial in extracting and emphasizing spatial patterns and textures, thereby facilitating more distinct classification of land cover types. %TODO citation?
+    The classified image has 11 classes that are shown in \cref{tab:land_cover_classes}
+    \\
+    The feature enhanced data of images of Bremen%, Valencia and TODO 
+    were used of multiple years to create an unsupervised K-Means clustering model.%TODO add more 
+    This initial clustering served as the foundation for the subsequent Random Forest machine learning model.
+    The K-means algorithm was executed with varying numbers of classes – specifically 8, 10, and 11 – to determine the optimal classification schema.
+    This model was validated using the Sentinel-2 10m Land Use/Land Cover map (\cite{Zhang}).
+    Since the data set only uses 8 classes, the used classes where mapped to the best fitting class (indicated in \cref{tab:land_cover_classes}). 
+    Clouds, Cloudshadows and Snow/Ice where not used for verification and removed for the analysis.
+    %TODO
+    To judge results the output of the kmeans and the random forrest was compared to the ESA CCI Land Use Data Set~\cite{landformclassicationusingfuzzykmeans2000} that was scaled up to the used image resolution. %TODO check if correct reference
+    \\
+    TODO THE VALIDATION RESULTS STILL TBD... :/ 
+    \\ 
+    The Trained model was then used to classify other cities and datasets from different times. 
+    Part of the training data as well as different time data from the same area was used and Feature enhanced using the same Gabor-Filter bank.
+    Feeding the enhanced data into the random forests model was then used to determine the land cover classes for the next step of the analysis.
+    \begin{table}[h]
+    \centering
+    \caption{Land Cover Classes Identified\label{tab:land_cover_classes}}
+    \begin{tabular}{lp{4cm}l}
+    \toprule
+    \textbf{Class Number} & \textbf{Land Cover Type} & \textbf{ESRI Class}\\
+    \midrule
+    1 &  Allotments and vegetation rich residential area  & Build Area\\
+    2 &  Industry Halls & Build Area\\
+    3 &  Forest and dense vegetation& Trees \& Crops\\
+    4 &  Agricultural Land & Crops\\
+    5 &  Water& Water / Flooded Vegetation\\
+    6 &  Industrial& Build Area\\
+    7 &  Bare Soil, Rock & Bare \\
+    8 &  Cloud Shadows & Clouds \& Any \\
+    9 &  Fields and meadows& Rangeland \&Crops \\
+    10 &  Clouds & Clouds \\
+    11 &  Residential/ Build-up& Build Area\\
+    \bottomrule
+    \end{tabular}
+    \end{table}
+    For the labeling of these land cover classes, the Normalized Difference Vegetation Index (NDVI) and the Normalized Difference Built-up Index (NDBI) bands were utilized.
+    These indices were instrumental in differentiating vegetated areas from built-up regions, thereby aiding in the accurate categorization of land cover types.
+    The classification labels were assigned based on the proximity of the NDVI and NDBI values to the cluster centers derived from the K-means model.
+    This approach ensured that each land cover class was consistently labelled independent of the study area.\\
+    %
+    \subsubsection{Urban Area Extraction}
     The resulting classified image was then processed to extract urban areas.
     The algorithm used the classes 1,2,6 and 11 from \cref{tab:land_cover_classes} to detect areas that can be considered urban.
     The areas were \gls{dilated} and \gls{eroded} to bringe small gaps between parts of the citie and close holes as well cut small links such as highways between areas.
@@ -704,6 +704,27 @@ TODO nochmal etwas genauer beschreiben. ADD DATEN und Bilder!
     The \glspl{UHI} data was then correlated with the air temperature data of the local measurement stations and corrected for size increases of urban heat island impacted by land cover change in the previous step. 
     This way in the statistical analysis all \glspl{UHI} that would be impacted by urbanisation or change of surface type where excluded from the analysis.
 %
+    \subsubsection{Data Handling}
+    One of the challenges that arised during the processing of multiple images where the large amount of data of the images (each fully loaded image with all 11 bands including classification is around 1.5 GB).
+    To reduce the memory footprint of the processing chain, xarray (\cite{hoyer2017xarray}) was used. 
+    Xarray allows lazy loading from disk, this only loads parts of the complete data set. 
+    Another feature of xarray that was used are labeled data. Each loaded image used latitude and longitude as coordinates allowing to accessing sub areas by reference coordinates. 
+    Another axis was added for the time dimension, so that each area could be stored in a single data file, but access is done loading only the relevant data for a specific time or a selected time frame.
+
+    For this step the following data was loaded from the previous dataset: 
+    \begin{itemize}
+      \item Band data from the area of interest (Band 1 to 10)
+      \item Classification label, a layer with the numerical classifications assigned to each pixel 
+      \item Urban mask, a layer with urban, suburban and peri urban areas
+      \item Urban Heat Islands, for each time step a layer, masking urban heat islands
+    \end{itemize}
+
+    \subsubsection{Calculating temperature rise within the city}
+    For the city in question the next ground based measurement stations where used to calculate a fitted temperature regression. 
+    This data % TODO add image 
+    was correlated with the surface urban heat island intensity as well as the measured temperature data from the times where satellite data was available. 
+% EOE
+
     %\subsection{Analysis}
     %\subsection{Conclusions}{sec:conclusion}
 %    \section{Simulation and Modeling of \texorpdfstring{\glsxtrlongpl{UHI}}{Urban Heat Islands}}\label{sec:modelling}
