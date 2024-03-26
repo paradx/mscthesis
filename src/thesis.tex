@@ -4,6 +4,7 @@
 \usepackage[english]{babel}
 \usepackage{csquotes}
 \usepackage[iso]{isodate}
+
 % Font configuration according to uni specs 
 %% Calibri or Arial 11pt or Times New Roman 12pt
 %\usepackage{fontspec}
@@ -32,12 +33,15 @@
 %% images
 \usepackage{graphicx}
 \usepackage{wrapfig}
+\usepackage{pdflscape}
 \usepackage[inkscapeformat=png]{svg}
 %% captions 
 \usepackage{caption}
 \usepackage{subcaption}
 %% tables 
+\usepackage{tabularx, makecell}
 \usepackage{booktabs}
+\usepackage{siunitx}
 %% maths
 \usepackage{amsmath}
 %% colors
@@ -46,7 +50,7 @@
 \usepackage{setspace}
 \usepackage[colorlinks=true, allcolors=black]{hyperref}
 \usepackage[capitalize]{cleveref}
-\usepackage[backend=biber, style=authoryear]{biblatex}
+\usepackage[backend=biber, style=authoryear]{biblatex} %% alphabetic
 %% acronyms and glossary 
 %\usepackage[acronym,]{glossaries} 
 \usepackage[automake,acronym,postdot,stylemods,translate=babel]{glossaries-extra}
@@ -384,11 +388,11 @@ HVAC systems also produce heat, when cooling buildings. This further increases t
     \begin{figure}[!htbp]
        \begin{subfigure}[b]{0.50\textwidth}
          \input{pipelinetrain.tikz.tex}
-         \caption{Processing pipeline for developing the model}\label{fig:pipelineTraining}
+         \subcaption{Processing pipeline for developing the model}\label{fig:pipelineTraining}
        \end{subfigure}
        \begin{subfigure}[b]{0.50\textwidth}
          \input{pipelinetrained.tikz.tex}
-         \caption{Data Processing pipeline with the trained Model}\label{fig:pipelineTrained}
+         \subcaption{Data Processing pipeline with the trained Model}\label{fig:pipelineTrained}
        \end{subfigure}
        \caption{The image processing overview\label{fig:pipeline}}
      \end{figure}
@@ -429,37 +433,37 @@ Mathematically the Gabor-filter is defined by
      \begin{subfigure}[b]{0.45\textwidth}
          \centering
          \includegraphics[width=\textwidth]{img/Features_2_005_0.png}
-         \caption{Kernel with $\sigma$ = 2, f = 0.05 and 0 ° rotation}\label{fig:feat01}
+         \subcaption{Kernel with $\sigma$ = 2, f = 0.05 and 0 ° rotation}\label{fig:feat01}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.45\textwidth}
          \centering
          \includegraphics[width=\textwidth]{img/Features_2_015_0.png}
-         \caption{Kernel with $\sigma$ = 2, f = 0.15 and 0 ° rotation}\label{fig:feat02}
+         \subcaption{Kernel with $\sigma$ = 2, f = 0.15 and 0 ° rotation}\label{fig:feat02}
      \end{subfigure}
 
      \begin{subfigure}[b]{0.45\textwidth}
          \centering
          \includegraphics[width=\textwidth]{img/Features_4_005_0.png}
-         \caption{Kernel with $\sigma$ = 4, f = 0.05 and 0 ° rotation}\label{fig:feat03}
+         \subcaption{Kernel with $\sigma$ = 4, f = 0.05 and 0 ° rotation}\label{fig:feat03}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.45\textwidth}
          \centering
          \includegraphics[width=\textwidth]{img/Features_2_005_90.png}
-         \caption{Kernel with $\sigma$ = 2, f = 0.05 and 90 ° rotation}\label{fig:feat04}
+         \subcaption{Kernel with $\sigma$ = 2, f = 0.05 and 90 ° rotation}\label{fig:feat04}
      \end{subfigure}
 
      \begin{subfigure}[b]{0.45\textwidth}
          \centering
          \includegraphics[width=\textwidth]{img/Features_2_015_90.png}
-         \caption{Kernel with $\sigma$ = 2, f = 0.15 and 90 ° rotation}\label{fig:feat05}
+         \subcaption{Kernel with $\sigma$ = 2, f = 0.15 and 90 ° rotation}\label{fig:feat05}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.45\textwidth}
          \centering
          \includegraphics[width=\textwidth]{img/Features_4_015_0.png}
-         \caption{Kernel with $\sigma$ = 4, f = 0.15 and 0 ° rotation}\label{fig:feat06}
+         \subcaption{Kernel with $\sigma$ = 4, f = 0.15 and 0 ° rotation}\label{fig:feat06}
      \end{subfigure}
         \caption{Result of convolving differently oriented gabor wavelets with an Landsat-8 image of Bremen}\label{fig:gaborExample}
     \end{figure}
@@ -624,7 +628,7 @@ It also seeks to offer insights into sustainable urban planning and design pract
     %TODO
     To judge results the output of the kmeans and the random forrest was compared to the ESA CCI Land Use Data Set~\cite{landformclassicationusingfuzzykmeans2000} that was scaled up to the used image resolution. %TODO check if correct reference
     \\
-    TODO THE VALIDATION RESULTS STILL TBD... :/ 
+    TODO THE VALIDATION RESULTS STILL TBD~:/% 
     \\ 
     The Trained model was then used to classify other cities and datasets from different times. 
     Part of the training data as well as different time data from the same area was used and Feature enhanced using the same Gabor-Filter bank.
@@ -682,7 +686,6 @@ This process not only facilitated a detailed and accurate representation of the 
 TODO nochmal etwas genauer beschreiben. ADD DATEN und Bilder! 
 %
 \newpage
-
   \section{Impact of Climate Change on Urban Heat Islands}\label{sec:UHITempImp}
     \subsection{Introduction}
     The interaction between global and local climate is a complicated process that has multiple parameters, that are not completely understood nor are they all easily measurable. 
@@ -719,19 +722,92 @@ TODO nochmal etwas genauer beschreiben. ADD DATEN und Bilder!
       \item Urban Heat Islands, for each time step a layer, masking urban heat islands
     \end{itemize}
 
+    \newpage
     \subsubsection{Calculating temperature rise within the city}
     For the city in question the next ground based measurement stations where used to calculate a fitted temperature regression. 
     This data % TODO add image 
     was correlated with the surface urban heat island intensity as well as the measured temperature data from the times of the satellite data acquisitions. 
     For German cities the stations of the \gls{DWD} where used.
-    Using the~\cite{wetterdienst2024} library, that allows locating the nearest weather station having sufficiently high resolution weather data. 
+    %#Using the~\cite{wetterdienst2024} library, that allows locating the nearest weather station having sufficiently high resolution weather data. 
+    One indicator interesting in the research on urban heat islands is the number of days with high temperature.
+    There are multiple threshold days that are used to classify seasons in comparison to the average.
+    Hot days (defined by the \gls{DWD} as days with a maximum temperature over 30 °C), summer days (maximum temperature over 25 °C) and tropical nights (days with daily minimal temperature over 20 °C), are tracked by metrological organisations~\cite{dwdklimalexikon}.
+    Another measurement to visualize a rise in average temperature is the amount of frost days (where the minimal temperature is below 0 °C). 
+  \subsection{Analysis}
+  \subsubsection{Bremen}
+  Bremen was selected as the base area of the study, to be able to verify classification results and due to personal local knowlaege. 
+    \begin{figure}[!htbp]
+     \centering
+        \includegraphics[width=\textwidth]{img/BremenKIChanges}
+        \caption{Development of threashold days over time\label{fig:climateovertimeBremen}}
+   \end{figure}
+   An overview of the climate of Bremen is shown in \cref{fig:bremenclimateoverview}.
+   The threshold days over time are shown in \cref{fig:climateovertimeBremen},
+   The weather station in Bremen is located at the airport on the edge of the city area. %TOOD image? 
+   For comparison of air temperature with a more rural area the \gls{DWD} weather station ``Worpswede-Hüttenbusch'' located roughly 30 km north-north-east of the weather station and is located in a rural area. 
+   To verify that the measurements of the urban and rural stations are correlated the absolute temperature difference for daily values is shown in \cref{fig:diff2015Bre} and \cref{fig:diff20222Bre}, it can be seen that the atmospheric urban heat island over Bremen is affecting the Bremen airport station. 
+   In the period from April to October in 2015 the daily mean temperature was 0.6 °C lower at the rural station. 
 
+   In the same period in 2022 the daily mean temperature was 0.85 °C lower at the rural station. 
+   %TODO add min and max and reason for why it is like that 
 
+  
 
-% EOE
+   %TODO for the days show a plot with both measurements (rural/ urban) 
+    \begin{figure}[!p]
+     \centering
+       \begin{subfigure}[b]{\textwidth}
+     \includegraphics[width=\textwidth]{img/DWDBremenWeather.jpg}
+     \subcaption{Weather in Bremen with key threshold days~\cite{DWD2024}\label{fig:bremenclimateoverview}}
+       \end{subfigure}
 
-    %\subsection{Analysis}
-    %\subsection{Conclusions}{sec:conclusion}
+       \begin{subfigure}[b]{\textwidth}
+        \includegraphics[width=\textwidth]{img/MapWetterstationenBremen.jpeg}
+         \subcaption{Location of the weather stations in Bremen and the rural reference station in Worpswede-Hüttenbusch}\label{fig:mapWeatherstationsBremen}
+       \end{subfigure}
+         \caption{Overview of the data used for the analysis of the Bremen UHIs}\label{fig:AnalysisBre}
+   \end{figure}
+
+    \begin{figure}[!p]
+     \centering
+       \begin{subfigure}[b]{\textwidth}
+        \includegraphics[width=\textwidth]{img/BremenDifferences2015.png}
+        \subcaption{Absolute Differences between measurement stations [°C] and days with satellite coverage (green) in 2015}\label{fig:diff2015Bre}
+       \end{subfigure}
+       \begin{subfigure}[b]{\textwidth}
+        \includegraphics[width=\textwidth]{img/BremenDifferences2022.png}
+        \subcaption{Absolute Differences between measurement stations [°C] and days with satellite coverage (green) in 2022}\label{fig:diff20222Bre}
+       \end{subfigure}
+         \caption{Differences of weather station measurements in urban and rural areas near Bremen}\label{fig:diffBre}
+   \end{figure}
+   
+\begin{landscape}
+    \begin{table}[p]
+    \centering
+    \caption{Comparison of Air Temperature, LST and Urban Heat Island size for Bremen\label{tab:statsBremen}}
+    \begin{tabular}{l lll lll l llll lll}
+      \toprule
+        &\multicolumn{7}{c}{\makecell{\textbf{Air Temperature}}} & \multicolumn{3}{c}{\makecell{\textbf{LST}}}\\
+      \textbf{Date}&\multicolumn{3}{c}{\makecell{\textbf{Urban}}} &\multicolumn{3}{c}{\makecell{\textbf{Rural}}} & \textbf{$\Delta T$} &
+      \multicolumn{3}{c}{\makecell{\textbf{Urban}}}& \multicolumn{3}{c}{\makecell{\textbf{Rural}}}\\
+
+        & $T_{\min}$ & $T_{mean}$ & $T_{\max}$ & $T_{\min}$ & $T_{mean}$ & $T_{\max}$ & & 
+       $T_{\min}$ & $T_{mean}$ & $T_{\max}$ & Num. UHI & $T_{\min}$ & $T_{mean}$ & $T_{\max}$ \\
+           \midrule
+      2015-07-04 & 18.3 & 26.3 & 36.0 & 19.7 & 27.3 & 36.8 & -1.0 & & & & & & & \\
+      2021-06-18 & 15.9 & 24.7 & 31.9 & 17.7 & 25.4 & 30.7 & -0.7 & & & & & & & \\
+      2021-06-02 & 8.3  & 18.1 & 25.7 & 10.6 & 18.3 & 24.4 & -0.2 & & & & & & & \\
+      2022-06-21 & 6.3  & 15.6 & 23.4 & 6.4  & 15.8 & 23.0 & -0.2 & & & & & & & \\
+      2022-08-24 & 15.8 & 24.2 & 32.0 & 18.4 & 24.9 & 31.2 & -0.7 & & & & & & & \\
+      2022-06-29 & 10.7 & 20.8 & 29.0 & 13.2 & 21.5 & 28.1 & -0.7 & & & & & & & \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+\end{landscape}
+%\subsection{Analysis}
+%\subsection{Conclusions}{sec:conclusion}
+
+%    \newpage
 %    \section{Simulation and Modeling of \texorpdfstring{\glsxtrlongpl{UHI}}{Urban Heat Islands}}\label{sec:modelling}
 %    \subsection{Introduction}
 %
@@ -742,6 +818,7 @@ TODO nochmal etwas genauer beschreiben. ADD DATEN und Bilder!
 %    \subsection{Synthesis of Findings}
 %    \subsection{Implications}
 %
+\newpage
 \section{Conclusion}\label{sec:conclusion}
 \subsection{Summary}
 % Summary of the findings 
@@ -749,7 +826,11 @@ TODO nochmal etwas genauer beschreiben. ADD DATEN und Bilder!
 
 \subsection{Limitations and Challenges}
 % Why was something not possible
-While the connection of ground based sensor stations with remote imagery works well, a direct reliable calculation 
+While the connection of ground based sensor stations with remote imagery works well, a direct reliable conversion from land surface temperatures to air temperature, since the lag and 
+
+\subsubsection{Data}
+\subsubsection{Software}
+
 % 
 \subsection{Future Work}
 
