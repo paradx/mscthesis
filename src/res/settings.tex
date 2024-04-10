@@ -1,0 +1,131 @@
+% Language setting
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage[iso]{isodate}
+
+% Font configuration according to uni specs 
+%% Calibri or Arial 11pt or Times New Roman 12pt
+%\usepackage{fontspec}
+%\defaultfontfeatures{Ligatures=TeX}
+%\setsansfont{Calibri}
+%\setmainfont{Times New Roman}
+\usepackage[automark, autooneside=true]{scrlayer-scrpage}
+\KOMAoptions{%
+   headsepline = true,
+   footsepline = true,
+   plainheadsepline = true,
+   plainfootsepline = true,
+} 
+\renewcommand\sectionmark[1]{\markright{\MakeMarkcase {\thesection\hskip .5em\relax#1}}}
+\ihead*{}%\leftmark}
+\ohead*{\rightmark}
+\chead{}
+
+\cfoot[]{}
+\ifoot[Linus Andrae]{Linus Andrae}
+\ofoot[\thepage]{\thepage}%\ of \pageref*{LastPage}]{\thepage \ of \pageref*{LastPage}}
+
+
+% Set page size and margins
+\usepackage[top=2cm,bottom=2cm,left=5cm,right=2cm,head=18pt]{geometry}
+%% images
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{pdflscape}
+\usepackage[inkscapeformat=png]{svg}
+\usepackage{pdfpages}
+%% captions 
+\usepackage{caption}
+\usepackage{subcaption}
+%% tables 
+\usepackage{tabularx, makecell}
+\usepackage{booktabs}
+\usepackage{siunitx}
+%% maths
+\usepackage{amsmath}
+%% colors
+\usepackage{xcolor}
+%% links and refs and citations 
+\usepackage{setspace}
+\usepackage[colorlinks=true, allcolors=black]{hyperref}
+\usepackage[capitalize]{cleveref}
+\usepackage[backend=biber, style=authoryear-comp]{biblatex} %% alphabetic
+
+\DeclareCiteCommand{\cite}[\mkbibemph]
+  {\usebibmacro{cite:init}%
+   \usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite}}
+  {}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand*{\cite}[\mkbibemph]
+  {\usebibmacro{cite:init}%
+   \usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{citeyear}}
+  {}
+  {\usebibmacro{postnote}}
+
+\newcommand*{\mkbibemphparens}[1]{\mkbibparens{\mkbibemph{#1}}}
+
+\DeclareCiteCommand{\parencite}[\mkbibemphparens]
+  {\usebibmacro{cite:init}%
+   \usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite}}
+  {}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand*{\parencite}[\mkbibemphparens]
+  {\usebibmacro{cite:init}%
+   \usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{citeyear}}
+  {}
+  {\usebibmacro{postnote}}
+
+%% acronyms and glossary 
+%\usepackage[acronym,]{glossaries} 
+\usepackage[automake,acronym,postdot,stylemods,translate=babel]{glossaries-extra}
+% varwidth
+\usepackage{varwidth}
+%% include code snippets
+\usepackage{listings}
+%% Kerning
+\usepackage[protrusion=true,expansion]{microtype}
+%% Tikz
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, backgrounds, automata, positioning}
+%% Some diagram definitions
+  %
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick,->, > = stealth]
+
+\usepackage[version=4]{mhchem} % for chemical reaction formulas
+%% title page
+\usepackage{titling} % for cooler titlepages 
+% configuration 
+\bibliography{refs.bib} % Entries are in the refs.bib file
+% configure python code snippets
+\lstdefinestyle{PyStyle}{%
+    commentstyle=\color{olive},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{gray},
+    stringstyle=\color{purple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    language=python
+}
