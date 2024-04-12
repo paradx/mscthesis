@@ -4,8 +4,8 @@
   \node (cut) [process, below of=input, text width=0.9\textwidth]{Cut to AOI};
   \node (features) [process, below of=cut, text width=0.9\textwidth]{Gabor Feature Extraction};
   \node (kmeans) [process, below of=features, text width=0.9\textwidth]{KMeans clustering};
-  \node (randomforest) [process, below of=kmeans, text width=0.9\textwidth]{Gabor Feature Extraction};
-  \node (stat1) [process, below of=randomforest, text width=0.9\textwidth]{Statistical analysis of different classes};
+%  \node (randomforest) [process, below of=kmeans, text width=0.9\textwidth]{Gabor Feature Extraction};
+  \node (stat1) [process, below of=kmeans, text width=0.9\textwidth]{Statistical analysis of different classes};%randomforest
   \node (stat2) [process, below of=stat1, text width=0.9\textwidth]{fitting class names};
   \node (diff) [process, below of=stat2, text width=0.9\textwidth]{diff analysis of LU/LC classes};
 
@@ -13,8 +13,8 @@
   \draw[arrow] (input) -- (cut);
   \draw[arrow] (cut) -- (features);
   \draw[arrow] (features) -- (kmeans);
-  \draw[arrow] (kmeans) -- (randomforest);
-  \draw[arrow] (randomforest) -- (stat1);
+  \draw[arrow] (kmeans) -- (stat1);%(randomforest);
+  %\draw[arrow] (randomforest) -- (stat1);
   \draw[arrow] (stat1) -- (stat2);
   \draw[arrow] (stat2) -- (diff);
 \end{tikzpicture}

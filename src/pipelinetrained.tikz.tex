@@ -1,0 +1,22 @@
+\begin{tikzpicture}[node distance=2cm, auto, scale=.5, on grid]
+  \node (start) [startstop, text width =0.7\textwidth] {Start};
+  \node (input) [io, below of=start, text width =0.6\textwidth]{Landsat 7\& 8 Image};
+  \node (cut) [process, below of=input, text width = 0.9\textwidth]{Cut to AOI};
+  \node (features) [process, below of=cut, text width = 0.9\textwidth]{Gabor Feature Extraction};
+  \node (randomforest) [process, below of=features, text width = 0.9\textwidth]{Surface Classification \\using the trained model};
+  \node (stat1) [process, below of=randomforest, text width = 0.9\textwidth]{Urban area detection using Random Forrest};
+  \node (stat2) [process, below of=stat1, text width = 0.9\textwidth]{Statistical analysis of image areas};
+  \node (diff) [process, below of=stat2, text width = 0.9\textwidth]{LU/LC change detection};
+  \node (uhi) [process, below of=diff, text width = 0.9\textwidth]{UHI detection};
+  \node (timeline) [process, below of=uhi, text width = 0.9\textwidth]{analyse change over time};
+
+  \draw[arrow] (start) -- (input);
+  \draw[arrow] (input) -- (cut);
+  \draw[arrow] (cut) -- (features);
+  \draw[arrow] (features) -- (randomforest);
+  \draw[arrow] (randomforest) -- (stat1);
+  \draw[arrow] (stat1) -- (stat2);
+  \draw[arrow] (stat2) -- (diff);
+  \draw[arrow] (diff) -- (uhi);
+  \draw[arrow] (uhi) -- (timeline);
+\end{tikzpicture}
