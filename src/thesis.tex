@@ -647,7 +647,7 @@ Current Date:&\thedate\\
         \includegraphics[width=\textwidth]{img/Features_nir_6.png}
         \subcaption{Convolution of NIR Band and kernel 6}
       \end{subfigure}
-     \caption{Example feature images of the convolution of three bands and gabor filters \label{fig:gaborresults}}
+     \caption{Example feature images of the convolution of three bands and gabor filters\label{fig:gaborresults}}
     \end{figure}
  \noindent 
  %
@@ -661,17 +661,17 @@ Current Date:&\thedate\\
       The frequencies of the sine wave where varied between 0.05 and 0.5. A trade-off between computation time and results was found using 3 frequencies shown in \cref{fig:gaborbank} \\ 
       This step was crucial in extracting and emphasizing spatial patterns and textures, thereby facilitating more distinct classification of land cover types. 
       %
-      \begin{figure}
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/red.png}
-        \subcaption{Original Band}
-      \end{subfigure}
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/Features_red2.png}
-        \subcaption{Convolution of NIR Band and kernel 6}
-      \end{subfigure}
-     \caption{Example feature images of the convolution of three bands and gabor filters \label{fig:gaborresults}}
-    \end{figure}
+   %   \begin{figure}
+   %   \begin{subfigure}[b]{0.3\textwidth}
+   %     \includegraphics[width=\textwidth]{img/RedChannel2019-06-29.png}
+   %     \subcaption{Original Band}
+   %   \end{subfigure}
+   %   \begin{subfigure}[b]{0.3\textwidth}
+   %     \includegraphics[width=\textwidth]{img/Features_red4.png}
+   %     \subcaption{Convolution of NIR Band and kernel 6}
+   %   \end{subfigure}
+   %   \caption{Example feature images of the convolution of three bands and gabor filters\label{fig:gaborresults}}
+   % \end{figure}
       %TODO citation?
       For classifying surfaces an unsupervised machine learning was used. 
       %After the features were added the data was passed through the trained (random forest model \cref{sec:randomForrest}) for classification. \\
@@ -882,7 +882,7 @@ Current Date:&\thedate\\
 
 
 
-\begin{figure}[!p]
+   \begin{figure}[!p]
      \centering
        \begin{subfigure}[b]{\textwidth}
           \includesvg[width=\textwidth]{img/UHIs_Bremen_2019-06-29_s:3.svg}
@@ -933,7 +933,7 @@ Current Date:&\thedate\\
 %
 %   
 \begin{landscape}
-    \begin{table}[ht]
+  \begin{table}[ht]
     \renewcommand{\arraystretch}{1.4}
     \centering
     \caption{Comparison of Air Temperature, \gls{LST} and \gls{UHI} size for Bremen\label{tab:statsBremen}}
@@ -943,69 +943,67 @@ Current Date:&\thedate\\
       \textbf{Date}&\multicolumn{3}{c}{\makecell{\textbf{Urban}}} &\multicolumn{3}{c}{\makecell{\textbf{Rural}}} & \textbf{$\Delta T$} &
       \multicolumn{3}{c}{\makecell{\textbf{Urban}}}& \multicolumn{3}{c}{\makecell{\textbf{Rural}}}\\
 
-        & $T_{\min}$ & $T_{mean}$ & $T_{\max}$ & $T_{\min}$ & $T_{mean}$ & $T_{\max}$ & & 
-       $T_{\min}$ & $T_{mean}$ (std) & $T_{\max}$ & Num. UHIs & $T_{\min}$ & $T_{mean} (std)$ & $T_{\max}$ \\
-           \midrule
-      2022--06--21 & 6.9 & 15.7 & 22.3 & 7.6 & 15.6 & 23.0 & -1.0 & 4.4 & 29.0 (4.4) & 56.7 & 39 & 4.7& 29.7 (4.4)& 56.7 \\
+                                                   & $T_{\min}$ & $T_{mean}$ & $T_{\max}$ & $T_{\min}$ & $T_{mean}$ & $T_{\max}$ & & 
+      $T_{\min}$ & $T_{mean}$ (std) & $T_{\max}$ & Num. UHIs & $T_{\min}$ & $T_{mean} (std)$ & $T_{\max}$ \\
+      \midrule
+      2022--06--21 & 6.9  & 15.7 & 22.3 & 7.6 & 15.6 & 23.0 & -1.0 & 4.4 & 29.0 (4.4) & 56.7 & 39 & 4.7& 29.7 (4.4)& 56.7 \\
       2019--06--29 & 15.9 & 24.7 & 31.9 & 17.7 & 25.4 & 30.7 & -0.7 & 22.9 & 34.2 (3.5) & 61.4 & 120 & 22.92 & 35.2(3.77) & 61.4 \\
-      .... TBC & & & & & & & & & &&&&&\\
+      %.... TBC & & & & & & & & & &&&&&\\
       \bottomrule
     \end{tabular}
   \end{table}
 
-  \begin{table}[ht]
-    \renewcommand{\arraystretch}{1.4}
-    \centering
-    \caption{Comparison of Urban Heat Islands in Bremen over time \label{tab:statsBremen}}
-    \begin{tabular}{l lll ll}
-      \toprule
-      \textbf{Date}& Number UHIs & min area & mean area & max area & min UHI mean T & max UHI \\
-           \midrule
-       2022--06--21 & 120 &  \\ 
-      2019--06--29 & \\
-      .... TBC & & & & & & & & & &&&&&\\
-      \bottomrule
-    \end{tabular}
-  \end{table}
+    \begin{table}[ht]
+      \renewcommand{\arraystretch}{1.4}
+      \centering
+      \caption{Comparison of Urban Heat Islands in Bremen over time \label{tab:statsBremen}}
+      \begin{tabular}{l lll lll}
+        \toprule
+        \textbf{Date}& Number UHIs & min area & mean area & max area & min UHI mean T & max UHI \\
+             \midrule
+        2022--06--21 & 120 &  & & & & \\ 
+        2019--06--29 &     &  & & & & \\
+        %.... TBC & & & & & & & & & &&&&&\\
+        \bottomrule
+      \end{tabular}
+    \end{table}
+  % \begin{table}[ht]
+  %   \centering
+  %   \renewcommand{\arraystretch}{1.4}
+  %   \caption{Comparison of Air Temperature, LST and Urban Heat Island size for Essen\label{tab:statsEssen}}
+  %   \begin{tabular}{l lll lll l llll lll}
+  %     \toprule
+  %       &\multicolumn{7}{c}{\makecell{\textbf{Air Temperature}}} & \multicolumn{3}{c}{\makecell{\textbf{LST}}}\\
+  %     \textbf{Date}&\multicolumn{3}{c}{\makecell{\textbf{Urban}}} &\multicolumn{3}{c}{\makecell{\textbf{Rural}}} & \textbf{$\Delta T$} &
+  %     \multicolumn{3}{c}{\makecell{\textbf{Urban}}}& \multicolumn{3}{c}{\makecell{\textbf{Rural}}}\\
 
-
- % \begin{table}[ht]
- %   \centering
- %   \renewcommand{\arraystretch}{1.4}
- %   \caption{Comparison of Air Temperature, LST and Urban Heat Island size for Essen\label{tab:statsEssen}}
- %   \begin{tabular}{l lll lll l llll lll}
- %     \toprule
- %       &\multicolumn{7}{c}{\makecell{\textbf{Air Temperature}}} & \multicolumn{3}{c}{\makecell{\textbf{LST}}}\\
- %     \textbf{Date}&\multicolumn{3}{c}{\makecell{\textbf{Urban}}} &\multicolumn{3}{c}{\makecell{\textbf{Rural}}} & \textbf{$\Delta T$} &
- %     \multicolumn{3}{c}{\makecell{\textbf{Urban}}}& \multicolumn{3}{c}{\makecell{\textbf{Rural}}}\\
-
- %       & $T_{\min}$ & $T_{mean}$ & $T_{\max}$ & $T_{\min}$ & $T_{mean}$ & $T_{\max}$ & & 
- %      $T_{\min}$ & $T_{mean}$ & $T_{\max}$ & Num. UHI & $T_{\min}$ & $T_{mean}$ & $T_{\max}$ \\
- %          \midrule
- %     2015--07--04 & 18.3 & 26.3 & 36.0 & 19.7 & 27.3 & 36.8 & -1.0 & & & & & & & \\
- %     2021--06--18 & 15.9 & 24.7 & 31.9 & 17.7 & 25.4 & 30.7 & -0.7 & & & & & & & \\
- %     2021--06--02 & 8.3  & 18.1 & 25.7 & 10.6 & 18.3 & 24.4 & -0.2 & & & & & & & \\
- %     2022--06--21 & 6.3  & 15.6 & 23.4 & 6.4  & 15.8 & 23.0 & -0.2 & & & & & & & \\
- %     2022--08--24 & 15.8 & 24.2 & 32.0 & 18.4 & 24.9 & 31.2 & -0.7 & & & & & & & \\
- %     2022--06--29 & 10.7 & 20.8 & 29.0 & 13.2 & 21.5 & 28.1 & -0.7 & & & & & & & \\
- %     \bottomrule
- %   \end{tabular}
- % \end{table}
+  %       & $T_{\min}$ & $T_{mean}$ & $T_{\max}$ & $T_{\min}$ & $T_{mean}$ & $T_{\max}$ & & 
+  %      $T_{\min}$ & $T_{mean}$ & $T_{\max}$ & Num. UHI & $T_{\min}$ & $T_{mean}$ & $T_{\max}$ \\
+  %          \midrule
+  %     2015--07--04 & 18.3 & 26.3 & 36.0 & 19.7 & 27.3 & 36.8 & -1.0 & & & & & & & \\
+  %     2021--06--18 & 15.9 & 24.7 & 31.9 & 17.7 & 25.4 & 30.7 & -0.7 & & & & & & & \\
+  %     2021--06--02 & 8.3  & 18.1 & 25.7 & 10.6 & 18.3 & 24.4 & -0.2 & & & & & & & \\
+  %     2022--06--21 & 6.3  & 15.6 & 23.4 & 6.4  & 15.8 & 23.0 & -0.2 & & & & & & & \\
+  %     2022--08--24 & 15.8 & 24.2 & 32.0 & 18.4 & 24.9 & 31.2 & -0.7 & & & & & & & \\
+  %     2022--06--29 & 10.7 & 20.8 & 29.0 & 13.2 & 21.5 & 28.1 & -0.7 & & & & & & & \\
+  %     \bottomrule
+  %   \end{tabular}
+  % \end{table}
 \end{landscape}
-%\subsection{Analysis}
-%\subsection{Conclusions}{sec:conclusion}
-
-%    \newpage
-%    \section{Simulation and Modeling of \texorpdfstring{\glsxtrlongpl{UHI}}{Urban Heat Islands}}\label{sec:modelling}
-%    \subsection{Introduction}
-%
-%    \subsection{Analysis}
-%    \subsection{Conclusions}
-%\newpage
-%\section{Discussion}\label{sec:discussion}
-%    \subsection{Synthesis of Findings}
-%    \subsection{Implications}
-%
+  %\subsection{Analysis}
+  %\subsection{Conclusions}{sec:conclusion}
+  
+  %    \newpage
+  %    \section{Simulation and Modeling of \texorpdfstring{\glsxtrlongpl{UHI}}{Urban Heat Islands}}\label{sec:modelling}
+  %    \subsection{Introduction}
+  %
+  %    \subsection{Analysis}
+  %    \subsection{Conclusions}
+  %\newpage
+  %\section{Discussion}\label{sec:discussion}
+  %    \subsection{Synthesis of Findings}
+  %    \subsection{Implications}
+  %
 \newpage
 \section{Conclusion}\label{sec:conclusion}
 \subsection{Summary}
@@ -1024,26 +1022,26 @@ While with the introduction of Landsat 9, the amount of footage doubled, in regi
 % 
 \subsection{Future Work}
 The classification part should be improved by using a widely available product that has a suitable resolution. 
-During development the 300 m reference product \cref{sec:references} was used but was not considered precise enough for these measurements.
+During development the 300 m reference product~\cite{sec:references} was used but was not considered precise enough for these measurements.
 
 \newpage
 \section{Appendix}
-\subsection{Additional Figures}
-%TODO 
-\subsection{Content of the Data Storage device}
-All data and the software used to create the figures and images for this document are available on the storage device.
-The software is also available online in the linked GitHub repository.
-The software version last used for this document is tagged with the name: \texttt{master-submission}
-The following artefacts can be found in these locations:
-\subsubsection{Data}
-The data is stored in multiple subfolders. 
-The \texttt{Data} folder contains the different cities as subfolders, within each of these folders, there is a \texttt{dataset} folder, containing a \texttt{xarray} dataset named \texttt{dataXarrayCITY_NAME.nc} of the used area of interest, including all bands and the classifiction at all times analysed during this project. 
-The \texttt{dataXarrayCITY_NAME_feat.nc} contains the extracted feature bands from the gabor feature extraction.
-The \texttt{ML_Model} folder contains a ``pickeled'' K-Means model, a file containing a numpy array with cluster centres for the label assignment and the random forest model. %TODO CHECK for rf
-\subsubsection{Code}
-The folder app contains the python code used for generating the data, the documentation of the code is located within the doc folder.
-%
-%
+  \subsection{Additional Figures}
+  %TODO 
+  \subsection{Content of the Data Storage device}
+    All data and the software used to create the figures and images for this document are available on the storage device.
+    The software is also available online in the linked GitHub repository.
+    The software version last used for this document is tagged with the name: \texttt{master-submission}
+    The following artefacts can be found in these locations:
+  \subsubsection{Data}
+    The data is stored in multiple subfolders. 
+    The \texttt{Data} folder contains the different cities as subfolders, within each of these folders, there is a \texttt{dataset} folder, containing a \texttt{xarray} dataset named \textit{dataXarrayCITY\_NAME.nc} of the used area of interest, including all bands and the classifiction at all times analysed during this project. 
+    The \texttt{dataXarrayCITY\_NAME\_feat.nc} contains the extracted feature bands from the gabor feature extraction.
+    The \texttt{ML\_Model} folder contains a ``pickeled'' K-Means model, a file containing a numpy array with cluster centres for the label assignment and the random forest model. %TODO CHECK for rf
+  \subsubsection{Code}
+    The folder app contains the python code used for generating the data, the documentation of the code is located within the doc folder.
+  %
+  %
 \newpage
 \printbibliography%
 \newpage
