@@ -6,7 +6,7 @@
 
 % setup title 
 \date{\today}
-\title{\textbf{\huge Impact of Climate and \\Land Cover Change \\in Urban Heat Islands}}
+\title{\textbf{\huge Impact of Climate and Land Cover Change in Urban Heat Islands}}
 \author{%
 \begin{tabular}{ll}
 Supervisor: &Prof.\ Dr.\ Annette Ladstätter-Weißenmayer\\
@@ -58,6 +58,11 @@ Current Date:&\thedate\\
 {%
   name={Erosion},
   description={An image processing operation that reduces the size of objects by removing pixels at the border of the object}
+}
+\newglossaryentry{AoI}%
+{%
+  name={Area Of Interest},
+  description={A area that contains the city or structure to be investigated}
 }
 \newglossaryentry{lib}%
 {%
@@ -238,7 +243,7 @@ Current Date:&\thedate\\
       Trees and other plants release VOCs like isoprene and terpenes as a protective mechanism against temperature stress and to protect from insects and pests. 
       The use of these \glspl{VOC} for trees varies over the year and this gives the \gls{VOC} and the resulting O\textsubscript{3} emission a high seasonal variability. 
       The resulting tropospheric ozone, that is major health concern that is directly toxic to humans and is shown to cause lung damage by oxidative stress in the lung lining tissue (see~\cite{Mudway2000}). 
-      With rising global temperatures the number of days with temperatures causing heat stress in trees (e.g.\ with a temperature above 30 °C shown in \cref{fig:tempVOC}) has been increasing even at higher altitudes (for the city area of Bremen this ~\cref{fig:ubaTemp}).
+      With rising global temperatures the number of days with temperatures causing heat stress in trees (e.g.\ with a temperature above 30 °C shown in \cref{fig:tempVOC}) has been increasing even at higher altitudes (for the city area of Bremen this~\cref{fig:ubaTemp}).
       Due to the effect of Urban heat islands that causes a further increase in temperature within urban areas, there is an expected increase of tropospheric ozone due to higher \glspl{VOC} emission from urban and sub urban trees and higher reaction rates in densely populated areas with higher mortality and other health consequences (shown in~\cite{Ebi2008}).\\ 
 
       \begin{figure}[!htbp]
@@ -320,13 +325,11 @@ Current Date:&\thedate\\
     \end{itemize}%
     way of detecting patterns and information within the data. \\
     The field of image processing and machine learning has developed a wide range of tools that are used in many different fields over the past decades. % TODO might want to add examples here ?
-
     \subsection{Machine Learning}\label{sec:ml}
       The term machine learning describes a set of algorithms that use a set of training data, detect statistical correlations using different weights to approximate this data. %TODO external source 
       These approximations can be stored and be used to detect the same features within new but similar data.
       Different machine learning techniques are used for for different use cases and areas.
       %In total 
-%
       In the next sections the image processing steps are described from a technical perspective and the underlying mathematical frameworks are discussed.
     \subsection{Data Processing Pipeline}
       An image or data processing pipeline is a chained list of processing steps, that allows to feed different data through the same algorithm. 
@@ -421,12 +424,13 @@ Current Date:&\thedate\\
         \item \textbf{Assignment}: Assign each data point to the nearest centroid, forming $k$ clusters.
         \item \textbf{Update}: Recalculate the centroids as the mean of all data points in the cluster. 
     \end{enumerate}
-    This process is repeated until a maximum number of iterations or minimal changes in centroids is reached~\autocite{Sinaga2020}.\\ % TODO read
+    This process is repeated until a maximum number of iterations or minimal changes in centroids is reached~\autocite{Sinaga2020}.\\ 
+    There are multiple algorithmic implementations of K-Means, the specific algorithm used for classification used the Lloyd-Algorithm.
     Mathematically a set of observations $(x_1, x_2, \ldots, x_n)$, where each observation is a $d$-dimensional real vector.
     K-means clustering aims to partition the $n$ observations into $k$ ($\leq n$) sets $S = \{S_1, S_2, \ldots, S_k\}$ so as to minimize the within-cluster sum of squares. \\
     The objective is to find:
     \begin{equation}
-        \min{S} = \sum{i=1}^{k} \sum{x \in S_i} \| x - \mu_i \|^2
+        \min{S} = \sum_{i=1}^{k} \sum_{x \in S_i} \| x - \mu_i \|^2
     \end{equation}
     where $\mu_i$ is the mean of points in $S_i$.
     %
@@ -562,184 +566,235 @@ Current Date:&\thedate\\
        \end{center}
        \caption{Example Kernel for a larger kernel with 26 $\times$ 26 Pixel kernel size and multiple repetitions of the sine component}\label{fig:largeKernel}
       \end{wrapfigure}
-    The analysis used the following parameters: 
-      % Classification: 
-    The Gabor filter was varied using different $\sigma$, $\theta$ and $f$ values.
-    Due to computational restrictions the number of rotations ($\theta$) was limited to 5, a value of 4 resulted in better results. 
-    For $\sigma > 2$ the classification degraded showing stripes very large patterns were detected, a value of $\sigma = 1$ resulted in a kernel size of 7 $\times$ 7 pixel and good results.
-%
-%    
-    The usable frequencies are limited by the size of the kernel and the image resolution shown in \cref{fig:largeKernel}.
-    Due to the low resolution, a large kernel size would detect features that are repeated with a features size in the range of 200 m that do not occur in large quantities in urban areas. 
-    Larger kernel size with higher frequencies would increase detection capability for images with higher resolution. 
-    \Cref{fig:gaborbank} shows the used kernels.
-     %Due to the low resolution of 30 m per pixel high frequencies where not abl
-%
-    \begin{figure}[!htbp]
-      \centering
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/K0.png}
-        \subcaption{Kernel 1}
-      \end{subfigure}
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/K1.png}
-        \subcaption{Kernel 2}
-      \end{subfigure}
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/K2.png}
-        \subcaption{Kernel 3}
-      \end{subfigure}
+      The analysis used the following parameters: 
+        % Classification: 
+      The Gabor filter was varied using different $\sigma$, $\theta$ and $f$ values.
+      Due to computational restrictions the number of rotations ($\theta$) was limited to 5, a value of 4 resulted in better results. 
+      For $\sigma > 2$ the classification degraded showing stripes very large patterns were detected, a value of $\sigma = 1$ resulted in a kernel size of 7 $\times$ 7 pixel and good results.
+      The usable frequencies are limited by the size of the kernel and the image resolution shown in \cref{fig:largeKernel}.
+      Due to the low resolution, a large kernel size would detect features that are repeated with a features size in the range of 200 m that do not occur in large quantities in urban areas. 
+      Larger kernel size with higher frequencies would increase detection capability for images with higher resolution. 
+      \Cref{fig:gaborbank} shows the used kernels.
+       %Due to the low resolution of 30 m per pixel high frequencies where not abl
+      \begin{figure}[!htbp]
+        \centering
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{img/K0.png}
+          \subcaption{Kernel 1}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{img/K1.png}
+          \subcaption{Kernel 2}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{img/K2.png}
+          \subcaption{Kernel 3}
+        \end{subfigure}
 
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/K3.png}
-        \subcaption{Kernel 4}
-      \end{subfigure}
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/K4.png}
-        \subcaption{Kernel 5}
-      \end{subfigure}
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/K5.png}
-        \subcaption{Kernel 6}
-      \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{img/K3.png}
+          \subcaption{Kernel 4}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{img/K4.png}
+          \subcaption{Kernel 5}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{img/K5.png}
+          \subcaption{Kernel 6}
+        \end{subfigure}
 
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/K6.png}
-        \subcaption{Kernel 7}
-      \end{subfigure}
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/K7.png}
-        \subcaption{Kernel 8}
-      \end{subfigure}
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/K8.png}
-        \subcaption{Kernel 9}
-      \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{img/K6.png}
+          \subcaption{Kernel 7}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{img/K7.png}
+          \subcaption{Kernel 8}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{img/K8.png}
+          \subcaption{Kernel 9}
+        \end{subfigure}
 
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/K9.png}
-        \subcaption{Kernel 10}
-      \end{subfigure}
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/K10.png}
-        \subcaption{Kernel 11}
-      \end{subfigure}
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/K11.png}
-        \subcaption{Kernel 12}
-      \end{subfigure}
-      \caption{Filter bank of 12 gabor filters with 4 rotations and a $\sigma=1\ $ and $\ f = 0.15, 0,35 \text{ and } 0.4$\label{fig:gaborbank}}%
-    \end{figure}
-%  
-    \noindent
-    The kernels mainly act as a edge and structure detection algorithm in this case as shown in \cref{fig:gaborresults}, that shows extracted features of some example bands.
-  \begin{figure}[!htbp]
-      \centering
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/Features_swir10.png}
-        \subcaption{Convolution of SWIR Band and kernel 10}
-      \end{subfigure}
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/Features_blue3.png}
-        \subcaption{Convolution of blue band and kernel 3}
-      \end{subfigure}
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/Features_nir_6.png}
-        \subcaption{Convolution of NIR Band and kernel 6}
-      \end{subfigure}
-     \caption{Example feature images of the convolution of three bands and gabor filters\label{fig:gaborresults}}
-    \end{figure}
- \noindent 
- %
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{img/K9.png}
+          \subcaption{Kernel 10}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{img/K10.png}
+          \subcaption{Kernel 11}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{img/K11.png}
+          \subcaption{Kernel 12}
+        \end{subfigure}
+        \caption{Filter bank of 12 gabor filters with 4 rotations and a $\sigma=1\ $ and $\ f = 0.15, 0,35 \text{ and } 0.4$\label{fig:gaborbank}}%
+      \end{figure}
+      \noindent
+      The kernels mainly act as a edge and structure detection algorithm in this case as shown in \cref{fig:gaborresults}, that shows extracted features of some example bands.
+      \begin{figure}[!htbp]
+        \centering
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{img/Features_swir10.png}
+          \subcaption{Convolution of SWIR Band and kernel 10}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{img/Features_blue3.png}
+          \subcaption{Convolution of blue band and kernel 3}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{img/Features_nir_6.png}
+          \subcaption{Convolution of NIR Band and kernel 6}
+        \end{subfigure}
+       \caption{Example feature images of the convolution of three bands and gabor filters\label{fig:gaborresults}}
+      \end{figure}
+      \noindent 
       Each band of the image was then processed using a Gabor Feature Extraction algorithm with four rotations, parameter sets. 
       It was found, by variation of parameters, that the highest score was archived using 4 rotations of a symmetric kernel or 8 rotations of an asymmetric kernel with a 2:1 ratio.
       %TODO  verify
-     % 
+      % 
       %TOD TO find 
-     % and (only circular kernel where used) with a $\lambda$ of 2 and 4. %TODO check 
+      % and (only circular kernel where used) with a $\lambda$ of 2 and 4. %TODO check 
       The optimal sigma was found using systematic variation to be between 1.0 and 1.5. 
       The frequencies of the sine wave where varied between 0.05 and 0.5. A trade-off between computation time and results was found using 3 frequencies shown in \cref{fig:gaborbank} \\ 
       This step was crucial in extracting and emphasizing spatial patterns and textures, thereby facilitating more distinct classification of land cover types. 
       %
-   %   \begin{figure}
-   %   \begin{subfigure}[b]{0.3\textwidth}
-   %     \includegraphics[width=\textwidth]{img/RedChannel2019-06-29.png}
-   %     \subcaption{Original Band}
-   %   \end{subfigure}
-   %   \begin{subfigure}[b]{0.3\textwidth}
-   %     \includegraphics[width=\textwidth]{img/Features_red4.png}
-   %     \subcaption{Convolution of NIR Band and kernel 6}
-   %   \end{subfigure}
-   %   \caption{Example feature images of the convolution of three bands and gabor filters\label{fig:gaborresults}}
-   % \end{figure}
-      %TODO citation?
-      For classifying surfaces an unsupervised machine learning was used. 
-      %After the features were added the data was passed through the trained (random forest model \cref{sec:randomForrest}) for classification. \\
-      The classified image has 11 classes that are shown in \cref{tab:land_cover_classes}
-      \\
+      \begin{figure}
+        \begin{subfigure}[b]{0.5\textwidth}
+          \includegraphics[width=\textwidth]{img/RedChannel2019-06-29.png}
+          \subcaption{Original Band}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.5\textwidth}
+          \includegraphics[width=\textwidth]{img/Features_red4.png}
+          \subcaption{Convolution of NIR Band and kernel 6}
+        \end{subfigure}
+       \caption{Example feature images of the convolution of three bands and gabor filters\label{fig:gaborresults}}
+      \end{figure}
+      In \cref{fig:gaborresults} it can be seen how the filter is amplifying features within the image plane. \\ 
+     
       The feature enhanced data of images of Bremen%, Valencia and TODO 
-      were used of multiple years to create an unsupervised K-Means clustering model.%TODO add more 
-      This initial clustering served as the foundation for the subsequent Random Forest machine learning model.
+      were used of multiple years to create an unsupervised K-Means clustering model.
+      %After the features were added the data was passed through the trained (random forest model \cref{sec:randomForrest}) for classification. \\
+      \begin{figure}
+          \includegraphics[width=\textwidth]{img/Classification.png}
+       \caption{K-Means Classification of Bremen\label{fig:classification}}
+      \end{figure}
+      The classified image has 11 classes that are shown in \cref{tab:land_cover_classes}, that where where joined into three classes: \textit{Urban} \textit{Water} and \textit{Non-Urban}, for calculating \glspl{LULC}. \\ 
+      %
+        \begin{table}[ht]
+          \begin{minipage}{\textwidth}
+          \centering
+          \renewcommand{\arraystretch}{1.4}
+          \caption{Land Cover Classes Identified}\label{tab:land_cover_classes}
+          \begin{tabular}{p{1cm}p{4cm}l}
+            \toprule
+            \textbf{Class Number} & \textbf{Land Cover Type} & \textbf{ESRI Class}\\
+            \midrule
+            1 &  Water  & Water \\
+            2  & Clouds / PV & No Data\footnote{Reference uses yearly average data, so there is no cloud class}\\
+            3  & Field / Meadows & Grassland\\ 
+            4  & Agricultural (high growth) & Cropland \\
+            5  & Industrial & Urban \\  
+            6  & Residential & Urban \\
+            7  & Bare Soil/Sealed Surface & Bare area\\ 
+            8  & Vegetated Residential (wet) & Sparse Vegetation / Urban  \\ %TODO find solution in sw
+            9  & Industrial Halls & Urban \\ 
+            10 & Forests/Dense Vegetation & Forest\\
+            11 & Vegetated Residential & Sparse Vegetation / Urban \\%TODO find solution in SW
+            \bottomrule
+        \end{tabular}
+       \end{minipage}
+      \end{table}
+    \\
+    This initial clustering served as the foundation for the subsequent Random Forest machine learning model.
       The K-means algorithm was executed with varying numbers of classes – specifically 8, 10, and 11 – to determine the optimal classification schema.
-      This model was validated using the Sentinel-2 10m Land Use/Land Cover map (\autocite{Zhang}).
-      Since the data set only uses 8 classes, the used classes where mapped to the best fitting class (indicated in \cref{tab:land_cover_classes}). 
-      clouds, cloud shadows and snow/ice where not used for verification and removed for the analysis.
-      %TODO
-      To judge results the output of the K-Means and the random forest was compared to the ESA CCI Land Use Dataset (~\autocite{landformclassicationusingfuzzykmeans2000}) that was scaled up to the used image resolution. %TODO check if correct reference
-      \\
-      TODO THE VALIDATION RESULTS STILL TBD~:/% 
-      \\ 
+      To judge quality of the clustering results the output of the K-Means and the random forest was compared to the % ESA CCI Land Use Dataset \autocite{CCCS2019} 
+      10m- ESRI Land Cover/Land Use time series \autocite{Zhang} that was scaled down to the used image resolution. 
+      
+      %TODO check if correct reference
+      %This model was validated using the Sentinel-2 300m Land Use/Land Cover map (\autocite{Zhang}).
+      Since the data set only uses 7 (relevant) classes, the used classes where mapped to the best fitting class (indicated in \cref{tab:land_cover_classes}). 
+      Clouds, cloud shadows and snow/ice where not used for verification and removed for the analysis.\\ 
+    \newpage 
+    \subsubsection{Urban Area Extraction}
+      \begin{wrapfigure}{r}{0.4\textwidth}
+      \vspace{-2cm}
+       \begin{center}
+         \includegraphics[width=0.4\textwidth]{img/Step3.png}
+       \subcaption{Mask of the image after dilation and erosion}\label{fig:msksub}
+         \includegraphics[width=0.4\textwidth]{img/FinalizedMask.png}
+       \subcaption{Mask of the combined images}\label{fig:msksub}
+       \end{center}
+       \caption{Urban mask creation}\label{fig:mask}
+      \end{wrapfigure}
+ 
+      The resulting classified image was then further processed to extract urban areas.
+      The algorithm used the classes 5, 6 and 9 from \cref{tab:land_cover_classes} to detect areas that can be considered urban.
+      For each class a single pixel erosion is done to remove single outlier pixel.
+      The remaining areas were \gls{dilated} (kernel size 6) and \gls{eroded} (same kernel size) to close small holes and gaps between parts of the city.
+      The remaining area is dilated with a 4 pixel kernel to reconnect smaller areas and cover small non urban gaps like small channels or train tracks.
+      All Urban classes are combined by using a binary \texttt{or} the urban marked pixel.
+      The combined area is eroded with a $20\times1$ and $1\times20$ kernel to remove small thin links such as highways between urban areas. 
+      A last dilation is done to create a smooth shape to remove hard edges created by the last kernel.
+      After this preprocessing step the areas are enumerated and all areas that cover at least 1\% of the image area where used to create buffer zones. 
+      % 
+      Buffer zones where defined as described in \cref{sec:urbanBufferzone}.\\
+      \subsubsection{Calculating Difference between time steps}
       The Trained model was then used to classify other cities and datasets from different times. 
       Part of the training data as well as different time data from the same area was used and Feature enhanced using the same Gabor-Filter bank.
-      Feeding the enhanced data into the random forests model was then used to determine the land cover classes for the next step of the analysis.
-      \begin{table}[ht]
-      \centering
-      \renewcommand{\arraystretch}{1.4}
-      \caption{Land Cover Classes Identified}\label{tab:land_cover_classes}
-      \begin{tabular}{p{1cm}p{4cm}l}
-      \toprule
-      \textbf{Class Number} & \textbf{Land Cover Type} & \textbf{ESRI Class}\\
-      \midrule
-      1 &  Agricultural & Crops\\
-      2 &  Bare Soil, Rock & Bare \\
-      3 &  Vegetated Residential & Build Area\\
-      4 &  Meadows & Crops\\
-      5 &  Forest / Dense Vegetation & Trees \& Crops \\
-      6 &  Residential & Build Area\\
-      7 &  Fields & Crops\\
-      8 &  Agricultural/ Fields & Crops\\
-      %11 &  Residential/ Build-up& Build Area\\
-      %8 &  Cloud Shadows & Clouds \& Any \\
-      %9 &  Fields and meadows& Rangeland \&Crops \\
-      %10 &  & Clouds \\
-      9 &  Industry Halls & Build Area\\
-      10 &  Agricultural (2) & Crops\\
-      11 &  Water& Water / Flooded Vegetation\\
-      \bottomrule
-      \end{tabular}
-      \end{table}
-
       %For the labelling of these land cover classes, the Normalized Difference Vegetation Index (NDVI) and the Normalized Difference Built-up Index (NDBI) bands were utilized.
       %These indices were instrumental in differentiating vegetated areas from built-up regions, thereby aiding in the accurate categorization of land cover types.
       The classification labels were assigned based on the proximity of the cluster centres of the trainings data to the cluster centres of the K-means fit.
       This approach ensured that each land cover class was consistently labelled independent of the study area.\\
-    %
-    \subsubsection{Urban Area Extraction}
-      The resulting classified image was then processed to extract urban areas.
-      The algorithm used the classes 1,2,6 and 11 from \cref{tab:land_cover_classes} to detect areas that can be considered urban.
-      The areas were \gls{dilated} and \gls{eroded} to bridge small gaps between parts of the city and close holes as well cut small thin links such as highways between larger areas.
-      After this preprocessing step the areas are enumerated and all areas that cover at least 1\% of the image area where used to create buffer zones. 
-  
-      Bufferzones where defined as described in \cref{sec:urbanBufferzone}.\\
-      TODO add images or code snippet
+      \begin{table}[ht]
+          \begin{minipage}{\textwidth}
+          \centering
+          \renewcommand{\arraystretch}{1.4}
+          \caption{Land Cover Differences}\label{tab:land_cover_diff}
+          \begin{tabular}{p{1cm}p{4cm}l}
+            \toprule
+            \textbf{Area ID} & \textbf{Previous Class} & \textbf{Current Class}\\
+            \midrule
+            01 & & Bare Soil \\
+            \bottomrule
+        \end{tabular}
+       \end{minipage}
+      \end{table}
+       
  \subsection{Analysis}\label{sec:landcoverAnalysis} 
-  The output of the land cover classes was compared with the CCI Sentinel-3 based land cover product. This product has a 300 m resolution but an upscaling and downscaling was done to get the data
+     \begin{wrapfigure}{r}{0.5\textwidth}
+     \centering
+          \includesvg[width=0.45\textwidth]{img/LULC Change 2019 - 2021.svg}
+        \caption{LULC Differences (marked in white)\label{fig:ccidiff}}
+   \end{wrapfigure}
+      The output of the land cover classes was compared with the CCI Sentinel-3 based land cover product. 
+      This product has a 300 m resolution but an upscaling was done to get the resolution to match. 
+      The classification for 2019 and 2021 can be seen in \cref{fig:cciclasses} and the areas that changed are highlighted in \cref{fig:ccidiff}. 
+      \begin{figure}[!htbp]
+       \centering
+          \begin{subfigure}[b]{0.45\textwidth}
+            \includesvg[width=\textwidth]{img/LULC Change 2019.svg}
+            \subcaption{\gls{LULC} 2019}
+          \end{subfigure}
+          \begin{subfigure}[b]{0.45\textwidth}
+            \includesvg[width=\textwidth]{img/LULC Change 2021.svg}
+            \subcaption{\gls{LULC} 2021} % TOOD CHANGE TO 2022
+          \end{subfigure}
+          \caption{LULC from~\cite{CCCS2019}\label{fig:cciclasses}}
+      \end{figure}
 
+      After referencing the LULC data it was shown that there where no significant LULC changes within the city area of Bremen.  
+      
  \subsection{Conclusions}
-    In summary, the integration of enhanced Landsat imagery, Gabor filtering, K-means clustering, and Random Forest classification constituted a robust methodology for land cover classification.
+    In summary, the integration of enhanced Landsat imagery, Gabor filtering, K-means clusteringclassification constituted a robust methodology for land cover classification.
+    The difference between time steps within the year are mainly due to seasonal variation and can not be used for UHI impact detection. 
+
+    Within the area of Bremen there was no significant change of LULC within the available time line to investigate the impact of \glspl{UHI}.
     This process not only facilitated a detailed and accurate representation of the study area's land cover but also demonstrated the efficacy of combining various remote sensing and machine learning techniques for environmental analysis.
     The number of classes that are distinguishable for the algorithm highly varied so it a possible improvement would be the use of reducing machine learning algorithms, that identifies the principle components between c.
     %
+    
   \newpage
   \section{Impact of Climate Change on Urban Heat Islands}\label{sec:UHITempImp}
     \subsection{Introduction}
@@ -790,10 +845,12 @@ Current Date:&\thedate\\
       To convert the image file containing 16 bit unsigned integers into a temperature \cref{equ:tiftolst} is used, where DN is the integer value. The scaling and offset factors are specific to the product and where taken from~\autocite{EROASC2013}.
   
       \begin{equation}\label{equ:tiftolst}
-        T_C = T_K -273.15 = \frac{DN}*0.00341802 + 149.0 - 273.15 
+        T_C = T_K - 273.15 = DN*0.00341802 + 149.0 - 273.15 
       \end{equation}
+
+      The accuracy of the resulting temperature is given by the data provider with $\pm 1\ °C$.
   
-      The Temperature was then converted back into an integer to reduce storage requirements, this is not degrading calculations, since the accuracy of the temperature product is lower then $\pm 1$°C.
+      %The Temperature was then converted back into an integer to reduce storage requirements, this is not degrading calculations, since the accuracy of the temperature product is lower then $\pm 1$°C.
   \newpage
     \subsubsection{Calculating temperature rise within the city}
       For the city in question the next ground based measurement stations where used to calculate a fitted temperature regression. 
@@ -884,12 +941,11 @@ Current Date:&\thedate\\
 
    \begin{figure}[!p]
      \centering
-       \begin{subfigure}[b]{\textwidth}
+       \begin{subfigure}[b]{0.48\textwidth}
           \includesvg[width=\textwidth]{img/UHIs_Bremen_2019-06-29_s:3.svg}
          \subcaption{Map of the detected UHIs in June 2019}\label{fig:uhis2019}
        \end{subfigure}
-
-       \begin{subfigure}[b]{\textwidth}
+       \begin{subfigure}[b]{0.48\textwidth}
           \includesvg[width=\textwidth]{img/UHIs_Bremen_2022-06-21_s:3.svg}
          \subcaption{Map of the detected UHIs in June 2022}\label{fig:uhis2022}
        \end{subfigure}
@@ -959,10 +1015,10 @@ Current Date:&\thedate\\
       \caption{Comparison of Urban Heat Islands in Bremen over time \label{tab:statsBremen}}
       \begin{tabular}{l lll lll}
         \toprule
-        \textbf{Date}& Number UHIs & min area & mean area & max area & min UHI mean T & max UHI \\
+        \textbf{Date}& Number UHIs & min area (m$^2$) & mean area (m$^2$) & max area (m$^2$) & SUHI\textsubscript{max} T\textsubscript{mean} & UHI\textsubscript{max}  T\textsubscript{max}\\
              \midrule
-        2022--06--21 & 120 &  & & & & \\ 
-        2019--06--29 &     &  & & & & \\
+        2022--06--21 &  45 & 4500 & 50900 & 390600 & 46.3 & 51.6 \\ 
+        2019--06--29 & 135 & 7200 & 49817 & 294300 &  47.5 & 45.71 \\
         %.... TBC & & & & & & & & & &&&&&\\
         \bottomrule
       \end{tabular}
@@ -990,6 +1046,7 @@ Current Date:&\thedate\\
   %   \end{tabular}
   % \end{table}
 \end{landscape}
+  
   %\subsection{Analysis}
   %\subsection{Conclusions}{sec:conclusion}
   
@@ -1007,22 +1064,39 @@ Current Date:&\thedate\\
 \newpage
 \section{Conclusion}\label{sec:conclusion}
 \subsection{Summary}
+
 % Summary of the findings 
 % contributions to research
 
 \subsection{Limitations and Challenges}
 % Why was something not possible
 While the connection of ground based sensor stations with remote imagery works well, a direct reliable conversion from land surface temperatures to air temperature, since there is a temporal and seasonally different energy transport between surfaces and surrounding air. 
-Another limiting factor was the availability of suitable cloud free satellite footage of the area of study.
-While with the introduction of Landsat 9, the amount of footage doubled, in regions 
+
 
 \subsubsection{Data}
+Another limiting factor was the availability of suitable cloud free satellite footage of the area of study.
+While with the introduction of Landsat 9, the amount of footage doubled, in regions with a lot of cloud cover like Bremen, the amount of usable footage is very limited.
+
 \subsubsection{Software}
+For the analysis of the \gls{AoI}, a python application and script assortment was developed. 
+It has was developed with adaptability in mind so that the 
+
 
 % 
 \subsection{Future Work}
-The classification part should be improved by using a widely available product that has a suitable resolution. 
+
+The classification part could be improved by using a widely available product that has a suitable resolution. 
 During development the 300 m reference product~\cite{sec:references} was used but was not considered precise enough for these measurements.
+The second reference product used had 10 m resolution, but limited the available time line to 2017 to 2021.
+
+% Areas of interest
+Since the selected \gls{AoI} did not contain sufficiently large \gls{LULC} changes within the urban area, multiple sides where selected that could be of interest for studies using the same methodology.
+\textbf{Leipzig 416} is a construction project within the center of the city of Leipzig.
+The construction started in 2021 and a significant land use change was observed in that area. 
+
+
+
+
 
 \newpage
 \section{Appendix}
