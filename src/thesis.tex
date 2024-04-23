@@ -64,18 +64,17 @@ Current Date:&\thedate\\
   name={Library},
   description={a bundled collection of resources (e.g.\ algorithm) to be ease software development}
 }
-
 \newglossaryentry{DWD}%
 {%
   name = {Deutscher Wetter Dienst (DWD)},
   description= {German Meterological Service, the german meterological society}
 }
-
 \newglossaryentry{sentinel3}%
 {%
   name={Sentinel-3},
   description={A Pair of Satellites, that are part of the Copernicus constellation. Using 21 spectral channels with a resolution of 300~m per pixel}
 }
+
 \begin{document}
   \input{title}
   \newpage
@@ -100,16 +99,20 @@ Current Date:&\thedate\\
 \setcounter{page}{1}
 \pagenumbering{arabic}
 \setcounter{figure}{0}
-%\section*{Acknowledgements}
+\input{acknowledgement.tex}
 \section{Introduction}\label{sec:intro}
-\subsection{An historical overview of urban heat research}
-  The scientific investigation of the urban climate and the influence of human settlements and activity on the local atmosphere and temperature has been studied for more then 200 years.%
+  The investigation of Urban Heat Islands are a very important topic in times of climate change and urbanization.\\
+  Urban environments have been the interest of study for a long time, but increases in frequency and intensity of extreme weather events and heat waves  are significantly more likely to happen \autocite{Uhe2016} and with intensities that where nearly impossible without the impact of climate change.
+  This is well understood and attributed on larger scales but the local factors are harder to simulate and understand since the impact of multiple factors influence the phenomena significantly and climate models are unable to predict extreme heat waves with high accuracy~\autocite{VanOldenborgh2022}.
+  Studying and understanding the local urban climate has a long history, including the understanding of \glspl{UHI} and impacts of urban atmospheric pollutions is one important aspect in this regard. 
+ \subsection{An historical overview of urban heat research}
+  The scientific investigation of the urban climate and the influence of human settlements and activity on the local atmosphere and temperature has been studied for more then 200 years.~%
   \cite{Howard1833}~investigated the climate of London in a study from 1819 to 1827 and a similar study was conducted in Paris in the 1850s by~\cite{renou1862differences}.~%
   The first mobile measurement campaigns around the topic of urban climate were conducted by~\cite{peppler1929auto} and~\cite{tollner1932untersuchungen} and investigated the spacial distribution of temperatures within urban areas  in the 1920s in Germany and Austria. 
   This type of measurement were repeated in multiple cities around the globe at the time.\\
   The term \gls{UHI} was coined in the 1960s in publications regarding case studies in London~\autocite{Chandler1961} and Montreal~\autocite{Oke1968}.
   During this time the influences and understanding of the interaction between the human industrial activity, the land change by urbanisation and industrialization and the influence thereof on temperatures and pollution was investigated by numerous case studies using fixed or mobile weather stations.
-  Often health problems within industrial areas or incidence like the 1930 meuse valley fog catastrophe, in which exhaust gases, including fluorine gas, combined with an inversion weather condition, forming a cloud over the area causing the death of at least 60 people.
+  Often health problems within industrial areas or incidence like the 1930 Meuse valley fog catastrophe, in which exhaust gases, including fluorine gas, combined with an inversion weather condition, forming a cloud over the area causing the death of at least 60 people~\autocite{Nemery2001}.
   The \textit{great smog} in 1952 in London and the Meuse valley fog triggered an scientific interest in the interaction between human settlement, pollution and metrological phenomena on human health and the environment, shaping the idea of an urban climate.\\ \\ 
   To understand the urban meteorology the first use of helicopters and air planes to measure vertical temperature profiles were documented in the 1950s.
   These studies focused on the atmospheric heat distribution over urban areas and resulted in the development of physical energy transport models for these atmospheric urban heat islands.
@@ -143,10 +146,12 @@ Current Date:&\thedate\\
   %As demonstrated by studies such as the one conducted by \autocite{Sobrino2020} using Sentinel-3 images, the future of \gls{UHI} research holds promise for gaining deeper insights into the impacts of urbanization on local climate patterns worldwide.
   % TODO more and finish
   The next step in advancing the comprehension of \glspl{UHI} involves gaining a deeper understanding of how various parameters contribute to the formation and intensity of \glspl{UHI}.
-  With the widespread introduction of countermeasures to \glspl{UHI} and climate change resilience techniques in different cities, continuous monitoring of statistical parameters and indices becomes more relevant in order to assess the effectiveness of the mitigation strategies. 
+  With the wider adaption and interest in to the introduction of countermeasures to \glspl{UHI} and climate change resilience techniques in different cities, continuous monitoring of \glspl{UHI} and the urban climate is necessary to judge effectiveness of the taken countermeasures. 
+  To do this efficiently, statistical parameters and indices are crucial in order to assess the effectiveness of the mitigation strategies. 
 
  \subsection{Research Question}
-  In this thesis, the impacts of land cover changes, such as urbanisation, and rising average temperatures on the \gls{UHI} phenomena are investigated.
+
+  In this thesis, the impacts of land cover, land cover changes such as urbanisation, and rising average temperatures on the \gls{UHI} phenomena are investigated.
   The specific questions posed are:
   \begin{enumerate}
     \item What definition can be used to define \glspl{UHI} comparably?\label{q1}
@@ -156,9 +161,11 @@ Current Date:&\thedate\\
     \item Is it feasible to model \glspl{UHI} using the identified impacts of temperature and land use change?\label{q5}
     \item What indices can be used or created to categorize and rate \gls{UHI} intensity?\label{q6}
   \end{enumerate}
-  The first question tackles the problem that \gls{UHI} definitions changed over time and there are different types of \glspl{UHI} that can be measured. The goal is to find a definition that describes \glspl{UHI} in a comparable way, to allow global measurement and comparison between cities and regions.\\ 
-  The second and third question investigates the impact urbanisation and surface sealing on the intensity and size of urban heat islands. This can help in urban planning and mitigation of \glspl{UHI} in affected urban areas.\\ %TODO this sentence 
-  The fourth questions goal is to answer how much the rise of global temperatures due to climate change is affecting the intensity of \gls{UHI} effect in cities.% 
+  The first question tackles the problem that the \gls{UHI} definition was refined over time and there are different types of \glspl{UHI} that can be measured. 
+  The goal is to find a definition that allows investigation and detection of \glspl{UHI} in a comparable way, to allow global measurement and comparison between cities and regions.\\ 
+  The second and third question investigates the impact urbanisation and surface sealing on the intensity and size of urban heat islands. 
+  This can help in urban planning and mitigation of \glspl{UHI} in affected urban areas.\\ %TODO this sentence 
+  The fourth questions goal is to answer how much the rise of local temperature and the global mean temperatures due to climate change is affecting the intensity and size of \gls{UHI} effect in cities.% 
   The fifth question aims to provide a methodology and quantify if the \gls{UHI} effect can be modelled and predict the intensity when surface or air temperatures are given. 
   The sixth and last question shall answer what indices that are already given can be used to describe heat islands or if there is the need to create a new index for measuring intensity and human impact of \gls{UHI} effects within cities.
 
@@ -568,7 +575,6 @@ Current Date:&\thedate\\
     Due to computational restrictions the number of rotations ($\theta$) was limited to 5, a value of 4 resulted in better results. 
     For $\sigma > 2$ the classification degraded showing stripes very large patterns were detected, a value of $\sigma = 1$ resulted in a kernel size of 7 $\times$ 7 pixel and good results.
 %
-%    
     The usable frequencies are limited by the size of the kernel and the image resolution shown in \cref{fig:largeKernel}.
     Due to the low resolution, a large kernel size would detect features that are repeated with a features size in the range of 200 m that do not occur in large quantities in urban areas. 
     Larger kernel size with higher frequencies would increase detection capability for images with higher resolution. 
@@ -653,13 +659,13 @@ Current Date:&\thedate\\
  %
       Each band of the image was then processed using a Gabor Feature Extraction algorithm with four rotations, parameter sets. 
       It was found, by variation of parameters, that the highest score was archived using 4 rotations of a symmetric kernel or 8 rotations of an asymmetric kernel with a 2:1 ratio.
-      %TODO  verify
+     %TODO  verify
      % 
       %TOD TO find 
      % and (only circular kernel where used) with a $\lambda$ of 2 and 4. %TODO check 
       The optimal sigma was found using systematic variation to be between 1.0 and 1.5. 
       The frequencies of the sine wave where varied between 0.05 and 0.5. A trade-off between computation time and results was found using 3 frequencies shown in \cref{fig:gaborbank} \\ 
-      This step was crucial in extracting and emphasizing spatial patterns and textures, thereby facilitating more distinct classification of land cover types. 
+     This step was crucial in extracting and emphasizing spatial patterns and textures, thereby facilitating more distinct classification of land cover types. 
       %
    %   \begin{figure}
    %   \begin{subfigure}[b]{0.3\textwidth}
@@ -1017,14 +1023,12 @@ Another limiting factor was the availability of suitable cloud free satellite fo
 While with the introduction of Landsat 9, the amount of footage doubled, in regions 
 
 \subsubsection{Data}
+
+
 \subsubsection{Software}
 
-% 
-\subsection{Future Work}
-The classification part should be improved by using a widely available product that has a suitable resolution. 
-During development the 300 m reference product~\cite{sec:references} was used but was not considered precise enough for these measurements.
-
-\newpage
+\input{futureWork.tex}
+%\newpage
 \section{Appendix}
   \subsection{Additional Figures}
   %TODO 
