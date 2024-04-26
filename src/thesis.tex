@@ -499,6 +499,7 @@ Current Date:&\thedate\\
     The urban area is identified by detecting land cover classes indicating a larger area of build up classes. 
     These Areas are then converted into a polygon that are extended by buffer zones as shown in \cref{fig:bufferedBremen}.
     Additionally an approach is discussed where the relative (statistical) intensity is used compared to the absolute temperature difference to compensate for seasonal temperature spread within certain areas.
+    \newpage
     \subsection{Definition of Urban Heat Islands}\label{sec:definition}
     The following \gls{UHI} definition is proposed and used throughout this document.\\
     \\
@@ -509,7 +510,7 @@ Current Date:&\thedate\\
     For comparability a statistical metric is used, since the absolute intensity as well as the daily temperature spread varies with the seasons %TODO source
     and is easily altered by water bodies or other thermal masses in the image.\\ 
     
-    The proposed threshold of at least two standard deviations above the average temperature was chosen since this gave consistent results over the seasons. %TODO verify!
+    The proposed threshold of at least three standard deviations above the average temperature was chosen since this gave consistent results over the seasons. %TODO verify!
     The reference measurement is done using the surface temperature of the peri-urban buffer zone and removing all larger urban areas within it. 
     This will get rid of other cities or larger industrial sides close to the area of interest.
     The mean temperature and variation within the peri-urban area is then calculated and used as reference.
@@ -524,13 +525,15 @@ Current Date:&\thedate\\
       To generate the different temperature statistics buffer zones must be created, to do this multiple areas are defined using \cref{equ:areas}.
 %
       \begin{equation}\label{equ:areas}
-	      W_U = \frac{A_U^{\frac{1}{2}}}{4}
-	      W_P = \frac{6\cdot A_U^{(\frac{1}{2}-W_U)}}{4}
+        \begin{split}
+          W_U = & \frac{A_U^{\frac{1}{2}}}{4} \\
+          W_P = & \frac{6\cdot A_U^{(\frac{1}{2}-W_U)}}{4}
+        \end{split}
       \end{equation}
       Where $W_U$ is the urban and suburban area (the urban area and a suburban buffer zone) and $W_P$ the peri-urban area.
       These definitions where used in~\cite{Sobrino2020} and were developed in the 90s for urban development (\cite{AlkanBala2014}).
       The practical implementation was done as part of the classification and is described in \cref{sec:urbanAreaExtraction}. \\
-      The heat island is then defined as area that is more then $3\times \sigma$ above the mean temperature of the surrounding area $W_P$, while the surrounding area is defined as a fixed buffer based on the size of the urban area and clean the area of larger settlements. 
+      The heat island is then defined as area that is more then $3~\cdot~\sigma$ above the mean temperature of the surrounding area $W_P$, while the surrounding area is defined as a fixed buffer based on the size of the urban area and clean the area of larger settlements. 
       \begin{figure}
         \includegraphics[width=\textwidth]{img/UrbanAreaBremen}
         \caption{Urban Area of Bremen, with buffer zones for Adjacent and Peri Urban Area\label{fig:bufferedBremen}}
@@ -1024,9 +1027,9 @@ Current Date:&\thedate\\
 
 \subsection{Limitations and Challenges}
 % Why was something not possible
-While the connection of ground based sensor stations with remote imagery works well, a direct reliable conversion from land surface temperatures to air temperature, since there is a temporal and seasonally different energy transport between surfaces and surrounding air. 
-Another limiting factor was the availability of suitable cloud free satellite footage of the area of study.
-While with the introduction of Landsat 9, the amount of footage doubled, in regions 
+  While the connection of ground based sensor stations with remote imagery works well, a direct reliable conversion from land surface temperatures to air temperature, since there is a temporal and seasonally different energy transport between surfaces and surrounding air. 
+  Another limiting factor was the availability of suitable cloud free satellite footage of the area of study.
+  While with the introduction of Landsat 9, the amount of footage doubled, in regions 
 
 \subsubsection{Data}
 
@@ -1034,7 +1037,7 @@ While with the introduction of Landsat 9, the amount of footage doubled, in regi
 \subsubsection{Software}
 
 \input{futureWork.tex}
-%\newpage
+\newpage
 \section{Appendix}
   \subsection{Additional Figures}
   %TODO 
