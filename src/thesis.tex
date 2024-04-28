@@ -257,7 +257,7 @@ Current Date:&\thedate\\
       Trees and other plants release VOCs like isoprene and terpenes as a protective mechanism against temperature stress and to protect from insects and pests. 
       The use of these \glspl{VOC} for trees varies over the year and this gives the \gls{VOC} and the resulting O\textsubscript{3} emission a high seasonal variability. 
       The resulting tropospheric ozone, that is major health concern that is directly toxic to humans and is shown to cause lung damage by oxidative stress in the lung lining tissue (see~\cite{Mudway2000}). 
-      With rising global temperatures the number of days with temperatures causing heat stress in trees (e.g.\ with a temperature above 30~°C shown in \cref{fig:tempVOC}) has been increasing even at higher altitudes (for the city area of Bremen shown in~\cref{fig:ubaTemp}).
+      With rising global temperatures the number of days with temperatures causing heat stress in trees (e.g.\ with a temperature above 30~°C shown in \cref{fig:tempVOC}) has been increasing even at higher altitudes (for the city area of Bremen shown in~\cref{fig:monthAvg}).
       Due to the effect of Urban heat islands that causes a further increase in temperature within urban areas, there is an expected increase of tropospheric ozone due to higher \glspl{VOC} emission from urban and sub urban trees and higher reaction rates in densely populated areas with higher mortality and other health consequences (shown in~\cite{Ebi2008}).\\ 
       %
     \subsubsection{Mitigation techniques for Urban Heat Islands}\label{ssec:mitigation}
@@ -445,9 +445,19 @@ Current Date:&\thedate\\
     The K-Means clustering algorithm is used for surface classification using the feature enriched multi band satellite data.
     \Cref{fig:kmeansclusters} shows the result of clustering land surface types (the shown clustering did not use feature enhancement with Gabor and only used the band information as basis).%TODO fix that!  
         \begin{figure}[!htbp]
-          \centering
-          \includegraphics[width=\textwidth]{img/NDVI vs LST.png}
-          \caption{Result of clustering (coloured dots) plotted as \gls{NDVI} value and \gls{LST}\label{fig:kmeansclusters}}
+
+     \begin{subfigure}[b]{\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{img/NDVI vs LST 2019-06-29.png}
+         \subcaption{Classification distribution on a day with higher temperatures}\label{fig:ndvilst01}
+     \end{subfigure}
+
+     \begin{subfigure}[b]{\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{img/NDVI vs LST 2022-06-21.png}
+         \subcaption{Classification distribution on a day with lower temperatures}\label{fig:ndvilst02}
+     \end{subfigure}
+          \caption{Result of clustering plotted with \gls{NDVI} and \gls{LST} values and cluster centres (coloured squares) \label{fig:kmeansclusters}}
         \end{figure}
 
     The pre-trained model is stored to disk and can be used to classify similar images again. 
@@ -691,6 +701,12 @@ Current Date:&\thedate\\
       %After the features were added the data was passed through the trained (random forest model \cref{sec:randomForrest}) for classification. \\
       The classified image has 11 classes that are shown in \cref{tab:land_cover_classes}
       \\
+      \begin{wrapfigure}{l}{0.48\textwidth}
+         \begin{center}
+         \includegraphics[width=0.46\textwidth]{img/DiffLULC}
+       \end{center}
+       \caption{Change between reference and LULC}\label{fig:lulcDiff}
+      \end{wrapfigure}
       The feature enhanced data of images of Bremen%, Valencia and TODO 
       were used of multiple years to create an unsupervised K-Means clustering model.%TODO add more 
       This initial clustering served as the foundation for the subsequent Random Forest machine learning model.
@@ -699,9 +715,13 @@ Current Date:&\thedate\\
       Since the data set only uses 8 classes, the used classes where mapped to the best fitting class (indicated in \cref{tab:land_cover_classes}). 
       clouds, cloud shadows and snow/ice where not used for verification and removed for the analysis.
       %TODO
+      
       To judge results the output of the K-Means and the random forest was compared to the ESA CCI Land Use Dataset (~\autocite{landformclassicationusingfuzzykmeans2000}) that was scaled up to the used image resolution. %TODO check if correct reference
       \\
-      TODO THE VALIDATION RESULTS STILL TBD~:/% 
+      It can be seen from the difference between the LULC classification and the main difference in categorization is along the edges between different class patches. 
+      This can be explained by differences in the categorization approach, where the reference dataset is using averages for the whole year while the classification for the data is done at a single point in time. 
+      This can lead to an over detection of vegetation or water classes due to season or weather impact on the single point in time classification.
+      In \cref{fig:lulcDiff} this difference is shown between the 2019 LULC reference and the (filtered) classification of the image taken at the 26-06-2019
       \\ 
       The Trained model was then used to classify other cities and datasets from different times. 
       Part of the training data as well as different time data from the same area was used and Feature enhanced using the same Gabor-Filter bank.
@@ -900,23 +920,21 @@ Current Date:&\thedate\\
       \end{figure}
       %To test if the temperature in the weather stations was significantly offset a \gls{WilMannWhitTe} was performed on the datasets.
       %The test showed a significant offset for the minimum and mean temperature.
-      \begin{figure}[!p]
-        \centering
-          \begin{subfigure}[b]{\textwidth}
-            \includesvg[width=\textwidth]{img/UHIs_Bremen_2019-06-29_s:3.svg}
-            \subcaption{Map of the detected UHIs in June 2019}\label{fig:uhis2019}
-          \end{subfigure}
-
-          \begin{subfigure}[b]{\textwidth}
-             \includesvg[width=\textwidth]{img/UHIs_Bremen_2022-06-21_s:3.svg}
-            \subcaption{Map of the detected UHIs in June 2022}\label{fig:uhis2022}
-          \end{subfigure}
-            \caption{Overview of Bremen UHIs at different times \glspl{UHI}}\label{fig:AnalysisBre}
-      \end{figure}
+   \begin{figure}[!p]
+     \centering
+       \begin{subfigure}[b]{0.48\textwidth}
+          \includegraphics[width=\textwidth]{img/UHIs_Bremen_2019-06-29_s:3}
+         \subcaption{Map of the detected UHIs in June 2019}\label{fig:uhis2019}
+       \end{subfigure}
+       \begin{subfigure}[b]{0.48\textwidth}
+          \includegraphics[width=\textwidth]{img/UHIs_Bremen_2022-06-21_s:3}
+         \subcaption{Map of the detected UHIs in June 2022}\label{fig:uhis2022}
+       \end{subfigure}
+         \caption{Overview of Bremen UHIs at different times \glspl{UHI}}\label{fig:AnalysisBre}
+   \end{figure}
  % \subsubsection{Essen}
  % Essen is a city located in the centre of the Ruhr in Germany, with a population of 583000.  \\
-%%
- % The weather station ``Essen-Brederney'' is located at the edge of the ``Brederney'' suburb to the north of the city located 6.8 km from the city centre (nearly double the distance compared to Bremen). 
+ %
  % The overall climate in Essen is a mixture between ``warm-summer-humid-continental'' (Dfb) and ``temperate-oceanic'' (Cfb) climate according to the Köppen-Geiger climate classification scheme.
  % The average and extrem values from the ``Essen-Brederney'' station are shown in \cref{tbl:essenweather}.
  % The reference station is the station ``Duisburg-Bearl'' located 30 km to the south west next to the river Rhine.\\
