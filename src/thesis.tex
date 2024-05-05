@@ -59,6 +59,11 @@
   name={Erosion},
   description={An image processing operation that reduces the size of objects by removing pixels at the border of the object}
 }
+\newglossaryentry{AoI}%
+{%
+  name={Area Of Interest},
+  description={A area that contains the city or structure to be investigated}
+}
 \newglossaryentry{lib}%
 {%
   name={Library},
@@ -413,7 +418,6 @@ The different types of \glspl{UHI} (see \cref{sec:uhi})that can be measured.
       These approximations can be stored and be used to detect the same features within new but similar data.
       Different machine learning techniques are used for for different use cases and areas.
       %In total 
-%
       In the next sections the image processing steps are described from a technical perspective and the underlying mathematical frameworks are discussed.
     \todo[inline]{More}
 %
@@ -518,7 +522,8 @@ The different types of \glspl{UHI} (see \cref{sec:uhi})that can be measured.
         \item \textbf{Assignment}: Assign each data point to the nearest centroid, forming $k$ clusters.
         \item \textbf{Update}: Recalculate the centroids as the mean of all data points in the cluster. 
     \end{enumerate}
-    This process is repeated until a maximum number of iterations or minimal changes in centroids is reached~\autocite{Sinaga2020}.\\
+    This process is repeated until a maximum number of iterations or minimal changes in centroids is reached~\autocite{Sinaga2020}.\\ 
+    There are multiple algorithmic implementations of K-Means, the specific algorithm used for classification used the Lloyd-Algorithm.
     Mathematically a set of observations $(x_1, x_2, \ldots, x_n)$, where each observation is a $d$-dimensional real vector.
     K-means clustering aims to partition the $n$ observations into $k$ ($\leq n$) sets $S = \{S_1, S_2, \ldots, S_k\}$ so as to minimize the within-cluster sum of squares. \\
     The objective is to find:
@@ -693,31 +698,32 @@ The different types of \glspl{UHI} (see \cref{sec:uhi})that can be measured.
         \subcaption{Kernel 3}
       \end{subfigure}
 
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/K3.png}
-        \subcaption{Kernel 4}
-      \end{subfigure}
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/K4.png}
-        \subcaption{Kernel 5}
-      \end{subfigure}
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/K5.png}
-        \subcaption{Kernel 6}
-      \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{img/K3.png}
+          \subcaption{Kernel 4}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{img/K4.png}
+          \subcaption{Kernel 5}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{img/K5.png}
+          \subcaption{Kernel 6}
+        \end{subfigure}
 
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/K6.png}
-        \subcaption{Kernel 7}
-      \end{subfigure}
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/K7.png}
-        \subcaption{Kernel 8}
-      \end{subfigure}
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/K8.png}
-        \subcaption{Kernel 9}
-      \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{img/K6.png}
+          \subcaption{Kernel 7}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{img/K7.png}
+          \subcaption{Kernel 8}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+          \includegraphics[width=\textwidth]{img/K8.png}
+          \subcaption{Kernel 9}
+        \end{subfigure}
+
 
       \begin{subfigure}[b]{0.3\textwidth}
         \includegraphics[width=\textwidth]{img/K9.png}
@@ -823,6 +829,7 @@ The different types of \glspl{UHI} (see \cref{sec:uhi})that can be measured.
       \end{tabular}
       \end{table}
 
+
       %For the labelling of these land cover classes, the Normalized Difference Vegetation Index (NDVI) and the Normalized Difference Built-up Index (NDBI) bands were utilized.
       %These indices were instrumental in differentiating vegetated areas from built-up regions, thereby aiding in the accurate categorization of land cover types.
       \noindent
@@ -904,7 +911,11 @@ The urban area shown in \cref{fig:bufferedBremen} yielded a usable product with 
    
         \todo[inline]{Add violin charts and explain wtf this mean} 
 
+
+      After referencing the LULC data it was shown that there where no significant LULC changes within the city area of Bremen.  
+      
  \subsection{Conclusions}
+
     The usage of Landsat imagery, with a Gabor filtering, K-means based classification constituted a robust methodology for land cover classification.
     The filter parameters on the gabor filter where optimal with and absolute MSE of 0.3 $\pm 0.05$ (class values 0 = water, 1 = urban and 2 = non-urban) for two years of classification, which is an error of 10\%.
     Using the more detailed \gls{SSIM} the index is 0.98 $\pm 0.001$ showing very high similarity (1 would be identical images, -1 inverted images and 0 for no similarity). 
@@ -912,8 +923,8 @@ The urban area shown in \cref{fig:bufferedBremen} yielded a usable product with 
     \todo[inline,size=\tiny]{}
     The number of classes that are distinguishable varies by season and is limited by computing power so a possible improvement would be the use of reducing machine learning algorithms, that identifies the principle components that have less variance between seasons and use parallelization such as \textit{dask}\autocite{dask}, to allow bigger filter banks and additional steps to the pipeline to increase output quality.
     Another simple way that was not utilized was to incorporate the QA layer provided by the Landsat L2 data product, that provide per pixel probability values for water and cloud detection, that could remove outliers in the water and cloud classes and therefore provide higher quality results for the other classes. 
-%
     %
+    
   \newpage
   \section{Impact of Climate Change on Urban Heat Islands}\label{sec:UHITempImp}
     \subsection{Introduction}
@@ -971,13 +982,15 @@ The urban area shown in \cref{fig:bufferedBremen} yielded a usable product with 
       The temperature is also corrected for atmospheric interference using local reference stations. 
       The USGS uses reference stations, atmospheric models and independent reference measurements from other satellites to calculate the Surface temperature, the surface temperature product has an accuracy of $\pm 1 K$ overall and other uncertainties are marked in a quality assurance file provided for each image.\\
       To convert the image file containing 16 bit unsigned integers into a temperature \cref{equ:tiftolst} is used, where DN is the integer value. The scaling and offset factors are specific to the product and where taken from~\cite{EROASC2013}.
- % 
+      % 
       \begin{equation}\label{equ:tiftolst}
+
         T_C = T_K -273.15 = \text{DN}\cdot0.00341802 + 149.0 - 273.15 
       \end{equation}
       Where DN is the \textit{Digital Number} (a 16 bit integer) stored in the image file, the multiplication factor as well as the 149.0 offset are provided in the meta data file and in the Landsat user manual~\autocite{EROASC2013}. 
       The accuracy of the resulting temperature value is given by the user manual as $\pm 1$~K.
       \newpage
+    %
     \subsubsection{Calculating temperature rise within the city}
       For the city in question the next ground based measurement stations where used to calculate a fitted temperature regression. 
       This data was correlated with the \gls{SUHI} intensity as well as the measured temperature data from the times of the satellite data acquisitions. 
@@ -1065,6 +1078,7 @@ The urban area shown in \cref{fig:bufferedBremen} yielded a usable product with 
       %The test showed a significant offset for the minimum and mean temperature.
    \begin{figure}[!p]
      \centering
+
        \begin{subfigure}[b]{\textwidth}
           \includegraphics[width=\textwidth]{img/UHIs_Bremen_2019-06-29_s:3}
          \subcaption{Map of the detected UHIs in June 2019}\label{fig:uhis2019}
@@ -1136,6 +1150,7 @@ The urban area shown in \cref{fig:bufferedBremen} yielded a usable product with 
       \caption{Comparison of Urban Heat Islands in Bremen over time \label{tab:UHIBremenStats}}
       \begin{tabular}{l lll lll}
         \toprule
+
         \textbf{Date}& Number UHIs & min area [$m^2$]& mean area [$m^2$]& max area [$m^2$]& $\text{UHI}_{\text{max}}~\text{T}_{mean}$ [°C]& $\text{UHI}_{max}~T_{max}$ [°C]\\
              \midrule
         2022--06--21 & 135 & 4500 & 77440 & 1199700 &52.00 & 47.45 \\ 
@@ -1167,6 +1182,7 @@ The urban area shown in \cref{fig:bufferedBremen} yielded a usable product with 
   %   \end{tabular}
   % \end{table}
 \end{landscape}
+  
   %\subsection{Analysis}
   %\subsection{Conclusions}{sec:conclusion}
   
@@ -1184,6 +1200,7 @@ The urban area shown in \cref{fig:bufferedBremen} yielded a usable product with 
 \newpage
 \section{Conclusion}\label{sec:conclusion}
 \subsection{Summary}
+
 % Summary of the findings 
 % contributions to research
 
@@ -1193,7 +1210,31 @@ The urban area shown in \cref{fig:bufferedBremen} yielded a usable product with 
   Another limiting factor was the availability of suitable cloud free satellite footage of the area of study.
   While with the introduction of Landsat 9, the amount of footage doubled, in regions 
 
+
 \subsubsection{Data}
+Another limiting factor was the availability of suitable cloud free satellite footage of the area of study.
+While with the introduction of Landsat 9, the amount of footage doubled, in regions with a lot of cloud cover like Bremen, the amount of usable footage is very limited.
+
+\subsubsection{Software}
+For the analysis of the \gls{AoI}, a python application and script assortment was developed. 
+It has was developed with adaptability in mind so that the 
+
+
+% 
+\subsection{Future Work}
+
+The classification part could be improved by using a widely available product that has a suitable resolution. 
+During development the 300 m reference product~\cite{sec:references} was used but was not considered precise enough for these measurements.
+The second reference product used had 10 m resolution, but limited the available time line to 2017 to 2021.
+
+% Areas of interest
+Since the selected \gls{AoI} did not contain sufficiently large \gls{LULC} changes within the urban area, multiple sides where selected that could be of interest for studies using the same methodology.
+\textbf{Leipzig 416} is a construction project within the center of the city of Leipzig.
+The construction started in 2021 and a significant land use change was observed in that area. 
+
+
+
+
 
 
 \subsubsection{Software}
