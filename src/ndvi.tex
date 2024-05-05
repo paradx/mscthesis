@@ -2,7 +2,7 @@
 Many different indices are used for analysis of images or parameters in remote sensing, atmospheric physics and meteorology.
 The following sections introduce the indices that where used to analyse the \glspl{UHI} within this work. 
 \subsubsection{NDVI}
-\textit{The following section is a slightly reworked version of a section from the pre-thesis master project~\cite{andrae2023}}\\ 
+\textit{The following section is a slightly reworked version of a section from the pre-thesis master project}~\autocite[see]{andrae2023}\\ 
 %
 \noindent
 \begin{figure}[!htbp]
@@ -15,10 +15,12 @@ The \gls{NDVI} is an widely used index using the difference of the red and near 
     NDVI = \frac{Red-NIR}{Red+NIR}
     \label{equ:ndvi}
 \end{equation}
-For Landsat 8 and 9 data, channel 4 (red $640\ \text{nm} - 670\ \text{nm}$) and channel 5 (near infrared $850\ \text{nm} - 880\ \text{nm}$) where used.
-As shown in \cref{fig:absorbtionVeg} healthy plants reflect near infrared and there is a sharp rise in reflectance between the two used channels at around $700\ \text{nm}$. 
+For Landsat 8 and 9 data, channel 4 (red $0.640\ \mu \text{m} - 0.670\ \mu \text{m}$) and channel 5 (near infrared $0.850\ \mu \text{m} - 0.880\ \mu \text{m}$) where used.
+As shown in \cref{fig:absorbtionVeg} healthy plants reflect near infrared and there is a sharp rise in reflectance between the two used channels at around $0.700\ \mu \text{m}$. 
+By using the difference of the two color bands on opposite sides of the edge, the NDVI provides an inside how much healthy green vegetation is present in each pixel.
 %
-This index is used for emissivity estimation for Land Surface Temperature calculation see \cref{equ:toa}, correlation with heat islands (since there is a negative correlation between those two values, due to the latent heat of evaporation reducing surface temperature at higher vegetation areas).
+%This index is used for emissivity estimation for Land Surface Temperature calculation see \cref{equ:toa}, correlation with heat islands (since there is a negative correlation between those two values, due to the latent heat of evaporation reducing surface temperature at higher vegetation areas).
+
 \begin{figure}[!htbp]
     \centering
     \begin{subfigure}{0.45\textwidth}

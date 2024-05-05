@@ -50,7 +50,9 @@
 %% links and refs and citations 
 \usepackage{setspace}
 \usepackage[colorlinks=true, allcolors=black]{hyperref}
-\usepackage[capitalize]{cleveref}
+\usepackage{cleveref}
+% make figures always uppercase
+\crefname{figure}{Figure}{Figures}
 \usepackage[backend=biber, style=authoryear-comp]{biblatex} %% alphabetic
 
 \DeclareCiteCommand{\cite}[\mkbibemph]
