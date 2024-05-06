@@ -2,17 +2,12 @@
 \usepackage[english]{babel}
 \usepackage{csquotes}
 \usepackage[iso]{isodate}
-\usepackage{gensymb}
+\usepackage{textcomp, gensymb}
 \usepackage[T1]{fontenc}
 \usepackage{todonotes}
 \usepackage{tablefootnote} % for table footnotes
+\usepackage{tocloft}
 
-% Font configuration according to uni specs 
-%% Calibri or Arial 11pt or Times New Roman 12pt
-%\usepackage{fontspec}
-%\defaultfontfeatures{Ligatures=TeX}
-%\setsansfont{Calibri}
-%\setmainfont{Times New Roman}
 \usepackage[automark, autooneside=true]{scrlayer-scrpage}
 \KOMAoptions{%
    headsepline = true,
@@ -20,6 +15,19 @@
    plainheadsepline = true,
    plainfootsepline = true,
 } 
+
+%\renewcommand*{\sfdefault}{Calibri}
+%\renewcommand*{\rmdefault}{Times New Roman}
+%\setsansfont{Calibri}
+%\setmainfont{Times New Roman}
+\addtokomafont{disposition}{\rmfamily}
+
+% Font configuration according to uni specs 
+%% Calibri or Arial 11pt or Times New Roman 12pt
+%\usepackage{fontspec}
+%\defaultfontfeatures{Ligatures=TeX}
+%\setsansfont{Calibri}
+%\setmainfont{Times New Roman}
 \renewcommand\sectionmark[1]{\markright{\MakeMarkcase {\thesection\hskip .5em\relax#1}}}
 \ihead*{}%\leftmark}
 \ohead*{\rightmark}
@@ -31,7 +39,13 @@
 
 
 % Set page size and margins
-\usepackage[top=2cm,bottom=2cm,left=5cm,right=2cm,head=18pt]{geometry}
+\usepackage[top=2cm,
+            bottom=2cm,
+            left=3.5cm,
+            right=3cm,
+            headsep=18pt,
+            headheight= 2cm,
+            ]{geometry}
 %% images
 \usepackage{graphicx}
 \usepackage{wrapfig}
