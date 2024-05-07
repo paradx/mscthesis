@@ -562,7 +562,6 @@
         \min = \sum_{i}\sum_{j} C_{i,j}X_{i,j}
       \end{equation}
     This ensures that the minimum distance is used and an optimal reassignment takes place, even if cluster centres shift between images.
-    
 \newpage
 \section{Comparable Definition of Urban Heat Islands}\label{sec:definition}
     \subsection{Introduction}
@@ -592,12 +591,11 @@
         \vspace{0.2cm}
         An \gls{SUHI} is an area with increased surface temperature within an urban space, 
         where the temperature is at least 3 standard deviations above the average temperature of the urban adjacent rural buffer zone, 
-        corrected for larger settlements.
-       \vspace{0.2cm}
+        corrected for larger settlements. \vspace{0.2cm}
        }
       }\\ \\
       %
-      For comparability a statistical metric is used, since the absolute intensity as well as the daily temperature spread varies with the seasons \todo[inline,size=\tiny]{ source}
+      For comparability a statistical metric is used, since the absolute intensity as well as the daily temperature spread varies with the seasons \todo[inline,size=\tiny]{source}
       and is easily altered by water bodies or other thermal masses in the image.\\ 
       The proposed threshold of at least three standard deviations above the average temperature was chosen since this gave consistent results over the seasons. \todo[inline,size=\tiny]{ verify!}
       The reference measurement is done using the surface temperature of the peri-urban buffer zone and removing all larger urban areas within it. 
@@ -874,19 +872,21 @@
 
         \todo[inline]{explain correlation of clusters, what can be seen}
 
-   The urban area shown in \cref{fig:bufferedBremen} yielded a usable output shape following the Bremen city borders. 
+   The urban area shown in \cref{fig:bufferedBremen} yielded a usable output shape following the Bremen city borders, this was manually verified using the visible images and third party visible satellite images. 
    \Cref{fig:classesPeri} shows the classification of pixels within the peri urban area.
-   It can be seen, that the pixel
-
+   It can be seen, that the pixel the peri urban area has a mixed surface classes dominated by vegetation classes. 
+   Parts of these are removed (\textit{Residential}, \textit{Vegetated Residential}, \textit{Industrial \& Industry Halls} and \textit{Bare Soil}) if in an linked area of more then $\approx$ 25 ha of size, to remove other larger settlements that could distort the measurement.
         \todo[inline]{add peri urban tempreature calcultaion and class composition} 
-
+%
         \begin{figure}[!htbp]
          \centering
-         \includegraphics[width=\textwidth]{img/ClassDistributionPU.png}
+         \includegraphics[width=\textwidth]{img/ClassDistributionPU2019-06-29.png}
          \caption{Distribution of surface types within the peri urban area (prior to filtering)}\label{fig:classesPeri}
         \end{figure}
         \todo[inline]{add transition to UHIs, } 
-        Using the created urban mask, the UHIs are detected using the definition from \cref{ssec:definition}.
+        Based on the masked the average temperature is calculated for the peri urban and the urban area (including the sub urban buffer zone). 
+        Using the average temperature, \glspl{UHI} are detected using the definition from \cref{ssec:definition} within the area defined by the urban mask. 
+        The resulting urban
        \begin{figure}[!hbtp]
           \includegraphics[width=\textwidth]{img/UHIs_Bremen_2019-06-29_s:3}
          \caption{Map of the detected UHIs Bremen}\label{fig:uhisHB2019}
