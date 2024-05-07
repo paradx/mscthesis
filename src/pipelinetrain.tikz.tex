@@ -1,13 +1,14 @@
 \begin{tikzpicture}[node distance=2cm, auto, scale=.5, on grid]
   \node (start) [startstop, text width=0.7\textwidth] {Start};
-  \node (input) [io, below of=start, text width=0.6\textwidth]{Landsat 7\& 8 Image};
+  \node (input) [io, below of=start, text width=0.6\textwidth]{Landsat 8\& 9 Image};
   \node (cut) [process, below of=input, text width=0.9\textwidth]{Cut to AOI};
   \node (features) [process, below of=cut, text width=0.9\textwidth]{Gabor Feature Extraction};
   \node (kmeans) [process, below of=features, text width=0.9\textwidth]{KMeans clustering};
-%  \node (randomforest) [process, below of=kmeans, text width=0.9\textwidth]{Gabor Feature Extraction};
-  \node (stat1) [process, below of=kmeans, text width=0.9\textwidth]{Statistical analysis of different classes};%randomforest
-  \node (stat2) [process, below of=stat1, text width=0.9\textwidth]{fitting class names};
-  \node (diff) [process, below of=stat2, text width=0.9\textwidth]{diff analysis of LU/LC classes};
+  \node (stat1) [process, below of=kmeans, text width=0.9\textwidth]{Statistical analysis of different classes};
+  \node (stat2) [process, below of=stat1, text width=0.9\textwidth]{manual class name assignment};
+  \node (verif) [process, below of=stat2, text width=0.9\textwidth]{verification of classification};
+  \node (diff) [process, below of=verif, text width=0.9\textwidth]{diff analysis of LU/LC classes};
+  \node (stop) [startstop, below of=diff,text width=0.7\textwidth] {Stop};
 
   \draw[arrow] (start) -- (input);
   \draw[arrow] (input) -- (cut);
@@ -16,5 +17,7 @@
   \draw[arrow] (kmeans) -- (stat1);%(randomforest);
   %\draw[arrow] (randomforest) -- (stat1);
   \draw[arrow] (stat1) -- (stat2);
-  \draw[arrow] (stat2) -- (diff);
+  \draw[arrow] (stat2) -- (verif);
+  \draw[arrow] (verif) -- (diff);
+  \draw[arrow] (diff) -- (stop);
 \end{tikzpicture}
