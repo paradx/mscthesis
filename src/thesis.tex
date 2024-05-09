@@ -45,6 +45,7 @@
 \newacronym{SVM}  {SVM}  {Support Vector Machine}
 \newacronym{ECMWF}{ECMWF}{European Center for Medium-Range Weather Forecasts}
 \newacronym{WBGT} {WBGT} {Wet Bulb Globe Temperature}
+\newacronym{DWD}  {DWD}{Deutscher Wetter Dienst}
 %
 %
 \newglossaryentry{WilMannWhitTe}%
@@ -52,14 +53,16 @@
   name={Mann-Whitney-U-Test},
   description={A statistical test of a null hypothesis for non normal distributed data for two datasets}
 }
-\newglossaryentry{dilated}%
+\newglossaryentry{dilation}%
 {%
   name={Dilation},
+  text={dilation},
   description={An image processing operation that extends objects by adding pixel to the outside of an object}
 }
-\newglossaryentry{eroded}%
+\newglossaryentry{erosion}%
 {%
   name={Erosion},
+  text={erosion},
   description={An image processing operation that reduces the size of objects by removing pixels at the border of the object}
 }
 \newglossaryentry{AoI}%
@@ -71,11 +74,6 @@
 {%
   name={Library},
   description={a bundled collection of resources (e.g.\ algorithm) to be ease software development}
-}
-\newglossaryentry{DWD}%
-{%
-  name = {Deutscher Wetter Dienst (DWD)},
-  description= {German Meterological Service, the german meterological society}
 }
 \newglossaryentry{sentinel3}%
 {%
@@ -208,8 +206,7 @@
   For answering the question different types of \glspl{UHI} (see \cref{sec:uhi}) have to be distinguished and methods for measuring them found. 
   The goal is to find a definition that allows investigation and detection of \glspl{UHI} in a comparable way, to allow global measurement and comparison between cities and regions.\\ 
   The second and third question investigates the impact urbanisation and surface sealing on the intensity and size of urban heat islands. 
-  This can help in urban planning and mitigation of \glspl{UHI} in affected urban areas.\\ 
-  %\todo[inline,size=\tiny]{this sentence }
+  This can help in urban planning and mitigation of effects of \glspl{UHI} in areas at risk.\\ 
   The fourth questions goal is to answer how much the rise of local temperature and the global mean temperatures due to climate change is affecting the intensity and size of \gls{UHI} effect in cities.% 
   %The fifth question aims to provide a methodology and quantify if the \gls{UHI} effect can be modelled and predict the intensity when surface or air temperatures are given. 
   The fifth and last question shall answer what indices that are already given can be used to describe heat islands or if there is the need to create a new index for measuring intensity and human impact of \gls{UHI} effects within cities.
@@ -241,7 +238,6 @@
     \Cref{sec:LULC} explains how the measurements  and investigations of the impact of \gls{LULC} changes by build up where done.
     In \Cref{sec:UHITempImp} the impact of changing temperatures an increase of extreme weather phenomena on the intensity and seasonal variety of \glspl{UHI} was investigated. 
     After these the \cref{sec:conclusion} combines the findings of the previous chapters, shows what other investigations should be investigated further and where the research could be improved. 
-    \todo[inline]{Check all sections are covered}
 %
 \newpage
 \section{Background}\label{sec:background}
@@ -251,7 +247,34 @@
     \glspl{UHI} are a spacial phenomenon that occurs on different scales and intensities, this makes observation using remote sensing data a good and widely used approach~\autocite{Weng2003}.\\
     \glspl{UHI} are distinguished into surface and atmospheric \glspl{UHI} as discussed in the sections below. 
     The major background effect behind \glspl{UHI} is the change in energy transfer of solar radiation on urban surfaces. 
-    \todo[inline]{oke2002boundary add radiation equeation}
+    \begin{figure}[htbp]
+      \begin{center}
+        \includegraphics[width=\textwidth]{img/radiationBudget.png}
+      \end{center}
+      \caption{The Urban Energy Budget~\autocite[Fig. 7, Reprinted from]{EPA2008}\label{fig:radiationbudget}}
+    \end{figure}
+    Compared to rural areas, the urban environment has additional reflective surfaces, creating additional energy transfer increasing the fraction of the incoming short wave solar radiation that is not reflected back towards the atmosphere \autocite[p.12]{EPA2008}. 
+    Due to lower vegetation cover and higher sealed surfaces the amount of latent heat due to evaporation and transpiration is lower.
+    Radiation of infrared radiation can also be trapped within the urban area, especially if the sky view factor is low.\\ 
+    An additional influx of thermal energy is anthropogenic emission from industrial production.
+
+    The guiding equation is the equilibrium of incoming solar radiation and the outgoing upwards radiation. 
+    The incoming radiation ($R_n$) is matched by
+  \begin{itemize}
+    \item Latent heat transfer of evaporation and transpiration ($lE$)
+    \item Sensible heat transfer due to wind and upwelling warm air ($H$), 
+    \item Storage in surfaces ($S$)
+    \item Metabolic conversion by photosynthesis ($M$)
+  \end{itemize}
+    This gives \cref{equ:radiation} with $R_n$ being positive and all other terms negative.
+
+    \begin{equation}\label{equ:radiation}
+      R_n + lE + H + S + M = 0
+    \end{equation}
+    
+    In rural areas, $lE$ and $M$ are bigger due to vegetation, while the $S$ is terms are larger due to surface properties mentioned above.
+    $H$ depends strongly on urban morphology, so urban or rural have higher sensible heat transfer rates.\\
+    \Cref{ssec:mitigation} shows possibilities to influence the amount of stored energy and influence the rate of evaporation within the urban area.
     % The underlying phenomenon is the change of the energy balance of the earth-atmosphere system and the urban energy sub system, where the external energy inflow is larger then the energy transfer out of the system for a given time\autocite[p. 19]{oke2002boundary}.
     % During a day, during daytime the insolation of any earth surface causes incident radiation is higher then the energy transport by long wave thermal emission and reflection. 
     % During the night the energy is radiated away from the heated surfaces and causes the surfaces to reduce temperature.
@@ -261,14 +284,13 @@
     
     Since the phenomenon is known for a long time, mitigation strategies have been proposed to reduce the impact on well-being and intensity of the \glspl{UHI} and are touched upon in \cref{ssec:mitigation}.
     \Cref{sec:definition} will go into more detail of the definition of \glspl{UHI} for comparison within the scope of monitoring and remote sensing. 
-%
     \subsubsection{Atmospheric Urban Heat Islands}\label{sec:at_uhi}
       Atmospheric \glspl{UHI} is the increased air temperature within an urban area. 
       This are more dependent on weather and local topology and are in part caused by the slower cooling rate of build up land causing responsible for \glspl{SUHI}.
       %Under certain conditions the increased temperature will form a hot air pocket, that will trap the head and reduce airflow from and to the area. \\
       The main factors in forming \glspl{UHI} is the thermal storage capacity of materials used in urban areas like concrete, asphalt and steel, that have a high heat capacity and heat up quickly during the day and emit the stored thermal energy as sensible heat with a delay (eg.~during the night~\autocite{Ramamurthy2014}).
       High surface sealing and lack of vegetation reduce surface water availability and diminish evaporation and the cooling effect of latent heat causing more thermal energy to be available as sensible heat. 
-
+    
       \todo[inline,size=\tiny]{Add diagram for heat transfer over time}
       Another factor is the heat produced by human activity such as industrial processes and combustion engines.
       As a consequence of higher temperatures, active cooling devices (such as air conditioners) are more frequently used for buildings and vehicles, converting electrical or chemical energy to thermal energy stored in the urban atmosphere. 
@@ -285,7 +307,6 @@
          \item Surface material is one major factor in the development of \glspl{UHI} shown in \cref{sec:LULC}.
        \end{itemize}
        Since atmospheric \glspl{UHI} can not be directly observed using remote sensing data and are therefore not in focus of this work, the terms \gls{UHI} and \glspl{SUHI} are used interchangeably in this document. 
-  %
     \newpage
     \subsubsection{Air pollution and Urban Heat Islands}\label{ssec:airpollution}
       Air pollution has been a documented problem for the quality of life since the start of the industrialisation. 
@@ -293,7 +314,6 @@
       The major pollutants in urban areas in the 21st come from car exhaust, industrial processes and by-products of industrial Agricultural~(\cite{Leung2015} and~\cite{McDuffie2021}).
       Especially large urbanized areas are susceptible to air pollution due to increased concentration of combustion and industrial activity on a small area \autocite{Kanakidou2011}.
       One major pollutant with a significant health impact is tropospheric ozone, that is produced in larger quantities within environments with elevated temperature (see~\cite{Ebi2008}). \\
-%
       \begin{wrapfigure}{r}{0.5\textwidth}
         \vspace{-1cm}
          \begin{center}
@@ -332,7 +352,7 @@
       % Many cultures use passive cooling  roofs TODO find paper also passive ventilation and such 
       Another method of larger scale cooling is the increase of vegetation to increase latent heat transport and water availability.
       Two basic physical principles make water a well suited for cooling and energy transfer.
-      Water has a latent heat of vaporization $2440 kJ\cdot \text{kg}^-1 \text{at} 25$ \textdegree\ C and the capacity of water vapor in higher temperature air is increasing exponentially.
+      Water has a latent heat of vaporization of $2440 kJ\cdot \text{kg}^-1 \text{at} 25$ \textdegree\ C and the capacity of water vapor in higher temperature air is increasing exponentially.
       Saturation vapor concentration increases from $\approx17.5 \text{g}\cdot \text{m}^-3$ at 20 \textdegree\ C  to $\approx 52 \text{g}\cdot \text{m}^-3$ at 40 \textdegree\ C.
       This means that, given surface water availability high amounts of water can be vaporized and will carry away higher amounts of thermal energy in higher temperature condition, cooling down the surrounding area. 
       Active evaporative cooling is used and studied in arid climates for the past decades, showing effective at low air humidity providing 10 to 15 K cooling during high heat hours~\autocite{Vanos2022}.
@@ -342,8 +362,9 @@
       Green roof concepts, green facades, parks or street trees all show effective in reducing temperatures within the urban environment (see~\cite{Ramamurthy2014, Feyisa2014, Dimoudi2003, Gartland2008}).
       The study by~\cite{Fallmann2016} mentioned in \cref{ssec:airpollution} also showed that urban greening has a beneficial effect compared to high reflective surfaces, due to the increase in back scattering of high energy radiation crating ozone during high insolation.
       The same simulation showed that urban greening can limit boundary layer mixing due to reduced thermal updraft caused by lower turbulent kinetic energy, increasing pollution levels at street level.
-      This problem can be solved by employment of established methods for reduction in urban pollution, e.g.\ increase of public transport and regulation or taxation for high pollution vehicles and industries. 
+      This problem can be solved by employment of established methods for reduction in urban pollution, e.g.\ increase of public transport and regulation or taxation for high pollution vehicles and industries. \\
       Adding water bodies inside the city as well as ``sponge-city''-concepts are also promising approaches to mitigate heat islands (\cite{He2019}).
+      Increasing the water available can also be archived using different, less sealed surfaces, such as grass pavers or permeable pavements, that cause less run-off \autocite[p. 7]{EPA2008}.
       % 
     \subsubsection{Landsat 8 \& 9 Dataset}\label{sec:landsat}
       \begin{figure}[htbp]
@@ -362,13 +383,11 @@
       The OLI covers a wavelength of 0.43 $\mu m$ to 1.83 $\mu m$ separated into 9 bands with a resolution of 30 m per pixel (see \cref{fig:lsspectral}). 
       For the calculation of thermal infrared emission of the Earth's surface the TIRS instrument contains two bands within the thermal infrared covering wavelength between 10.6 $\mu m$ and 12.51 $\mu m$ with a resolution of 100 m.
       Both satellites have a revisit time of 14 days. 
-%
   \subsection{Land Surface Temperature}\label{ssec:lst}
     Land surface temperature is the temperature at which an object emits infrared radiation according to plank's law~\autocite{Liang2020}.
     Using remote sensing methods this quantity can not be directly observed since the satellite is observing \gls{TOA} brightness temperature.
     This temperature can be transformed to a \gls{LST} using atmospheric correction and correction for the emissivity of the ground.
     The conversion factor is data source dependent and can be found in \cref{sec:lstcalc}.
-%
   \subsection{Air Temperature}\label{ssec:airtemperature}
     Urban heat islands that directly impact human health are the atmospheric \glspl{UHI} in the urban canopy layer. 
     These are defined by the air temperature from street level up to roof height. 
@@ -386,7 +405,6 @@
     Combustion from traffic and industrial processes produce heat as a by-product that heats the surrounding air. 
     HVAC systems also produce heat, when cooling buildings. 
     This further increases the air temperature increasing cooling need within the urban area, creating a positive feedback loop. 
-    \newpage
     \input{ndvi}
     \subsubsection{Heat Index}\label{sec:heatIndex}
     The \gls{HI} is a temperature index that takes sultriness into account and rates the impact of temperature and air humidity of the human body. 
@@ -405,7 +423,6 @@
     \todo[inline]{Add c1-c9? }
     For extreme conditions the \gls{HI} shows an underestimation during heat waves \autocite{Romps2022}, limiting the usefulness for these scenarios.
     %The \gls{HI} later is used to compare different \glspl{UHI} with each other.
-%%
   \subsection{Wet Bulb Globe Temperature}
     To account the impact of insolation on the human body and the effect on heat stress exacerbated on the human body when high heat and insolation are present at the same time, the Wet Bulb Globe Temperature was developed. 
     Working under heat stress poses a serious health issue, for this the \gls{WBGT} was defined as EN ISO 7243:2017 (\cite{Iso7243_2017}) as work place safety standard, calculating the thermal load on the human body.
@@ -413,8 +430,7 @@
     The efficiency of this process is determined by the vapor pressure, that is influenced by temperature difference and the humidity difference.
     The simpler \gls{HI} is a way of calculating this impact while not taking radiant heat into account, the WBGT does incorporated this effect in the calculation.
     It was specially developed to help create safety for workers that work long hours outside with little or no shade, like construction or agricultural workers or soldiers.
-% 
-  \newpage
+\newpage
 \section{Image Processing}\label{sec:imgProcessing}
     Using remote sensing data for scientific purposes requires a 
     \begin{itemize} 
@@ -424,17 +440,17 @@
     \end{itemize}%
     way of extracting patterns and information from the available dataset.\\
     The field of image processing and machine learning has developed a wide range of tools that are used in many different fields over the past decades. 
-    \todo[inline,size=\tiny]{Might want to add examples here?}
-
     \subsection{Machine Learning}\label{sec:ml}
-    The term machine learning describes a set of algorithms that uses a set of training data to detect statistical correlations using different weights to approximate this data.
-    \todo[inline,size=\tiny]{external source }
+      The term machine learning describes a sub-set of artificial intelligence research that focuses on algorithms that uses statistical models to find correlations using different weights to approximate data.
+      Machine Learning encompasses a wide range of techniques, including supervised, unsupervised, and reinforcement learning, as well as more specialized topics such as deep learning and symbolic regression\autocite{Rodrigues2023}. 
+      In the context of remote sensing, machine learning methods have been utilized for tasks such as classification, biomass and soil moisture retrievals, and crop growth monitoring.
+      Flexibility and comparably lower computational requirements of machine learning methods allow processing of large amounts of high-dimensional data and handle non-linear problems, enabling efficient analysis of remote sensing data \autocite{Maxwell2018}.\\
+      Physics-Informed Machine Learning, allows integration of base truth to circumvent \textit{hallucinations} or false results, that can occurs in other \gls{ML} techniques and aims to guide machine learning models towards solutions that are physically plausible.
+      Examples of applications of machine learning in physics include system identification, control, and analysis, as well as the development of physics-informed digital twins. 
+      \gls{ML}, offering powerful tools for data analysis, modelling, and gaining deeper understanding of remote sensing and atmospheric research data.
       These approximations can be stored and be used to detect the same features within new but similar data.
-      Different machine learning techniques are used for for different use cases and areas.
-      %In total 
+      For this analysis the K-means algorithm was used. 
       In the next sections the image processing steps are described from a technical perspective and the underlying mathematical frameworks are discussed.
-    \todo[inline]{More}
-%
     \subsection{Data Processing Pipeline}\label{sec:pipeline}
       An image or data processing pipeline is a chained list of processing steps, that allows to feed different data through the same algorithm. 
       Many different data processing and machine learning \glslowercase{lib} use these to allow flexibility and modularity of the steps in data processing (e.g.\ the used Scikit-Learn~\autocite{scikit-learn}, Keras~\autocite{keras} or Gluon~\autocite{gluon}). 
@@ -452,81 +468,80 @@
          \caption{The image processing overview\label{fig:pipeline}}
        \end{figure}
        %
-  \newpage
-  \subsection{Gabor Feature Detection}\label{sec:gabor}
-    \begin{wrapfigure}{r}{0.40\textwidth}
-    \vspace{-1cm}
+       \newpage
+    \subsection{Gabor Feature Detection}\label{sec:gabor}
+      \begin{wrapfigure}{r}{0.40\textwidth}
+      \vspace{-1cm}
        \begin{center}
          \includegraphics[width=0.38\textwidth]{img/KLarge.png}
        \end{center}
        \caption{Example kernel with 26$\times$26 pixel kernel size}\label{fig:largeKernel}
       \end{wrapfigure}
-    The Gabor filter is an linear filter, that uses a convolution of an image with a wavelet created by rotating a sine modulated Gaussian, this kernel type is also called the \textit{gabor wavelet}.
-    \Cref{fig:largeKernel} shows an example of a single gabor filter kernel.
-    In image processing this algorithm is used as an feature extraction algorithm to extract and analyse texture and structures with different sizes within the image~\autocite{Cerdan1993}. 
-    By rotating the kernel and changing the frequency, different textures are extracted from the image.\\
-    %
-    Mathematically the Gabor-filter is defined by
-    \begin{equation}
-      g(x,y; \lambda, \theta, \phi, \sigma, \gamma) = \exp \left(- \frac{x'^2 + \gamma^2\cdot y'^2}{2\sigma^2}\right) \cdot \exp \left[i \left(2\pi\frac{x}{\lambda} + \phi \right)\right] 
-    \end{equation}
-    With $ x' = x \cos(\phi) + y \sin(\phi)~\text{and}~y' = -x \sin(\phi) + y \cos(\phi)$.\\ 
-    The \textbf{x} and \textbf{y} parameter determine the kernel size, this parameter should be chosen based on the image size and expected structure length.\\
-    $\boldsymbol{\gamma}$ is the aspect ratio of the kernel, with $\gamma = 1$ the kernel is round, for smaller $\gamma$ the kernel becomes a more eccentric ellipse.\\
-      $\boldsymbol{\phi}$ is the angle of phase shift of the sine component of the kernel. \\
-      $\boldsymbol{\theta}$ is the angle of rotation of the kernel, detecting differently oriented features.\\
-      $\boldsymbol{\lambda}$ is the wavelength of the sine wave. \\
-      $\boldsymbol{\sigma}$ is the standard deviation of the Gaussian distribution\\ \\
-    \noindent
-    To detect different structures of different scales within the image, a filter bank can be created by combining multiple filters and varying $\phi$, $\sigma$ and $\theta$.\\
-    After the convolution of the image with the filter bank, the resulting set of detected features can be used as an input into different algorithms.
-    \Cref{fig:gaborExample} shows the binary output of different kernel sizes and rotations on an satellite image of Bremen. 
-    It can be seen that the different structures such as fields (seen in \cref{fig:feat02} and \cref{fig:feat05}) or larger structures and water bodies (seen in \cref{fig:feat01} and \cref{fig:feat03}).
-    The output of the filter is an tensor that contains a binary image sized matrix per filter. Each layer provides meta information for each pixel, if it is part of a larger scale texture or pattern. 
-    This meta information is used to add additional features for the surface classification (\cref{sec:classification}) using k-means %(in training) and 
-    to allow better classification.%using the random forest model.
-    \begin{figure}[!htbp]
-       \centering
-     \begin{subfigure}[b]{0.45\textwidth}
+      The Gabor filter is an linear filter, that uses a convolution of an image with a wavelet created by rotating a sine modulated Gaussian, this kernel type is also called the \textit{gabor wavelet}.
+      \Cref{fig:largeKernel} shows an example of a single gabor filter kernel.
+      In image processing this algorithm is used as an feature extraction algorithm to extract and analyse texture and structures with different sizes within the image~\autocite{Cerdan1993}. 
+      By rotating the kernel and changing the frequency, different textures are extracted from the image.\\
+      %
+      Mathematically the Gabor-filter is defined by
+      \begin{equation}
+        g(x,y; \lambda, \theta, \phi, \sigma, \gamma) = \exp \left(- \frac{x'^2 + \gamma^2\cdot y'^2}{2\sigma^2}\right) \cdot \exp \left[i \left(2\pi\frac{x}{\lambda} + \phi \right)\right] 
+      \end{equation}
+      With $ x' = x \cos(\phi) + y \sin(\phi)~\text{and}~y' = -x \sin(\phi) + y \cos(\phi)$.\\ 
+      The \textbf{x} and \textbf{y} parameter determine the kernel size, this parameter should be chosen based on the image size and expected structure length.\\
+      $\boldsymbol{\gamma}$ is the aspect ratio of the kernel, with $\gamma = 1$ the kernel is round, for smaller $\gamma$ the kernel becomes a more eccentric ellipse.\\
+        $\boldsymbol{\phi}$ is the angle of phase shift of the sine component of the kernel. \\
+        $\boldsymbol{\theta}$ is the angle of rotation of the kernel, detecting differently oriented features.\\
+        $\boldsymbol{\lambda}$ is the wavelength of the sine wave. \\
+        $\boldsymbol{\sigma}$ is the standard deviation of the Gaussian distribution\\ \\
+      \noindent
+      To detect different structures of different scales within the image, a filter bank can be created by combining multiple filters and varying $\phi$, $\sigma$ and $\theta$.\\
+      After the convolution of the image with the filter bank, the resulting set of detected features can be used as an input into different algorithms.
+      \Cref{fig:gaborExample} shows the binary output of different kernel sizes and rotations on an satellite image of Bremen. 
+      It can be seen that the different structures such as fields (seen in \cref{fig:feat02} and \cref{fig:feat05}) or larger structures and water bodies (seen in \cref{fig:feat01} and \cref{fig:feat03}).
+      The output of the filter is an tensor that contains a binary image sized matrix per filter. Each layer provides meta information for each pixel, if it is part of a larger scale texture or pattern. 
+      This meta information is used to add additional features for the surface classification (\cref{sec:classification}) using k-means %(in training) and 
+      to allow better classification.%using the random forest model.
+      \begin{figure}[!htbp]
          \centering
-         \includegraphics[width=\textwidth]{img/Features_2_005_0.png}
-         \subcaption{Kernel with $\sigma$ = 2, f = 0.05 and 0 ° rotation}\label{fig:feat01}
-     \end{subfigure}
-     \hfill
-     \begin{subfigure}[b]{0.45\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{img/Features_2_015_0.png}
-         \subcaption{Kernel with $\sigma$ = 2, f = 0.15 and 0 ° rotation}\label{fig:feat02}
-     \end{subfigure}
+       \begin{subfigure}[b]{0.45\textwidth}
+           \centering
+           \includegraphics[width=\textwidth]{img/Features_2_005_0.png}
+           \subcaption{Kernel with $\sigma$ = 2, f = 0.05 and 0 ° rotation}\label{fig:feat01}
+       \end{subfigure}
+       \hfill
+       \begin{subfigure}[b]{0.45\textwidth}
+           \centering
+           \includegraphics[width=\textwidth]{img/Features_2_015_0.png}
+           \subcaption{Kernel with $\sigma$ = 2, f = 0.15 and 0 ° rotation}\label{fig:feat02}
+       \end{subfigure}
 
-     \begin{subfigure}[b]{0.45\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{img/Features_4_005_0.png}
-         \subcaption{Kernel with $\sigma$ = 4, f = 0.05 and 0 ° rotation}\label{fig:feat03}
-     \end{subfigure}
-     \hfill
-     \begin{subfigure}[b]{0.45\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{img/Features_2_005_90.png}
-         \subcaption{Kernel with $\sigma$ = 2, f = 0.05 and 90 ° rotation}\label{fig:feat04}
-     \end{subfigure}
+       \begin{subfigure}[b]{0.45\textwidth}
+           \centering
+           \includegraphics[width=\textwidth]{img/Features_4_005_0.png}
+           \subcaption{Kernel with $\sigma$ = 4, f = 0.05 and 0 ° rotation}\label{fig:feat03}
+       \end{subfigure}
+       \hfill
+       \begin{subfigure}[b]{0.45\textwidth}
+           \centering
+           \includegraphics[width=\textwidth]{img/Features_2_005_90.png}
+           \subcaption{Kernel with $\sigma$ = 2, f = 0.05 and 90 ° rotation}\label{fig:feat04}
+       \end{subfigure}
 
-     \begin{subfigure}[b]{0.45\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{img/Features_2_015_90.png}
-         \subcaption{Kernel with $\sigma$ = 2, f = 0.15 and 90 ° rotation}\label{fig:feat05}
-     \end{subfigure}
-     \hfill
-     \begin{subfigure}[b]{0.45\textwidth}
-         \centering
-         \includegraphics[width=\textwidth]{img/Features_4_015_0.png}
-         \subcaption{Kernel with $\sigma$ = 4, f = 0.15 and 0 ° rotation}\label{fig:feat06}
-     \end{subfigure}
-        \caption{Result of convolving differently oriented gabor wavelets with an Landsat-8 image of Bremen}\label{fig:gaborExample}
-    \end{figure}
-%
-\newpage
-  \subsection{K-Means Clustering}\label{sec:kmeans}
+       \begin{subfigure}[b]{0.45\textwidth}
+           \centering
+           \includegraphics[width=\textwidth]{img/Features_2_015_90.png}
+           \subcaption{Kernel with $\sigma$ = 2, f = 0.15 and 90 ° rotation}\label{fig:feat05}
+       \end{subfigure}
+       \hfill
+       \begin{subfigure}[b]{0.45\textwidth}
+           \centering
+           \includegraphics[width=\textwidth]{img/Features_4_015_0.png}
+           \subcaption{Kernel with $\sigma$ = 4, f = 0.15 and 0 ° rotation}\label{fig:feat06}
+       \end{subfigure}
+          \caption{Result of convolving differently oriented gabor wavelets with an Landsat-8 image of Bremen}\label{fig:gaborExample}
+      \end{figure}
+      \newpage
+      \subsection{K-Means Clustering}\label{sec:kmeans}
     K-means clustering is an unsupervised machine learning algorithm that is used to partition $n$ observations into $k$ clusters. 
     Each observation belongs to the cluster with the nearest mean, serving as a prototype of the cluster. 
     This method has many applications in data mining, image processing, and pattern recognition.\\
@@ -553,7 +568,7 @@
     Since the class labels are not consistently applied, the labels need to be reassigned to the correct cluster.
     For this the cluster-centres of the clusters from the trained k-means are saved as a array $n$-tuples for each class, where $n$ is the number of features used for training.
     \newpage
-   \subsubsection{Label Reassignment}\label{sec:labelassignment}
+    \subsubsection{Label Reassignment}\label{sec:labelassignment}
     The distance from the cluster centres of the initial training dataset and the centres of the newly classified data is calculated. 
     To get consistent mapping of class names to classification id, the minimal distance is not sufficient since a assignment of multiple classes to one original class be minimal. 
     To mitigate this issue a \textit{Hungarian Algorithm} is used, minimizing an overlying metric and creating a bijective assignment. 
@@ -626,27 +641,46 @@
     The impact of seasonal and geographic variations in temperature spread as well as weather and other metrological effects are reduced, since the peri urban area has a mixed composition. 
     \todo[inline,size=\tiny]{ link to the findings later }
     \todo[inline,size=\tiny]{ expand}
-
 \newpage
 \section{Impact of Land Cover Changes on Urban Heat Islands}\label{sec:LULC}
     \subsection{Introduction}
       One of the key factors influencing the intensity and distribution of \glspl{UHI} is land cover change, primarily driven by urbanization and associated human activities.
-      Soil properties impact the emissivity, thermal conductivity and heat capacity of an area and increases in build up reduce surface water availability. 
+      Soil properties impact the emissivity, thermal conductivity and heat capacity of an area and increases in build up reduce surface water availability (see \cref{sec:uhi}).
+      This is changing the energy flow increasing the daytime heat within the urban area.
       \\    
       This section looks into the relationship between land cover change and \glspl{UHI} effects using \gls{LULC} detection based on the previously classified Landsat images.
-      The exploration begins with an overview of the impact of land cover changes and the underlying mechanisms on Urban heat islands and highlighting the critical role that changes in land cover play in modulating urban thermal environments.
+      The first part of this section begins with an overview of how land cover changes influence heat build-up within the urban environment. 
+      Followed by how \gls{LULC} can be detected using Landsat data and how surface classification was done within this work. 
       \\
-      This chapter then goes into detail how the classification of land cover was conducted using Landsat 8 and 9 images, the analysis of spatial and temporal patterns of \glspl{UHI} in relation to the detected land cover classes follows.
+      This section then goes into detail how the classification of land cover was conducted using Landsat 8 and 9 images, the analysis of spatial and temporal patterns of \glspl{UHI} in relation to the detected land cover classes follows.
       To answer the question (\cref{q2}) what the influence on land cover with regards to intensity and size of \glspl{UHI} is, statistical analysis is conducted on the \glspl{UHI} within the area of Bremen. \\
-    \todo[inline]{Add Essen if we get that far\ldots}
-    %
+    \newpage
     \subsection{Impact of Land cover/ Surface type on Heat Build-up}
+      \begin{wrapfigure}{r}{0.40\textwidth}
+        \centering
+        \begin{subfigure}[b]{0.38\textwidth}
+          \includegraphics[width=\textwidth]{img/Features_swir10.png}
+          \subcaption{Convolution of SWIR Band and kernel 10}
+        \end{subfigure}
+
+        \begin{subfigure}[b]{0.38\textwidth}
+          \includegraphics[width=\textwidth]{img/Features_blue3.png}
+          \subcaption{Convolution of blue band and kernel 3}
+        \end{subfigure}
+
+        \begin{subfigure}[b]{0.38\textwidth}
+          \includegraphics[width=\textwidth]{img/Features_nir_6.png}
+          \subcaption{Convolution of NIR Band and kernel 6}
+        \end{subfigure}
+       \caption{Examples of the convolution of different bands and gabor filters\label{fig:gaborresults}}
+       \vspace{-3cm}
+      \end{wrapfigure} 
       The change of the urban surface properties is one of the major factors causing \glspl{SUHI}.  
       Multiple studies have shown that land cover has a significant impact on land surface temperature and \glspl{UHI} (e.g.~\cite{Karakus2019},~\cite{Weng2004} and~\cite{Stewart2011}). 
       This is mainly caused by the physical thermal properties of the different materials found in the different land cover classes. 
-      Build up areas contain higher amounts of metal, stone and concrete, all materials with a high thermal mass combined with a lower reflectance.  
+      Build up areas contain higher amounts of metal, stone and concrete, all materials with a high thermal mass combined with a higher absorption at short wavelengths (dependent on surface properties like coatings).  
       %Water and Vegetation have a high emissivity with > 0.9 compared to 0.2 -0.9 of metal, brick, concrete and bare soil. 
-      build up surfaces do not contain less water available for evaporation and thus more heat is heating up the material itself.
+      Build up surfaces have lower water availability for evaporation and thus more heat is heating up the material itself.
       Forests and other vegetated areas are permanently cooled by evaporative cooling and transpiration of trees, increasing vapor content and heat capacity of the air.
       \todo[inline]{maybe elaborate, add emissivity in chapter 1?}
     \subsubsection{Classification }\label{sec:classification}
@@ -654,31 +688,13 @@
       The primary data source for classification were 8-band Landsat images, which provided a comprehensive spectral view of the area to be classified.
       To augment the dataset and enhance the classification accuracy, Gabor filtering (see \cref{sec:gabor}) was applied to the Landsat images.
       As input, the gabor filtered multispectral data of satellite images from two dates were used.
-      The multi band image was loaded and cut to match the study area and reduce processing time by reducing data size.  
-  \begin{figure}[!htbp]
-      \centering
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/Features_swir10.png}
-        \subcaption{Convolution of SWIR Band and kernel 10}
-      \end{subfigure}
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/Features_blue3.png}
-        \subcaption{Convolution of blue band and kernel 3}
-      \end{subfigure}
-      \begin{subfigure}[b]{0.3\textwidth}
-        \includegraphics[width=\textwidth]{img/Features_nir_6.png}
-        \subcaption{Convolution of NIR Band and kernel 6}
-      \end{subfigure}
-     \caption{Example feature images of the convolution of three bands and gabor filters\label{fig:gaborresults}}
-    \end{figure}    
-    \noindent
-      The analysis used the following parameters: 
+      The multi band image was loaded and cut to match the study area and reduce processing time by reducing data size.  \\
+      The analysis used the following parameters: \\
       % Classification: 
-      The Gabor filter was varied using different $\sigma$, $\theta$ and $f$ values.
+      The Gabor filter used for feature engineering was varied using different $\sigma$, $\theta$ and $f$ values.
       Due to computational restrictions the number of rotations ($\theta$) was limited to 5, a value of 4 resulted in better results. 
       For ease of variation the $\sigma_x$ value was varied while the $\sigma_y = \frac{\sigma_x}{2}$, giving a 2:1 kernel ration (shown in \cref{fig:gaborbank} 
       For $\sigma_x > 2$ the classification degraded showing stripes very large patterns were detected, a value of $\sigma_x = 1$ resulted in a kernel size of 7 $\times$ 7 pixel and good results.
-%
       The usable frequencies are limited by the size of the kernel and the image resolution shown in \cref{fig:gaborbank}.
       Due to the low resolution, a large kernel size would detect features that are repeated with a features size in the range of 200 m that do not occur in large quantities in urban areas. 
       Larger kernel size with higher frequencies would increase detection capability for images with higher resolution. 
@@ -741,13 +757,10 @@
       \end{subfigure}
       \caption{Filter bank of 12 gabor filters with 4 rotations and a $\sigma_x=1\ ,\sigma_y = 0.5\ $ and $\ f = 0.15, 0.35 \text{ and } 0.4$\label{fig:gaborbank}}%
     \end{figure}
-%  
     \noindent
     The filter with these kernels act as a edge and structure detection algorithm shown in \cref{fig:gaborresults}, that shows extracted features of some example bands.
     In structured areas with fields or buildings on a street raster, the filter amplifies the structures, for smaller structures the filter detects edges for change in building material, due to different reflectivity and response for the different frequency bands. 
-  
- \noindent 
- %
+    \noindent 
       The result of the convolution of all bands of the image with the gabor filter was then used as feature vector. 
       By variation of parameters, a minimal error to the reference data was archived using 4 rotations an asymmetric kernel with a 2:1 ratio, two frequencies and two sigma sizes (see below).
       Since the classification was done using a reproducible randomness, the parameters influencing the result where:
@@ -762,11 +775,11 @@
         N_{feat} = |\theta| \cdot |\sigma| \cdot |f| 
       \end{equation}
       with an increase of any parameter the data set size increased significantly, creating a limit of the parameter variation. 
-    The $1833 \times 1833$ pixel sized image of Bremen (covering a square of $\approx 55$ km around the city centre), has a size of 13 MB per Band. 
-    After feature detection the resulting dataset would be 107 MB per Band resulting in around 1.2 GB for each 8 band Image for each time point within the used classification training dataset.
+    The $1833 \times 1833$ pixel sized image of Bremen (covering a square of $\approx 55$ km around the city centre), has a size of 13 MB per Band\footnote{%
+    After feature detection the resulting dataset would be 107 MB per Band resulting in around 1.2 GB for each 8 band Image for each time point within the used classification training dataset.}.
     The optimal sigma was found using systematic variation to be between 1.0 and 1.5. 
     The frequencies of the sine wave where varied between 0.05 and 0.5. 
-    A trade-off between computation time and results was found using 3 frequencies shown in \cref{fig:gaborbank} \\ 
+    A trade-off between computation time and results was found using 3 frequencies shown in \cref{fig:gaborbank}. \\ 
     This step was crucial in extracting and emphasizing spatial patterns and textures, thereby facilitating more distinct classification of land cover types.
       For classifying surfaces an unsupervised machine learning was used, the number of classes was varied between 8 and 12 classes, giving best results in terms of minimal \gls{MSE} and \gls{SSIM} when using 11 classes.
       The quality of the feature vectors was judged by the output of the classification that is covered below. 
@@ -783,7 +796,7 @@
       \midrule
       1 &   Water                         & Water / Flooded Vegetation\\
       2 &   Vegetated Residential         & Build Area\\
-      3 &   Clouds / PV                   & Build-up\footnote{since analysed images do not contain clouds} \\
+      3 &   Clouds / PV                   & Build-up\tablefootnote{Analysed images do not contain clouds over the urban areas} \\
       4 &   Fields \& Meadows             & Crops\\
       5 &   Agricultural                  & Crops\\
       6 &   Industry                      & Build Area\\
@@ -794,6 +807,7 @@
       11 &  Forest / Dense Vegetation     & Trees \& Crops \\
       \bottomrule
       \end{tabular}
+      
       \end{table}
       \newpage
     \subsection{Validation of Classification results}\label{sec:references}
@@ -818,15 +832,17 @@
       % VALIDATION OF CLASSIFICATION
       A simple comparison of difference can be done by calculating the \gls{MSE} for each classification of the image using \cref{equ:mse}, where  $m$ and $n$ are the sizes of the image and reference image respectively. Where I and K images with the pixel values at index i and j. 
       \begin{equation}\label{equ:mse}
-        MSE = \frac{1}{m\cdot n}\sum_{i=0}^{m-1} \sum_{j=0}^{n-1} \left[I(i,j)-K(i,j)\right]^2
+      MSE = \frac{1}{m\cdot n} \sum_{i=0}^{m-1} \sum_{j=0}^{n-1} {\left[I\left(i,j\right)-K\left(i,j\right)\right]}^2
       \end{equation}
       The score given by this gives and rough estimation of the difference between the images and the trained model was then used to classify other cities and datasets from different times. 
       Part of the training data as well as different time data from the same area was used and Feature enhanced using the same Gabor-Filter bank.
       \begin{equation}\label{equ:ssim}
-        SSIM = \frac{2\mu_x\mu_y+c_1}{m\cdot n}\sum_{i=0}^{m-1} \sum_{j=0}^{n-1} \left[I(i,j)-K(i,j)\right]^2
+      SSIM = \frac{(2\mu_{x}\mu_{y}+c_{1})(2\sigma_{xy}+c_{2})}{(\mu_{x}^2+\mu_{y}^2+c_{1})(\sigma_{x}^2\sigma_{y}^2+c_{2})}
       \end{equation}
+      $\mu$ are the mean values of each image, $\sigma$ is the variance of each image and $\sigma_{xy}$ the covariance of each image. $c_{1}$ and $c_{2}$ are stabilizing constants derived from the dynamic range of the image.
       For the SSIM the scikit-image implementation was used \autocite{Walt2014}.
-\todo[inline]{Add ref to SSIM of skmeans}
+      \Gls{SSIM} returns a value between 1 (identical images) and -1 (inverted images) with 0 for images with no similarity. 
+      The \gls{SSIM} of the images was calculated as 0.98 $\pm 0.001$ showing very high similarity.
 
       %Feeding the enhanced data into the random forests model was then used to determine the land cover classes for the next step of the analysis.
 
@@ -840,7 +856,9 @@
     \subsubsection{Urban Area Extraction}\label{sec:urbanAreaExtraction}
       The resulting classified image was then processed to extract urban areas.
       The algorithm used the classes 1, 2, 6 and 11 from \cref{tab:land_cover_classes} to detect areas that can be considered urban.
-      The areas were \gls{dilated} and \gls{eroded} to bridge small gaps between parts of the city and close holes as well cut small thin links such as highways between larger areas.
+      The areas were processed using \gls{dilation} and \gls{erosion} to isolate core urban areas. 
+      For this small gaps between parts of the city covered by vegetation (parks or railways) need to be bridged and holes closed 
+      Also small thin links such as highways between larger areas need to be cut, to create separate urban areas.
       After this preprocessing step the areas are enumerated and all areas that cover at least 1\% of the image area where used to create buffer zones. 
       Buffer zones where defined as described in \cref{sec:urbanBufferzone}. 
       The result for this for the urban area of Bremen can be seen in \cref{fig:bufferedBremen}.\\
@@ -848,15 +866,12 @@
         \includegraphics[width=\textwidth]{img/UrbanAreaBremen.png}
         \caption{Urban Area of Bremen, with buffer zones for Adjacent and Peri Urban Area\label{fig:bufferedBremen}}
       \end{figure}
-      The output of the land cover classes was compared with the CCI Sentinel-3 based land cover product. 
-      This product has a 10 m resolution but an upscaling and downscaling was done to get the data 
     \subsection{Analysis}\label{sec:landcoverAnalysis} 
       The results of the clustering shown in \cref{fig:ndvilst01} and \cref{fig:ndvilst02} show the different pixel values and the measured LST and NDVI values. 
       Especially the \textit{Water} and \textit{Dense Vegetation} classes are distinctly separated from the rest of the clusters. 
       The scatter plot also shows that the principle components of the classifications are not simply NDVI and LST but higher order feature dimentions play a significant role in separation of classes. 
-  \todo[inline]{Add interpretation of SSIM}
-   
-    \begin{figure}[!htbp]
+      % 
+      \begin{figure}[!htbp]
       \begin{subfigure}[b]{\textwidth}
         \centering
         \includegraphics[width=\textwidth]{img/NDVI vs LST 2019-06-29.png}
@@ -868,35 +883,50 @@
         \subcaption{Classification distribution on a day with lower temperatures}\label{fig:ndvilst02}
       \end{subfigure}
       \caption{Result of clustering plotted with \gls{NDVI} and \gls{LST} values and cluster centres (coloured squares)\label{fig:kmeansclusters}}
-    \end{figure}
+      \end{figure}
 
-        \todo[inline]{explain correlation of clusters, what can be seen}
-
-   The urban area shown in \cref{fig:bufferedBremen} yielded a usable output shape following the Bremen city borders, this was manually verified using the visible images and third party visible satellite images. 
-   \Cref{fig:classesPeri} shows the classification of pixels within the peri urban area.
-   It can be seen, that the pixel the peri urban area has a mixed surface classes dominated by vegetation classes. 
-   Parts of these are removed (\textit{Residential}, \textit{Vegetated Residential}, \textit{Industrial \& Industry Halls} and \textit{Bare Soil}) if in an linked area of more then $\approx$ 25 ha of size, to remove other larger settlements that could distort the measurement.
-        \todo[inline]{add peri urban tempreature calcultaion and class composition} 
+     \todo[inline]{explain correlation of clusters, what can be seen}
+      The urban area shown in \cref{fig:bufferedBremen} yielded a usable output shape following the Bremen city borders, this was manually verified using the visible images and third party visible satellite images. 
+      \Cref{fig:classesPeri} shows the classification of pixels within the peri urban area.
+      It can be seen, that the pixel the peri urban area has a mixed surface classes dominated by vegetation classes. 
+      Parts of these are removed (\textit{Residential}, \textit{Vegetated Residential}, \textit{Industrial \& Industry Halls} and \textit{Bare Soil}) if in an linked area of more then $\approx$ 25 ha of size, to remove other larger settlements that could distort the measurement.
+      The temperature values of the different areas is calculated by overlaying the masks on the thermal band of the Landsat data. 
 %
         \begin{figure}[!htbp]
          \centering
          \includegraphics[width=\textwidth]{img/ClassDistributionPU2019-06-29.png}
          \caption{Distribution of surface types within the peri urban area (prior to filtering)}\label{fig:classesPeri}
         \end{figure}
-        \todo[inline]{add transition to UHIs, } 
-        Based on the masked the average temperature is calculated for the peri urban and the urban area (including the sub urban buffer zone). 
+
+        The average temperature and variation is calculated for the peri urban and the urban area (including the sub urban buffer zone).
         Using the average temperature, \glspl{UHI} are detected using the definition from \cref{ssec:definition} within the area defined by the urban mask. 
-        The resulting urban
-       \begin{figure}[!hbtp]
-          \includegraphics[width=\textwidth]{img/UHIs_Bremen_2019-06-29_s:3}
-         \caption{Map of the detected UHIs Bremen}\label{fig:uhisHB2019}
-       \end{figure}
+        The areas that are above the area are then detected within the urban mask, the resulting areas are shown in \cref{fig:AnalysisBre}. 
+   \begin{figure}[!p]
+       \begin{subfigure}{\textwidth}
+          \centering
+          \includegraphics[width=0.8\textwidth]{img/UHIs_Bremen_2019-06-29_s:3}
+         \subcaption{Map of the detected UHIs in June 2019}\label{fig:uhis2019}
+       \end{subfigure}
+
+       \begin{subfigure}{\textwidth}
+          \centering
+          \includegraphics[width=0.8\textwidth]{img/UHIs_Bremen_2022-06-21_s:3}
+         \subcaption{Map of the detected UHIs in June 2022}\label{fig:uhis2022}
+       \end{subfigure}
+         \caption{Overview of Bremen \glspl{UHI} at different times}\label{fig:AnalysisBre}
+   \end{figure}
+
+      In \cref{fig:lstclusters19} and \cref{fig:lstclusters22}, the temperature distributions within the different classes is shown (the whole image was used for the statistic). 
+      Confirming previous research, classes with high vegetation and water are lower in temperature. 
+      The 2022 samples where at a colder day, with mixed cloud cover, explaining the significantly lower temperature of PV/cloud classes this class also includes some cumulus clouds outside of the city area further decreasing the temperature values for this class. 
+      \todo[inline]{maybe add weather chart for bremen of this day here?}
+
 
        \begin{landscape}
          \begin{figure}[!p]
            \centering
            \includegraphics[width=0.91\linewidth]{img/LST vs surface type with (11 clusters) - 2019-06-29.png}
-           \caption{Distribution of pixel \gls{LST} [°C] values per class June 2019 \label{fig:lstclusters}}
+           \caption{Distribution of pixel \gls{LST} [°C] values per class June 2019 \label{fig:lstclusters19}}
          \end{figure}
 
          \begin{figure}[!p]
@@ -904,7 +934,12 @@
            \includegraphics[width=0.91\linewidth]{img/LST vs surface type with (11 clusters) - 2022-06-21.png}
            \caption{Distribution of pixel \gls{LST} [°C] values per class June 2022 \label{fig:lstclusters22}}
          \end{figure}
-
+       \end{landscape}
+       \Cref{fig:ndviclusters2019} and \cref{fig:ndviclusters2022} shows the NDVI values of the same classes.
+       One unexpected observation is the wide spread of the water class over the whole range of the NDVI, where it is expected to be $\le$ 0. 
+       This can be explained when looking at the feature images showing that the highly vegetated riverbank areas are also classified as water based on the additional feature images, changing the NDVI of this class.
+       %and overlaying the classification with a visible image.
+       \begin{landscape}
          \begin{figure}[!p]
            \centering
            \includegraphics[width=0.91\linewidth]{img/NDVI vs surface type with (11 clusters) - 2019-06-29.png}
@@ -917,6 +952,7 @@
            \caption{Distribution of pixel \gls{NDVI} values per class 2022\label{fig:ndviclusters2022}}
          \end{figure}
        \end{landscape}
+
        \todo[inline]{explain violin charts} 
       \noindent
       To calculate the diff between \gls{LULC} at different points in time, a median filter is applied to reduce
@@ -931,14 +967,18 @@
     The number of classes that are distinguishable varies by season and is limited by computing power so a possible improvement would be the use of reducing machine learning algorithms, that identifies the principle components that have less variance between seasons and use parallelization such as \textit{dask}\autocite{dask}, to allow bigger filter banks and additional steps to the pipeline to increase output quality.
     Another simple way that was not utilized was to incorporate the QA layer provided by the Landsat L2 data product, that provide per pixel probability values for water and cloud detection, that could remove outliers in the water and cloud classes and therefore provide higher quality results for the other classes. 
     %
+    One way of increasing accuracy of the results is an increase in resolution, that allows the gabor filter bank to have a wider range for usable values. 
+    In \cref{fig:gaborbank} it can be seen that the first kernel of each rotation is nearly identical, due to to missing resolution. 
+    This would allow to detect smaller features.
+    %TODO maybe add check if really identical or off by a bit
     
   \newpage
   \section{Impact of Climate Change on Urban Heat Islands}\label{sec:UHITempImp}
     \subsection{Introduction}
       The interaction between global and local climate is a complicated process that has multiple parameters, that are not yet fully understood or directly measurable (see \cref{sec:intro}).  
-      While rural areas and the global south is most effected in terms of temperature increase and drought, the over mortality of heat waves is greatest within city areas~\autocite{Gabriel2011}. During high temperatures the threshold of negative health effect shows to be lower in northern European cities compared to Mediterranean cities~\autocite{Baccini2008}. 
+      While rural areas and the global south is most effected in terms of temperature increase and drought, the excess mortality of heat waves is greatest within city areas~\autocite{Gabriel2011}. During high temperatures the threshold of negative health effect shows to be lower in northern European cities compared to Mediterranean cities~\autocite{Baccini2008}. 
       \todo[inline,size=\tiny]{ One possible reason might be the lack of resilience of cities that are not encountering severe heat regularly. }
-      The negative health consequences and increased mortality is affecting elderly the most and the over mortality is an immediate effect \autocite{Baccini2008}. 
+      The negative health consequences and increased mortality is affecting elderly the most and the excess mortality is an immediate effect \autocite{Baccini2008}. 
       In western Europe the climate is governed by transitional climate, with attributes from maritime and continental climate.
       The summer is, compared to southern Europe, milder and not regularly affected by burning and heat waves. 
       %The temperature in winter is mostly mild and seldom below freezing.  TODO 
@@ -1062,7 +1102,7 @@
       %This indicates an upward trend seen worldwide,
 
       The weather station in Bremen is located at the airport on the edge of the city area. %TOOD image? 
-      For comparison of air temperature with a more rural area the \gls{DWD} weather station ``Worpswede-Hüttenbusch'' located roughly 30 km north-north-east of the weather station and is located in a rural area. 
+      For comparison of air temperature with a more rural area the \gls{DWD} weather station ``Worpswede-Hüttenbusch'' located roughly 30 km north-north-east of the weather station and is located in a rural area (show \cref{fig:mapWeatherstationsBremen}).
       To verify that the measurements of the urban and rural stations are correlated the absolute temperature difference for daily values is shown in \cref{fig:diff2015Bre} and \cref{fig:diff20222Bre}, it can be seen that the atmospheric \gls{UHI} over Bremen is affecting the Bremen airport station. 
       In the period from April to October in 2015 the daily mean temperature was 0.6 °C lower at the rural station. 
       In the same period in 2022 the daily mean temperature was 0.85 °C lower at the rural station. 
@@ -1095,22 +1135,9 @@
       \end{figure}
       %To test if the temperature in the weather stations was significantly offset a \gls{WilMannWhitTe} was performed on the datasets.
       %The test showed a significant offset for the minimum and mean temperature.
-   \begin{figure}[!p]
-       \begin{subfigure}{\textwidth}
-          \centering
-          \includegraphics[width=0.8\textwidth]{img/UHIs_Bremen_2019-06-29_s:3}
-         \subcaption{Map of the detected UHIs in June 2019}\label{fig:uhis2019}
-       \end{subfigure}
-
-       \begin{subfigure}{\textwidth}
-          \centering
-          \includegraphics[width=0.8\textwidth]{img/UHIs_Bremen_2022-06-21_s:3}
-         \subcaption{Map of the detected UHIs in June 2022}\label{fig:uhis2022}
-       \end{subfigure}
-         \caption{Overview of Bremen \glspl{UHI} at different times}\label{fig:AnalysisBre}
-   \end{figure}
-      \Cref{fig:uhis2019} shows two summer days in Bremen with different temperatures and the influence of temperature onto the \glspl{UHI} size and shapes. 
-      In the image from 2019, average temperature was much higher at the time. 
+   
+      \Cref{fig:AnalysisBre} shows two summer days in Bremen with different temperatures and the influence of temperature onto the \glspl{UHI} size and shapes. 
+      In the image from 2019 (\cref{fig:uhis2019}), the average temperature was much higher at the time. 
       It can be seen that the heat islands, while statistically the same difference to the peri urban temperature, increase in size and combine into larger structures. 
       In \cref{tab:UHIBremenStats} the statistical properties of the \gls{UHI} for the days are shown.
 %   
@@ -1151,19 +1178,6 @@
     \end{table}
 \end{landscape}
   
-  %\subsection{Analysis}
-  %\subsection{Conclusions}{sec:conclusion}
-  
-  %    \newpage
-  %    \section{Simulation and Modeling of \texorpdfstring{\glsxtrlongpl{UHI}}{Urban Heat Islands}}\label{sec:modelling}
-  %    \subsection{Introduction}
-  %
-  %    \subsection{Analysis}
-  %    \subsection{Conclusions}
-  %\newpage
-  %\section{Discussion}\label{sec:discussion}
-  %    \subsection{Synthesis of Findings}
-  %    \subsection{Implications}
   %
 \newpage
 \section{Conclusion}\label{sec:conclusion}
@@ -1193,6 +1207,15 @@ It has was developed with adaptability in mind so that the
 \input{futureWork.tex}
 \newpage
 \section{Appendix}
+  \subsection{Use of AI based tools (Nutzung KI basierte Anwendungen)}
+  According to the \textit{Eigenständigkeitserklärung} \cref{sec:eigenstaendigkeit} the use of so called AI tools needs to be declared. 
+    During this work the following tools where used: 
+  \begin{itemize}
+    \item OpenAIs ChatGPT \autocite{chatgpt} for aid during programming, help with formulations, getting topic overviews and aid in finding keywords for further research.
+    \item Kagi's summerizer \autocite{kagi}, to deem papers relevant.
+    \item scienceOS \autocite{scienceOS} to find research papers for topics and questions. 
+    \end{itemize}
+    All informations from these tools where used as an aid and where always cross-checked with primary sources. 
   \subsection{Additional Figures}
   \missingfigure{}
   \subsection{Content of the Data Storage device}
