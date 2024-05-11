@@ -136,7 +136,7 @@
 \section{Introduction}\label{sec:intro}
   The investigation of Urban Heat Islands are a very important topic in times of climate change and urbanization.\\
   Urban environments have been the interest of studies for a long time, but increases in frequency and intensity of extreme weather events and heat waves are significantly more likely to happen \autocite{Uhe2016}.
-  These are expected to appear with intensities that where nearly impossible without the impact of climate change \autocite{Bador2016}.
+  These are expected to appear with intensities that were nearly impossible without the impact of climate change \autocite{Bador2016}.
   This is well understood and can be attributed to anthropogenic climate change on larger scales, but local effects and impact of climate change on a small scale is harder to simulate and understand.
   The major issue is that the missing impact of localized phenomena such as weather, terrain and urban climate are not covered by climate models, making prediction of extreme heat waves with high accuracy difficult~\autocite{VanOldenborgh2022}.
   Studying and understanding the local urban climate has a long history, including the understanding of \glspl{UHI} and impacts of urban atmospheric pollution on humans and the greater atmosphere. 
@@ -432,13 +432,13 @@
     \todo[inline]{Add c1-c9? Fix Reference}
     For extreme conditions the \gls{HI} shows an underestimation during heat waves \autocite{Romps2022}, limiting the usefulness for these scenarios.
     %The \gls{HI} later is used to compare different \glspl{UHI} with each other.
-  \subsection{Wet Bulb Globe Temperature}
-    To account the impact of insolation on the human body and the effect on heat stress exacerbated on the human body when high heat and insolation are present at the same time, the Wet Bulb Globe Temperature was developed. 
-    Working under heat stress poses a serious health issue, for this the \gls{WBGT} was defined as EN ISO 7243:2017 (\cite{Iso7243_2017}) as work place safety standard, calculating the thermal load on the human body.
-    Heat exchange between the human body and the environment is dominated by evaporation of secreted sweat.
-    The efficiency of this process is determined by the vapor pressure, that is influenced by the temperature and humidity difference.
-    The simpler \gls{HI} is a way of calculating this impact while not taking radiant heat into account, the WBGT does incorporate this effect into this calculation.
-    It was specially developed to help create safety for workers that work long hours outside with little or no shade, like construction or agricultural workers or soldiers.
+    \subsection{Wet Bulb Globe Temperature}\label{sec:WBGT}
+     To account the impact of insolation on the human body and the effect on heat stress exacerbated on the human body when high heat and insolation are present at the same time, the Wet Bulb Globe Temperature was developed. 
+     Working under heat stress poses a serious health issue, for this the \gls{WBGT} was defined as EN ISO 7243:2017 (\cite{Iso7243_2017}) as work place safety standard, calculating the thermal load on the human body.
+     Heat exchange between the human body and the environment is dominated by evaporation of secreted sweat.
+     The efficiency of this process is determined by the vapor pressure, that is influenced by the temperature and humidity difference.
+     The simpler \gls{HI} is a way of calculating this impact while not taking radiant heat into account, the \gls{WBGT} does incorporate this effect into this calculation.
+     It was specially developed to help create safety for workers that work long hours outside with little or no shade, like construction or agricultural workers or soldiers.
 \newpage
 \section{Image Processing}\label{sec:imgProcessing}
     Using remote sensing data for scientific purposes requires a 
@@ -488,7 +488,7 @@
       \end{wrapfigure}
       The Gabor filter is a linear filter using a convolution of an image with a wavelet created by rotating a sine modulated Gaussian. 
       This kernel type is also called the \textit{gabor wavelet}.
-      \Cref{fig:largeKernel} shows an example of a single gabor filter kernel.
+      \Cref{fig:largeKernel} shows an example of a single Gabor filter kernel.
       In image processing, this algorithm is used as a feature extraction algorithm, to extract and analyse texture and structures of different sizes within the image~\autocite{Cerdan1993}. 
       By rotating the kernel and changing the frequency, different textures are extracted from the image.\\
       %
@@ -549,7 +549,7 @@
            \includegraphics[width=\textwidth]{img/Features_4_015_0.png}
            \subcaption{Kernel with $\sigma$ = 4, f = 0.15 and 0 ° rotation}\label{fig:feat06}
        \end{subfigure}
-          \caption{Result of convolving differently oriented gabor wavelets with an Landsat-8 image of Bremen}\label{fig:gaborExample}
+          \caption{Result of convolving differently oriented Gabor wavelets with an Landsat-8 image of Bremen}\label{fig:gaborExample}
       \end{figure}
       \newpage
       \subsection{K-Means Clustering}\label{sec:kmeans}
@@ -656,18 +656,20 @@
 \newpage
 \section{Impact of Land Cover Changes on Urban Heat Islands}\label{sec:LULC}
     \subsection{Introduction}
-      One of the key factors influencing the intensity and distribution of \glspl{UHI} is land cover change, primarily driven by urbanization and associated human activities.
-      Soil properties impact the emissivity, thermal conductivity and heat capacity of an area and increases in build up reduce surface water availability (see \cref{sec:uhi}).
-      This is changing the energy flow increasing the daytime heat within the urban area.
+      One of the key factors influencing the intensity and distribution of \glspl{UHI} is land cover change.
+      Change in \gls{LULC} is primarily driven by urbanization and associated human activities.
+      Soil and surface properties impact the emissivity, thermal conductivity and heat capacity of an area.
+      Increases in the sealed surface fraction reduces surface water availability (see \cref{sec:uhi}).
+      This is changing the energy flow, increasing the heat build-up within the urban area.
       \\    
-      This section looks into the relationship between land cover change and \glspl{UHI} effects using \gls{LULC} detection based on the previously classified Landsat images.
+      This section examines the relationship between land cover change and \glspl{UHI} effects using \gls{LULC} detection based on the previously classified Landsat images.
       The first part of this section begins with an overview of how land cover changes influence heat build-up within the urban environment. 
       Followed by how \gls{LULC} can be detected using Landsat data and how surface classification was done within this work. 
       \\
       This section then goes into detail how the classification of land cover was conducted using Landsat 8 and 9 images, the analysis of spatial and temporal patterns of \glspl{UHI} in relation to the detected land cover classes follows.
-      To answer the question (\cref{q2}) what the influence on land cover with regards to intensity and size of \glspl{UHI} is, statistical analysis is conducted on the \glspl{UHI} within the area of Bremen. \\
+      To answer the question (\creflabelformat{Question}{q2}) of the influence of land cover change on intensity and size of \glspl{UHI}, statistical analysis is conducted on the \glspl{UHI} within the area of Bremen. \\
     \newpage
-    \subsection{Impact of Land cover/ Surface type on Heat Build-up}
+    \subsection{Impact of Land Cover/ Surface Type on Heat Build-up}
       \begin{wrapfigure}{r}{0.40\textwidth}
         \vspace{-0.5cm}
         \centering
@@ -685,13 +687,13 @@
           \includegraphics[width=\textwidth]{img/Features_nir_6.png}
           \subcaption{Convolution of NIR Band and kernel 6}
         \end{subfigure}
-       \caption{Examples of the convolution of different bands and gabor filters\label{fig:gaborresults}}
-       \vspace{-2.5cm}
+       \caption{Examples of the convolution of different bands and Gabor filters\label{fig:gaborresults}}
+       \vspace{-2cm}
       \end{wrapfigure} 
       The change of the urban surface properties is one of the major factors causing \glspl{SUHI}.  
       Multiple studies have shown that land cover has a significant impact on land surface temperature and \glspl{UHI} (e.g.~\cite{Karakus2019},~\cite{Weng2004} and~\cite{Stewart2011}). 
       This is mainly caused by the physical thermal properties of the different materials found in the different land cover classes. 
-      Build up areas contain higher amounts of metal, stone and concrete, all materials with a high thermal mass combined with a higher absorption at short wavelengths (dependent on surface properties like coatings).  
+      Areas with urban characteristics contain higher amounts of metal, stone and concrete, materials with a high thermal mass combined with a higher absorption at short wavelengths (dependent on surface coatings).  
       %Water and Vegetation have a high emissivity with > 0.9 compared to 0.2 -0.9 of metal, brick, concrete and bare soil. 
       Build up surfaces have lower water availability for evaporation and thus more heat is heating up the material itself.
       Forests and other vegetated areas are permanently cooled by evaporative cooling and transpiration of trees, increasing vapor content and heat capacity of the air.
@@ -700,17 +702,17 @@
       The methodology employed for land cover classification involved the multi-step process utilizing satellite imagery, feature enhancement and machine learning techniques shown in \cref{fig:pipeline} and described in \cref{sec:pipeline}.
       The primary data source for classification were 8-band Landsat images, which provided a comprehensive spectral view of the area to be classified.
       To augment the dataset and enhance the classification accuracy, Gabor filtering (see \cref{sec:gabor}) was applied to the Landsat images.
-      As input, the gabor filtered multispectral data of satellite images from two dates were used.
+      As input, the Gabor filtered multispectral data of satellite images from two dates were used.
       The multi band image was loaded and cut to match the study area and reduce processing time by reducing data size.  \\
       The analysis used the following parameters: \\
       % Classification: 
       The Gabor filter used for feature engineering was varied using different $\sigma$, $\theta$ and $f$ values.
-      Due to computational restrictions the number of rotations ($\theta$) was limited to 5, a value of 4 resulted in better results. 
+      Due to computational restrictions the number of rotations ($\theta$) was limited to 5, a value of 4 yielded in best results. 
       For ease of variation the $\sigma_x$ value was varied while the $\sigma_y = \frac{\sigma_x}{2}$, giving a 2:1 kernel ration (shown in \cref{fig:gaborbank} 
       For $\sigma_x > 2$ the classification degraded showing stripes very large patterns were detected, a value of $\sigma_x = 1$ resulted in a kernel size of 7 $\times$ 7 pixel and good results.
       The usable frequencies are limited by the size of the kernel and the image resolution shown in \cref{fig:gaborbank}.
       Due to the low resolution, a large kernel size would detect features that are repeated with a features size in the range of 200 m that do not occur in large quantities in urban areas. 
-      Larger kernel size with higher frequencies would increase detection capability for images with higher resolution. 
+      Larger kernel sizes with higher frequencies would increase detection capability for images with higher resolution. 
     \Cref{fig:gaborbank} shows the used kernels for classification.
      %Due to the low resolution of 30 m per pixel high frequencies where not abl
 
@@ -768,22 +770,23 @@
         \includegraphics[width=\textwidth]{img/K11.png}
         \subcaption{Kernel 12}
       \end{subfigure}
-      \caption{Filter bank of 12 gabor filters with 4 rotations and a $\sigma_x=1\ ,\sigma_y = 0.5\ $ and $\ f = 0.15, 0.35 \text{ and } 0.4$\label{fig:gaborbank}}%
+      \caption{Filter bank of 12 Gabor filters with 4 rotations and a $\sigma_x=1\ ,\sigma_y = 0.5\ $ and $\ f = 0.15, 0.35 \text{ and } 0.4$\label{fig:gaborbank}}%
     \end{figure}
     \noindent
-    The filter bank with these kernels act as a edge and structure detection algorithm shown in \cref{fig:gaborresults}, that shows extracted features of some example bands.\\
-    In structured areas with fields or buildings on a street raster, the filter amplifies the structures, for smaller structures the filter detects edges for change in building material, due to different reflectivity and response for the different frequency bands. 
+    The filter bank with these kernels act as an edge and structure detection algorithm shown in \cref{fig:gaborresults}, that shows extracted features of some example bands.\\
+    In structured areas with fields or buildings on a street raster, the filter amplifies the structures, for smaller structures the filter detects edges for change in building material. 
+    The detection is working due to the different specific albedo for the different frequency bands, depending on material properties. 
     \noindent 
-      The result of the convolution of all bands of the image with the gabor filter was then used as feature vector. 
-      By variation of parameters, a minimal error to the reference data was archived using 4 rotations an asymmetric kernel with a 2:1 ratio, two frequencies and two sigma sizes (see error calculation below).
+      The result of the convolution of all bands of the image with the Gabor filter was then used as feature vector. 
+      By variation of parameters, a minimal error to the reference data was archived using 4 rotations, an asymmetric kernel with a 2:1 ratio, two frequencies and two sigma sizes (see error calculation below).
       Since the classification was done using a reproducible randomness, the parameters influencing the result where:
       \begin{itemize}
         \item the selected images
         \item the number of classes to find by the k-means algorithm
-        \item the parameter of the gabor filter
+        \item the parameter of the Gabor filter
       \end{itemize}
-      The images were not changed for finding the best filter settings, the number of k-means clusters was varied as well as the parameters of the gabor kernels. 
-      One limit of the gabor filter parameters (rotation, size and frequency) was given by the resulting increase in processing time, since the resulting feature vector for each band is set as      % 
+      The images were not changed for finding the best filter settings, the number of k-means clusters was varied as well as the parameters of the Gabor kernels. 
+      One limit of the Gabor filter parameters (rotation, size and frequency) was given by the resulting increase in processing time, since the resulting feature vector for each band is set as      % 
       \begin{equation}
         N_{feat} = |\theta| \cdot |\sigma| \cdot |f| 
       \end{equation}
@@ -794,9 +797,10 @@
     The frequencies of the sine wave where varied between 0.05 and 0.5. 
     A trade-off between computation time and results was found using 3 frequencies shown in \cref{fig:gaborbank}. \\ 
     This step was crucial in extracting and emphasizing spatial patterns and textures, thereby facilitating more distinct classification of land cover types.
-      For classifying surfaces the k-means unsupervised machine learning algorithm was used, the number of classes was varied between 8 and 12 classes, giving best results in terms of minimal \gls{MSE} and highest \gls{SSIM} when using 11 classes.
+      For classifying surfaces the k-means unsupervised machine learning algorithm was used.
+      The number of classes was varied between 8 and 12 classes, giving best results in terms of minimal \gls{MSE} and highest \gls{SSIM} when using 11 classes.
       The quality of the feature vectors was judged by the output of the classification that is covered below. 
-      The feature enhanced data of images of Bremen were used of multiple years to create the unsupervised k-means clustering model.\todo[inline,size=\tiny]{add more}
+      The feature enhanced data of images of Bremen were used of multiple years to create the unsupervised k-means clustering model.
       The classified image has 11 classes that are shown in \cref{tab:land_cover_classes}.
       \begin{table}[!htbp]
       \centering
@@ -821,28 +825,26 @@
       \end{tabular}
       
       \end{table}
-
+      \newpage
       \begin{wrapfigure}{l}{0.48\textwidth}
-         \begin{center}
-         \includegraphics[width=0.46\textwidth]{img/DiffLULC}
-       \end{center}
-       \caption{Change between reference product and k-means \gls{LULC} classification}\label{fig:lulcDiff}
+        \begin{center}
+          \includegraphics[width=0.46\textwidth]{img/DiffLULC}
+        \end{center}
+        \caption{Change between reference product and k-means \gls{LULC} classification}\label{fig:lulcDiff}
       \end{wrapfigure}
       In \cref{fig:lulcDiff} this difference is shown between the 2019 \gls{LULC} and 2022.
       The major differences are all seen outside of the city area and can be attributed to changes on agricultural land, that is harvested or has a different vegetation type.
-      During the available time neither classification nor reference data showed significant land use changes within the urban area of Bremen. The majority of changes where at the interfaces between two classes that are caused by errors in georeferencing, naturally occurring changes in vegetation growth and uncertainties due to spacial resolution.
+      During the available time neither classification nor reference data showed significant land use changes within the urban area of Bremen. 
+      The majority of changes occurred at the interfaces between two classes that are caused by errors in georeferencing, naturally occurring changes in vegetation growth and uncertainties due to spacial resolution.
       Due to the missing \gls{LULC} changes within the given time frame, the analysis of the impact of 
       \newpage
     \subsection{Validation of Classification results}\label{sec:references}
       
-      % and (only circular kernel where used) with a $\lambda$ of 2 and 4. \todo[inline,size=\tiny]{ check }
-      % 
-      %After the features were added the data was passed through the trained (random forest model \cref{sec:randomForrest}) for classification. \\
-      This model was validated using the Sentinel-2 10 m Land Use/Land Cover product~\autocite{Sentiel10mLULC}. 
-      Since the reference data only uses 8 classes, the used classes where mapped to the best fitting class (as indicated in \cref{tab:land_cover_classes}). 
+      The model was validated using the Sentinel-2 10 m Land Use/Land Cover product~\autocite{Sentiel10mLULC}. 
+      Since the reference data uses 8 classes, the used classes where mapped to the best fitting class as indicated in \cref{tab:land_cover_classes}. 
       Clouds, cloud shadows and snow/ice where not used for training and verification and removed for the analysis, since reference images do not contain clouds and images were selected to not contain ice, snow and clouds within relevant areas.
       %Since the datasets used for this analysis where selected to have no cloud cover over the analysis area, cloud pixel in the peri urban area where just excluded from the temperature calculation . 
-      The Esri 10m-Land Use Dataset was obtained using the ESRI Land cover explorer~\autocite{Zhang} that was scaled to the 30 m resolution of the Landsat images.\\
+      The Esri 10m-\gls{LULC} Dataset was obtained using the ESRI land cover explorer~\autocite{Zhang} and scaled to the 30 m resolution of the Landsat images.
       It can be seen from the difference between the \gls{LULC} classification and the main difference in categorization is along the edges between different class patches. 
       This can be explained by differences in the categorization approach, where the reference dataset is using averages for the whole year while the classification for the data is done at a single point in time. 
       This can lead to an over detection of vegetation or water classes due to season or weather impact on the single point in time classification.
@@ -868,18 +870,18 @@
       %For the labelling of these land cover classes, the Normalized Difference Vegetation Index (NDVI) and the Normalized Difference Built-up Index (NDBI) bands were utilized.
       %These indices were instrumental in differentiating vegetated areas from built-up regions, thereby aiding in the accurate categorization of land cover types.
       \noindent
-      The classification labels were assigned based on the proximity of the cluster centres of the trainings data to the cluster centres of the K-means fit (see \cref{sec:labelassignment}).
-      This approach ensured that each land cover class was consistently labelled independent of the study area.
+      The classification labels were assigned based on the proximity of the cluster centres of the training data, to the cluster centres of the K-means fit (see \cref{sec:labelassignment}).
+      This approach ensured that each land cover class was consistently labelled independent of the area of study.
     %
     \subsubsection{Urban Area Extraction}\label{sec:urbanAreaExtraction}
       The resulting classified image was then processed to extract urban areas.
       The algorithm used the classes 1, 2, 6 and 11 from \cref{tab:land_cover_classes} to detect areas that can be considered urban.
-      The areas were processed using \gls{dilation} and \gls{erosion} to isolate core urban areas. 
-      For this small gaps between parts of the city covered by vegetation (parks or railways) need to be bridged and holes closed 
-      Also small thin links such as highways between larger areas need to be cut, to create separate urban areas.
-      After this preprocessing step the areas are enumerated and all areas that cover at least 1\% of the image area where used to create buffer zones. 
-      Buffer zones where defined as described in \cref{sec:urbanBufferzone}. 
-      The result for this for the urban area of Bremen can be seen in \cref{fig:bufferedBremen}.\\
+      The areas were processed, using \gls{dilation} and \gls{erosion}, to isolate core urban areas. 
+      For small gaps between parts of the city, covered by vegetation (parks or railways), dilation was used to bridge gaps and close small holes.
+      Small thin links, such as highways, between larger areas are cut, to create separate urban areas.
+      After preprocessing the areas were enumerated and all areas that cover at least 1\% of the selected image section where used to create buffer zones. 
+      Buffer zones were defined as described in \cref{sec:urbanBufferzone}. 
+      The result for the urban area of Bremen can be seen in \cref{fig:bufferedBremen}.\\
       \begin{figure}[!htbp]
         \includegraphics[width=\textwidth]{img/UrbanAreaBremen.png}
         \caption{Urban Area of Bremen, with buffer zones for Adjacent and Peri Urban Area\label{fig:bufferedBremen}}
@@ -914,9 +916,9 @@
 
       The urban area shown in \cref{fig:bufferedBremen} yielded a usable output shape following the Bremen city borders, this was manually verified using the visible images and third party visible satellite images. 
       \Cref{fig:classesPeri} shows the classification of pixels within the peri urban area.
-      It can be seen, that the pixel the peri urban area has a mixed surface classes dominated by vegetation classes. 
-      Parts of these are removed (\textit{Residential}, \textit{Vegetated Residential}, \textit{Industrial \& Industry Halls} and \textit{Bare Soil}) if in an linked area of more then $\approx$ 25 ha of size, to remove other larger settlements that could distort the measurement.
-      The temperature values of the different areas is calculated by overlaying the masks on the thermal band of the Landsat data. 
+      It can be seen, that the pixel of the peri urban area has a mixed surface classes dominated by vegetation classes. 
+      Parts of these are removed (\textit{Residential}, \textit{Vegetated Residential}, \textit{Industrial \& Industry Halls} and \textit{Bare Soil}) if in a linked area of more than $\approx$ 25 ha of size, to remove other larger settlements that could distort the measurement.
+      The temperature values of the different areas are calculated by overlaying the masks on the thermal band of the Landsat data. 
 %
         \begin{figure}[!htbp]
          \centering
@@ -924,9 +926,9 @@
          \caption{Distribution of surface types within the peri urban area (prior to filtering)}\label{fig:classesPeri}
         \end{figure}
 
-        The average temperature and variation is calculated for the peri urban and the urban area (including the sub urban buffer zone).
+        The average temperature and variance is calculated for the peri urban and the urban area.
         Using the average temperature, \glspl{UHI} are detected using the definition from \cref{ssec:definition} within the area defined by the urban mask. 
-        The areas that are above the area are then detected within the urban mask, the resulting areas are shown in \cref{fig:AnalysisBre}. 
+        The areas that are above the threshold are then detected within the urban mask, the resulting \glspl{UHI} are shown in \cref{fig:AnalysisBre}. 
    \begin{figure}[!p]
        \begin{subfigure}{\textwidth}
           \centering
@@ -944,7 +946,8 @@
 
       In \cref{fig:lstclusters19} and \cref{fig:lstclusters22}, the temperature distributions within the different classes is shown (the whole image was used for the statistic). 
       Confirming previous research, classes with high vegetation and water are lower in temperature. 
-      The 2022 samples where at a colder day, with mixed cloud cover, explaining the significantly lower temperature of PV/cloud classes this class also includes some cumulus clouds outside of the city area further decreasing the temperature values for this class. 
+      The 2022 day was colder, with mixed cloud cover, explaining the significantly lower temperature of PV / Cloud classes.
+      The PV / Clouds class also included some cumulus clouds outside of the city area further decreasing the temperature values within this class. 
       \todo[inline]{maybe add weather chart for bremen of this day here?}
 
 
@@ -987,25 +990,25 @@
 
       %After referencing the  data it was shown that there where no significant LULC changes within the city area of Bremen.  
     Industrial and sealed surfaces are the most common class found within areas affected by \gls{UHI}.
-    No \glspl{UHI} where dominated by any class associated with high vegetation. 
+    No \glspl{UHI} were dominated by any class associated with high vegetation. 
       
  \subsection{Conclusions}
 
     The usage of Landsat imagery, with a Gabor filtering, K-means based classification constituted a robust methodology for land cover classification.
-    The filter parameters on the gabor filter where optimal with and absolute MSE of 0.3 $\pm 0.05$ (class values 0 = water, 1 = urban and 2 = non-urban) for two years of classification, which is an error of 10\%.
+    The filter parameters on the Gabor filter were optimal with and absolute MSE of 0.3 $\pm 0.05$ (class values 0 = water, 1 = urban and 2 = non-urban) for two years of classification, which is an error of 10\%.
     Using the more detailed \gls{SSIM} the index is 0.98 $\pm 0.001$ showing very high similarity (1 would be identical images, -1 inverted images and 0 for no similarity). 
-    These metrics where found highest with a filter bank of 12 asymmetric $7\times7$ px kernels, using 3 frequencies, 4 rotations and a sigma of $1.0$ and $0.5)$ in x- and y- direction respectively (see \cref{fig:gaborbank}).
+    These metrics were found highest with a filter bank of 12 asymmetric $7\times7$ px kernels, using 3 frequencies, 4 rotations and a sigma of $1.0$ and $0.5)$ in x- and y- direction respectively (see \cref{fig:gaborbank}).
     The number of classes that are distinguishable varies by season and is limited by computing power so a possible improvement would be the use of reducing machine learning algorithms, that identifies the principle components that have less variance between seasons and use parallelization such as \textit{dask}\autocite{dask}, to allow bigger filter banks and additional steps to the pipeline to increase output quality.
     Another simple way that was not utilized was to incorporate the QA layer provided by the Landsat L2 data product, that provide per pixel probability values for water and cloud detection, that could remove outliers in the water and cloud classes and therefore provide higher quality results for the other classes. 
     %
-    One way of increasing accuracy of the results is an increase in resolution, that allows the gabor filter bank to have a wider range for usable values. 
+    One way of increasing accuracy of the results is an increase in resolution, that allows the Gabor filter bank to have a wider range for usable values. 
     In \cref{fig:gaborbank} it can be seen that the first kernel of each rotation is nearly identical, due to to missing resolution. 
     This would allow to detect smaller features.
     Another improvement might be the implementation of weights for the feature and original image values.
     Due to the missing changes within the image time frame no impact on the urban heat islands within Bremen due to urbanization or construction can be seen. 
     The analysis of the classes dominant in the \gls{UHI} clearly show that the surface type does have an significant influence on the creation of urban heat islands. 
     Industrial and sealed surfaces are the most common class found within areas affected by \gls{UHI}.
-    No \glspl{UHI} where dominated by any class associated with high vegetation. 
+    No \glspl{UHI} were dominated by any class associated with high vegetation. 
     
     %TODO maybe add check if really identical or off by a bit
     
@@ -1036,11 +1039,11 @@
     \subsection{Methodology}
       Measurement of the impact on rising temperatures have to be done after correcting for other variables such as urban development, meteorological impact factors such as wind and rain. 
       To archive this a time series of land surface temperatures and \glspl{UHI} from 1990 to 2022 was created using Landsat 7 and Landsat 8 and 9 data.
-      Data from weather stations in the areas where used to calculate the trend of mean temperature over the time. 
+      Data from weather stations in the areas were used to calculate the trend of mean temperature over the time. 
       The \glspl{UHI} data was then correlated with the air temperature data of the local measurement stations and corrected for size increases of \gls{UHI} impacted by land cover change in the previous step. 
-      This way in the statistical analysis all \glspl{UHI} that would be impacted by urbanisation or change of surface type where excluded from the analysis.
+      This way in the statistical analysis all \glspl{UHI} that would be impacted by urbanisation or change of surface type were excluded from the analysis.
     \subsubsection{Data Handling}
-      One of the challenges that arised during the processing of multiple images where the large amount of data of the images (each fully loaded image with all 11 bands including classification is around 1.5 GB).
+      One of the challenges that was encountered during the processing of multiple images were the large amount of data of the images (each fully loaded image with all 11 bands including classification is around 1.5 GB).
       To reduce the memory footprint of the processing chain, xarray \autocite{hoyer2017xarray} was used. 
       Xarray allows lazy loading from disk, this only loads parts of the complete dataset. 
       Another feature of xarray that was used are labelled data. Each loaded image used latitude and longitude as coordinates allowing to accessing sub areas by reference coordinates. 
@@ -1060,14 +1063,14 @@
       \glsreset{TOA}%reset TOA acro
       To derive the level 2 data from level 1 data, \gls{TOA} brightness is used, corrected for stray light (Landsat 8 specific, see~\autocite[p.~67]{Zanter2019}) and instrument distortion. 
       Geometric and geographic terrain-correction (\cite[p.~44]{Zanter2019}) is applied resulting in an geolocalized image.
-      The \gls{TOA} temperature data is calculated according to \cref{equ:toa} where $K_1$ and $K_2$ are band specific conversion factors from the meta data file and $L_\lambda$ is the spectral radiance at the \gls{TOA} in $\frac{W}{m^2\cdot srad \cdot \mu m}$ e.g.\ the Band 10 Channel. 
+      The \gls{TOA} temperature data is calculated according to \cref{equ:toa}, where $K_1$ and $K_2$ are band specific conversion factors from the meta data file and $L_\lambda$ is the spectral radiance at the \gls{TOA} in $\frac{W}{m^2\cdot srad \cdot \mu m}$ e.g.\ the Band 10 Channel. 
       \begin{equation}\label{equ:toa}
   	    T = \frac{K_2}{\ln\left(\frac{K_1}{L_{\lambda}}+1\right)}
       \end{equation}
       To get the level two data from these \gls{TOA} measurements the value is corrected for emissivity of the ground using measurements from the \textit{ASTER GED} database (see~\cite{USGSWebsite}).\\
       The temperature is also corrected for atmospheric interference using local reference stations. 
       The \gls{USGS} uses reference stations, atmospheric models and independent reference measurements from other satellites to calculate the Surface temperature, the surface temperature product has an accuracy of $\pm 1 K$ overall and other uncertainties are marked in a quality assurance file provided for each image.\\
-      To convert the image file containing 16 bit unsigned integers into a temperature \cref{equ:tiftolst} is used. The scaling and offset factors are specific to the product and where taken from~\cite[Table 6-1]{EROASC2013}.
+      To convert the image file containing 16 bit unsigned integers into a temperature \cref{equ:tiftolst} is used. The scaling and offset factors are specific to the product and were taken from~\cite[Table 6-1]{EROASC2013}.
       % 
       \begin{equation}\label{equ:tiftolst}
         T_C = T_K - 273.15 = \text{DN} \cdot 0.00341802 + 149.0 - 273.15 
@@ -1077,9 +1080,9 @@
       \newpage
     %
     \subsubsection{Calculating temperature rise within the city}
-      For the city in question the next ground based measurement stations where used to calculate a fitted temperature regression. 
+      For the city in question the next ground based measurement stations were used to calculate a fitted temperature regression. 
       This data was correlated with the \gls{SUHI} intensity as well as the measured temperature data from the times of the satellite data acquisitions. 
-      For German cities the stations of the \gls{DWD} where used.
+      For German cities the stations of the \gls{DWD} were used.
       %#Using the~\autocite{wetterdienst2024} library, that allows locating the nearest weather station having sufficiently high resolution weather data. 
       One indicator interesting in the research on \glspl{UHI} is the number of days with high temperature.
       There are multiple threshold days that are used to classify seasons in comparison to the average.
@@ -1223,7 +1226,7 @@
       \end{wrapfigure}
     
     The analysis of the \glspl{UHI} at the analysed dates, shows a strong increase in maximum and average heat island size, with rising temperatures. 
-    \Glspl{UHI} smaller then 5 pixel (4500 m$^2$) where excluded, to mitigate impact of outliers. 
+    \Glspl{UHI} smaller then 5 pixel (4500 m$^2$) were excluded, to mitigate impact of outliers. 
     \Cref{fig:tempvssize} shows the distribution of sizes and maximum temperatures within the \gls{UHI}.
     Most heat islands are small with a wide range of temperatures, the few very big heat islands are within the mid range of temperatures. 
   \todo[inline]{.... more findings?}
@@ -1233,6 +1236,7 @@
   %
 \newpage
 \section{Conclusion}\label{sec:conclusion}
+
     Due to the limited remote sensing data availability at summer dates with similar weather, statistical analysis is not conclusive. 
     There is an increase in number, mean size and maximum size visible with rising average temperatures. 
     The maximum temperatures are very similar and do not increase linearly with average temperatures. 
@@ -1240,27 +1244,44 @@
     
     Analysing each \gls{UHI} for more parameter and using measurements from different sources, e.g.\ ground measurement campaigns to refine and verify measurements.
     The data indicates size increases of \glspl{SUHI} with rising temperatures, due to lack of measurement stations there is no data on the impact of the inner city air temperature distribution.
-    The use of indices like the \gls{HI} (see \cref{sec:heatIndex}) are useful tools 
+ \subsubsection{What definition can be used to define \glspl{UHI} comparably?}\label{a1} 
+        An \gls{SUHI} is an area with increased surface temperature within an urban space, where the temperature is at least 3 standard deviations above the average temperature of the urban adjacent rural buffer zone, corrected for larger settlements. 
+        This definition can be used to compare urban areas in different settings and surroundings. 
+ \subsubsection{What is the influence of \gls{LULC} change on the size of urban heat islands?}\label{a2}
+  There is a strong correlation between the dominant surface types and urban heat island size. 
+  Surfaces with high NDVI and low surface sealing result in lower temperature and no or a few urban heat islands. 
+  
+ \subsubsection{How significant is the impact of urbanisation on \glspl{UHI}, both in terms of absolute and relative temperature changes?}\label{a3}
+  Sealed surfaces and industrialized areas are most impacted and sources of urban heat islands, independent of average reference temperature.
+  Surface types typically associated with urbanisation and human activity, such as bare sealed areas (parking lots, runways, bare ground and industry lots), industrial areas and high density residential and commercial zones commonly found within city centres, are the ones with the most urban heat islands.
+  While the study area did not allow to investigate areas impacted by surface type changes. The strong correlation and other studies show that urbanization without mitigations is a strong driver for \glspl{UHI} formation.
+  
+ \subsubsection{What is the effect of rising average temperatures on the \glspl{UHI} effect?}\label{a4}
+  The weather data from the \gls{DWD} shows an increase of average temperature from 1990 to 2020 of 1.4 °C average yearly temperature. 
+  Combined with the findings of size change of the \gls{UHI} 
+
+  
+ \subsubsection{What indices can be used or created to categorize and rate \gls{UHI} intensity?}\label{a5}
+  The use of indices like the \gls{HI} (see \cref{sec:heatIndex}) and \gls{WBGT} \cref{sec:WBGT} are useful tools to judge the impact of \gls{UHI}.
+
 \subsection{Summary}
     The study shows that even in higher latitudes the surface temperatures caused by anthropogenic surface modification causes high surface temperatures. 
     The impact of climate change indicates an increase of hot days and tropical nights in temperate climate zones, increasing the risk of negative health effects and dangerous air temperatures during summer and heat waves.\\% 
-    It was also shown that Landsat data can independently be used for surface classification with high accuracy compared for single day classification, when combined with feature engineering such as gabor filters using unsupervised machine learning.
+    It was also shown that Landsat data can independently be used for surface classification with high accuracy compared for single day classification, when combined with feature engineering such as Gabor filters using unsupervised machine learning.
     At time of the study the availability of cloud free remote sensing data posed a severe hurdle. 
     The proposed statistical definition could be helpful to compare \glspl{UHI} in different climate zones and seasons. 
     Urban area extraction, adapted from the suggestion of~\cite{Sobrino2020} approach, has shown to follow the natural borders of the city well.
   \todo[inline]{final sentence}
-    
-
-% Summary of the findings 
+ % Summary of the findings 
 % contributions to research
 
 \subsection{Limitations and Challenges}
 % Why was something not possible
   While the connection of ground based sensor stations with remote imagery works well, a direct reliable conversion from land surface temperatures to air temperature, since there is a temporal and seasonally different energy transport between surfaces and surrounding air. 
   Another limiting factor was the availability of suitable cloud free satellite footage of the area of study.
-  While with the introduction of Landsat 9, the amount of footage doubled, in regions with high cloud cover (like Bremen) and due to the not evenly distributed coverage times of the satellites (2d apart), this resulted in very few images that where useable for the statistical analysis. 
+  While with the introduction of Landsat 9, the amount of footage doubled, in regions with high cloud cover (like Bremen) and due to the not evenly distributed coverage times of the satellites (2d apart), this resulted in very few images that were useable for the statistical analysis. 
   Due to the low numbers, the results are not statistically relevant and another satellite product or future results need to be used to come to a significant outcome. 
-  Observing the impact of land cover change another study area is needed where significant land cover changes are done. 
+  Observing the impact of land cover change another study area is needed, where significant land cover changes are done. 
   This could be areas that have high growths or construction (see~\cref{sec:future}) or areas that were impacted by catastrophes or war, artificially changing the surface properties 
 
 \subsubsection{Data}
@@ -1276,13 +1297,13 @@ It has was developed with adaptability in mind so that the
 \section{Appendix}
   \subsection{Use of AI based tools (Nutzung KI basierte Anwendungen)}
   According to the \textit{Eigenständigkeitserklärung} \cref{sec:eigenstaendigkeit} the use of so called AI tools needs to be declared. 
-    During this work the following tools where used: 
+    During this work the following tools were used: 
   \begin{itemize}
     \item OpenAIs ChatGPT \autocite{chatgpt} for aid during programming, help with formulations, getting topic overviews and aid in finding keywords for further research.
     \item Kagi's summerizer \autocite{kagi}, to deem papers relevant.
     \item scienceOS \autocite{scienceos} to find research papers for topics and questions. 
     \end{itemize}
-    All informations from these tools where used as an aid and where always cross-checked with primary sources. 
+    All informations from these tools were used as an aid and were always cross-checked with primary sources. 
   \subsection{Additional Figures}
     \begin{figure}[!htbp]
         \includegraphics[width=\textwidth]{img/UrbanAreaStuhr.png}
@@ -1298,7 +1319,7 @@ It has was developed with adaptability in mind so that the
   \subsubsection{Data}
     The data is stored in multiple subfolders. 
     The \texttt{Data} folder contains the different cities as subfolders, within each of these folders, there is a \texttt{dataset} folder, containing a \texttt{xarray} dataset named \textit{dataXarrayCITY\_NAME.nc} of the used area of interest, including all bands and the classifiction at all times analysed during this project. 
-    The \texttt{dataXarrayCITY\_NAME\_feat.nc} contains the extracted feature bands from the gabor feature extraction.
+    The \texttt{dataXarrayCITY\_NAME\_feat.nc} contains the extracted feature bands from the Gabor feature extraction.
     The \texttt{ML\_Model} folder contains a ``pickeled'' k-means model, a file containing a numpy array with cluster centres for the label assignment. 
   \subsubsection{Code}\label{sec:code}
       The folder app contains the python code used for generating the data, the documentation of the code is located within the doc folder.
@@ -1332,7 +1353,7 @@ It has was developed with adaptability in mind so that the
 \restoregeometry%
 \end{document}
 
-%The surface classes where correlated with the \todo[inline,size=\tiny]{ check }
+%The surface classes were correlated with the \todo[inline,size=\tiny]{ check }
 %Kataster data from Bremen as well as with OSM data. % todo do 
 %
 %Ziel Projekt teil: 
@@ -1350,9 +1371,9 @@ It has was developed with adaptability in mind so that the
 %\subsection{}
 
 %Of the different bands available from the used satellite data (Landsat7 and Landsat8), 
-%the visible and near infrared bands where used for clustering. 
+%the visible and near infrared bands were used for clustering. 
 %The clustering was done using the simple k-means algorithm. 
-%Different configuration where used %todo add pictures? 
-%These where compared and referenced with ground truth data %todo add error and limitations refgerenec here 
+%Different configuration were used %todo add pictures? 
+%These were compared and referenced with ground truth data %todo add error and limitations refgerenec here 
 
 
