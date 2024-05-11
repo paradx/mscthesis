@@ -89,7 +89,7 @@
 \newglossaryentry{MSE}%
 {%
   name={Mean Squared Error},
-  description={Algorithm to calculate the difference between two data sets (see \cref{equ:mse})}
+  description={Algorithm to calculate the difference between two sets of data (see \cref{equ:mse})}
 }
 \newglossaryentry{SSIM}%
 {%
@@ -114,7 +114,7 @@
   \tableofcontents
   \newpage
   \listoffigures
-  %\newpage
+  \newpage
   \listoftables
   \newpage
   % Abbreviations first
@@ -135,10 +135,11 @@
 \setcounter{figure}{0}
 \section{Introduction}\label{sec:intro}
   The investigation of Urban Heat Islands are a very important topic in times of climate change and urbanization.\\
-  Urban environments have been the interest of study for a long time, but increases in frequency and intensity of extreme weather events and heat waves are significantly more likely to happen \autocite{Uhe2016} and with intensities that where nearly impossible without the impact of climate change \autocite{Bador2016}.
+  Urban environments have been the interest of studies for a long time, but increases in frequency and intensity of extreme weather events and heat waves are significantly more likely to happen \autocite{Uhe2016}.
+  These are expected to appear with intensities that where nearly impossible without the impact of climate change \autocite{Bador2016}.
   This is well understood and can be attributed to anthropogenic climate change on larger scales, but local effects and impact of climate change on a small scale is harder to simulate and understand.
-  The major issue is the missing impact of localized phenomena such as weather, terrain and urban climate are not covered by climate models, making prediction of extreme heat waves with high accuracy difficult~\autocite{VanOldenborgh2022}.
-  Studying and understanding the local urban climate has a long history, including the understanding of \glspl{UHI} and impacts of urban atmospheric pollutions on humans and the greater atmosphere. 
+  The major issue is that the missing impact of localized phenomena such as weather, terrain and urban climate are not covered by climate models, making prediction of extreme heat waves with high accuracy difficult~\autocite{VanOldenborgh2022}.
+  Studying and understanding the local urban climate has a long history, including the understanding of \glspl{UHI} and impacts of urban atmospheric pollution on humans and the greater atmosphere. 
   Together with research the need for tools and data processing platforms are demanded by different organisations (such as the \gls{IASC}~\autocite{IFRC2022} and the \gls{EPA}~\autocite{FAS2024}) to prepare affected areas and organisations for heat mitigation in urban areas. 
  \subsection{An historical overview of urban heat research}
   The scientific investigation of the urban climate and the influence of human settlements and activity on the local atmosphere and temperature has been studied for more then 200 years.~%
@@ -147,46 +148,49 @@
   This type of measurement were repeated in multiple cities around the globe at the time.\\
   The term \gls{UHI} was coined in the 1960s in publications regarding case studies in London~\autocite{Chandler1961} and Montreal~\autocite{Oke1968}.
   During this time the influences and understanding of the interaction between the human industrial activity, the land change by urbanisation and industrialization and the influence of these factors on temperatures was investigated by numerous case studies using fixed or mobile weather stations.
-  Health problems within industrial areas or incidence like the 1930 Meuse valley fog catastrophe, in which exhaust gases, including fluorine gas, combined with an inversion weather condition, forming a cloud over the area causing the death of at least 60 people~\autocite{Nemery2001} or 
-  the \textit{Great Smog of London} in 1952, a similar event lasting four days causing 4000 direct death and between 10000 and 12000 death from consequences of the fog in the month after\autocite{Bell2004}, triggered scientific interest in the interaction between human settlement, pollution and metrological phenomena on the human health and the environment. 
-  The investigation of incidence like this using scientific methods shaped the idea of an man made urban climate.\\ \\ 
+  Health problems within industrial areas or incidents like the 1930 Meuse valley fog catastrophe, in which exhaust gases, including fluorine gas, combined with an inversion weather condition, forming a cloud over the area causing the death of at least 60 people~\autocite{Nemery2001}.
+
+  The \textit{Great Smog of London} in 1952, a similar event lasting four days, causing 4000 direct deaths and between 10000 and 12000 deaths from consequences of the fog in the months after~\autocite{Bell2004}, triggered scientific interest in the interaction between human settlement, pollution and meteorological phenomena on human health and the environment. 
+  The investigation of incidents like this using scientific methods shaped the idea of an man made urban climate.\\ \\ 
 %
-  To understand the urban meteorology in three dimensions the first use of balloons, helicopters and air planes to measure vertical temperature profiles were documented in the 1950 \autocite{Duckworth1954}.
+  To understand the urban meteorology in three dimensions the first use of balloons, helicopters and air planes to measure vertical temperature profiles were documented in the 1950s \autocite{Duckworth1954}.
   These studies focused on the atmospheric heat distribution over urban areas and resulted in the development of physical energy transport models for these atmospheric urban heat islands.
   These models required a deeper understanding of the surface properties and the temperature distribution within the urban area.\\ \\
   % 
-  Then newly available remote sensing devices such as infrared imagers made it possible to observe the urban environment from above and detect temperature hot spots using airborne and satellite images.  \\
+  Then newly available remote sensing devices, such as infrared imagers, made it possible to observe the urban environment from above and detect temperature hot spots using airborne and satellite images.  \\
   %  
-  First investigations regarding the feasibility of this approach were proposed in the late 70s (\cite{Watson1975},~\cite{Carlson1977} and~\cite{Block1978}) but the resolution of satellite images insufficient for detailed investigations of \glspl{UHI}.\\
+  First investigations regarding the feasibility of this approach were proposed in the late 70s (\cite{Watson1975},~\cite{Carlson1977} and~\cite{Block1978}) but the resolution of satellite images were insufficient for detailed investigations of \glspl{UHI}.\\
   A first study using satellite infrared imagery were conducted in 1978 using the NOAA 5 Satellite (with a spacial resolution of 1km~\autocite{Matson1978}).\\
   Multiple studies in the 70s and 80s used images taken from planes or helicopters to aid the investigation of smaller scale effects within the urban surface temperature distribution (e.g.~\cite{Landsberg1979},~\cite{ljungberg1980use} and~\cite{Foster1981}). \\
   With advances in satellite technology, the resolution and data availability increased significantly. 
-  The Landsat program stared in 1975 and with the launch of \textit{Landsat 4} in 1982 thermal infrared data of the whole planet was continuously provided. 
-  The infrared resolution, that allowed pixel sizes between 60 m (\textit{Landsat 7}) and 120 m (\textit{Landsat 4} and \textit{Landsat 5}), allowed investigation of smaller patterns within urban areas.\\
+  The Landsat program started in 1975 and with the launch of \textit{Landsat 4} in 1982 thermal infrared data of the whole planet were continuously provided. 
+  The infrared resolution that allowed pixel sizes between 60 m (\textit{Landsat 7}) and 120 m (\textit{Landsat 4} and \textit{Landsat 5}), made investigations of smaller patterns within urban areas possible.\\
   Many different satellites have been launched since, closing gaps in spectral, spacial and temporal coverage, with different resolutions for different use cases. 
   Relevant for investigation of the urban climate are the ASTER and MODIS instruments on the Terra satellite, providing a high revisit time and are useful for land cover monitoring. 
-  The ASTER instrument provides thermal data with high special resolution and a large dataset was created from ASTER data of the land surface properties (this dataset is used, among other uses, in the creation of the Land Surface Temperature product form the Landsat 8 and 9 satellites)
-  The \glspl{ESA} Copernicus satellites provide high special resolution visible data (Sentinel-2) as well as surface temperature (Sentinel-3). \\
+  The ASTER instrument provides thermal data with high spacial resolution and a large dataset was created from ASTER data of the land surface properties (this dataset is used, among others, in the creation of the Land Surface Temperature product form the Landsat 8 and 9 satellites).
+  The \glspl{ESA} Copernicus satellites provide high spacial resolution visible data (Sentinel-2) as well as surface temperature (Sentinel-3).\\
   %Other satellites, such as Terra with the ASTER instrument with visible and thermal images, Sentinel-2 providing visible resolution
   \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth]{img/LandsatDataArchiveStatsProductsPerYear.png}
     \caption{Number of Landsat Products per year over time (as of Feb. 2024) by the \gls{USGS}~\autocite{landsatstats}\label{fig:landsatproductsovertime}}
   \end{figure}
-  The increased revisit frequency of roughly two weeks made remote satellite data a more useful and widely used tool in the research of urban meteorology and urban heat islands.
+  \noindent
+  The increased revisit frequency of roughly two weeks made remote satellite data a more useful and widely used tool in the research on urban meteorology and urban heat islands.
   Over the past 30 years, the amount of available remote sensing data skyrocketed, Landsat 8 and 9 alone produced over 6 million images since the start of operation in 2013. \Cref{fig:landsatproductsovertime} shows the number of scenes taken by the Landsat satellites per year.
-  The rise in availability on the one hand makes it easier for researchers and companies to use the data, but requires increased computing and storage availability, to manage the increased data amount.
+  The rise in availability on the one hand makes it easier for researchers and companies to use the data, requiring increased computing and storage availability, to manage the increased data amount.
   This offers the possibility of creating scientific studies covering a wide range of cities over time, using the same sensor and tools. 
-  In~\cite{Sobrino2020} a methodology to compare \glspl{UHI} using \gls{sentinel3} images and conducted a broad study of \glspl{UHI} severity in cities around the world is suggested.
+  In~\cite{Sobrino2020} a methodology to compare \glspl{UHI} using \gls{sentinel3} images was proposed and a broad study of \glspl{UHI} severity in cities around the world was conducted.
   Over the past years the number of scientific papers investigating the issue from multiple angles increased significantly (ct.~\cite[P. 3]{Piracha2022b}).\\
   In conclusion, the advancement of remote sensing technology, particularly the availability of infrared imagers and satellite imagery, has revolutionized the study of \glspl{UHI}. 
   From the early investigations and roots of the field in meteorology and public health the research field expanded touching urban development, climate science, atmospheric chemistry and medicine as well as social sciences.\\
-  The scope of studies from case studies conducted in the 70s to the current abundance of data provided by satellites like Landsat 8 and 9, researchers now have the chance with long duration, high resolution data to analyse urban surface temperature distribution with unprecedented detail and accuracy.
+  The abundance of data provided by satellites like Landsat 8 and 9 now allows researchers to conduct long duration, high resolution studies.
+  Analysing urban surface temperature distribution with unprecedented detail and accuracy.
   The increase in data availability has not only facilitated research on urban meteorology and heat islands but has also presented new challenges in terms of data management and analysis that require the creation of performative analysis software and methods to extract, monitor and analyse urban areas during change.
   Despite these challenges, the potential for conducting comprehensive studies across various cities using consistent sensor data and combining multiple sensor sources allows a deep understanding and continuous monitoring of the urban environment.
   %As demonstrated by studies such as the one conducted by \autocite{Sobrino2020} using Sentinel-3 images, the future of \gls{UHI} research holds promise for gaining deeper insights into the impacts of urbanization on local climate patterns worldwide.
   The coming years promise even more missions that can be used for detecting urban heat islands, with nearly daily coverage and higher spacial resolution (e.g.~ESAs LSTM mission with 50 m resolution and a 4 day revisit time~\cite{CEOS2024}). 
-  Together with fusion approaches to combine different datasets to reduce error and increase spacial resolution (as done in e.g.~\cite{CampsValls2009}), monitoring services, heat warning systems and verification of implemented mitigations in cities by creating long term analysis of urban areas is about to become feasible.
+  Together with fusion approaches to combine different datasets to reduce error and increase spacial resolution (as done in e.g.~\cite{CampsValls2009}), monitoring services, heat warning systems and verification of implemented mitigations in cities by creating long term analysis of urban areas are about to become feasible.
   The next step in advancing the comprehension of \glspl{UHI} involves gaining a deeper understanding of how various parameters contribute to the formation and intensity of \glspl{UHI}.
   With the wider adaption and interest in to the introduction of countermeasures to \glspl{UHI} and climate change resilience techniques in different cities, continuous monitoring of \glspl{UHI} and the urban climate is necessary to judge effectiveness of the taken countermeasures.
   To do this efficiently, statistical parameters and indices are crucial in order to assess the effectiveness of the mitigation strategies. 
@@ -198,6 +202,7 @@
     \item What definition can be used to define \glspl{UHI} comparably?\label{q1}
     \item What is the influence of \gls{LULC} change on the size of urban heat islands?\label{q2}
     \item How significant is the impact of urbanisation on \glspl{UHI}, both in terms of absolute and relative temperature changes?\label{q3}
+      \todo[inline]{remove?}
     \item What is the effect of rising average temperatures on the \glspl{UHI} effect?\label{q4}
     \item What indices can be used or created to categorize and rate \gls{UHI} intensity?\label{q5}
     %\item Is it feasible to model \glspl{UHI} using the identified impacts of temperature and land use change?\label{q6}
@@ -207,7 +212,7 @@
   The goal is to find a definition that allows investigation and detection of \glspl{UHI} in a comparable way, to allow global measurement and comparison between cities and regions.\\ 
   The second and third question investigates the impact urbanisation and surface sealing on the intensity and size of urban heat islands. 
   This can help in urban planning and mitigation of effects of \glspl{UHI} in areas at risk.\\ 
-  The fourth questions goal is to answer how much the rise of local temperature and the global mean temperatures due to climate change is affecting the intensity and size of \gls{UHI} effect in cities.% 
+  The goal of the fourth questions is to answer how much the rise of local temperature and the global mean temperatures due to climate change is affecting the intensity and size of \gls{UHI} effect in cities. 
   %The fifth question aims to provide a methodology and quantify if the \gls{UHI} effect can be modelled and predict the intensity when surface or air temperatures are given. 
   The fifth and last question shall answer what indices that are already given can be used to describe heat islands or if there is the need to create a new index for measuring intensity and human impact of \gls{UHI} effects within cities.
 
@@ -225,19 +230,19 @@
   \subsubsection{Procedure}\label{ssec:procedure} 
     The satellite data (s.~\cref{sec:landsat}) is selected using filters and manual selection to find cloud free images of the area of interest in the time period that was selected for analysis. 
     The dataset is downloaded and the area of interest is extracted to reduce the data footprint.
-    This data set is also used to classify the land cover to allow short term land cover analysis using machine learning algorithms for classification.
+    This dataset is also used to classify the land cover to allow short term land cover analysis using machine learning algorithms for classification.
     For the further analysis a time series of \gls{LULC} is created for selected cities. 
     From the dataset a longitudinal analysis of \glspl{UHI} intensity over time is created.
-    For the select days where satellite cover is available, temperature data and other sources are used to create indices to measure heat stress and other parameters for assessing \glspl{UHI} intensity at the different days.
+    For the selected days where satellite cover is available, temperature data and other sources are used to create indices to measure heat stress and other parameters for assessing \glspl{UHI} intensity at different days.
     This data can then be used to create projections of \glspl{UHI} development based on the findings from \gls{SUHI} measurements and \gls{LULC} analysis.
-    \Cref{sec:pipeline} goes into the processing steps in more detail.
+    \Cref{sec:pipeline} goes into the processing steps in more detail. \todo[inline]{check or change?}
   \subsection{Structure of the Thesis}\label{ssec:structure} 
     In the introduction as well as in \cref{sec:background}, previous work and an overview of the current understanding of the \gls{UHI} effect and research in this area is given. 
     %comparable definition
     \Cref{sec:definition} explains the used adaptation of the proposed methodology by~\cite{Sobrino2020} to create a definition of \glspl{SUHI} that is usable for comparing \glspl{UHI} in different cities.  
     \Cref{sec:LULC} explains how the measurements  and investigations of the impact of \gls{LULC} changes by build up where done.
-    In \Cref{sec:UHITempImp} the impact of changing temperatures an increase of extreme weather phenomena on the intensity and seasonal variety of \glspl{UHI} was investigated. 
-    After these the \cref{sec:conclusion} combines the findings of the previous chapters, shows what other investigations should be investigated further and where the research could be improved. 
+    In \cref{sec:UHITempImp} the impact of changing temperatures an increase of extreme weather phenomena on the intensity and seasonal variety of \glspl{UHI} was investigated. 
+    After these the \cref{sec:conclusion} combines the findings of the previous chapters, shows which further studies could investigate the \gls{UHI} phenomena and where this research could be improved. 
 %
 \newpage
 \section{Background}\label{sec:background}
@@ -255,9 +260,9 @@
     \end{figure}
     Compared to rural areas, the urban environment has additional reflective surfaces, creating additional energy transfer increasing the fraction of the incoming short wave solar radiation that is not reflected back towards the atmosphere \autocite[p.12]{EPA2008}. 
     Due to lower vegetation cover and higher sealed surfaces the amount of latent heat due to evaporation and transpiration is lower.
-    Radiation of infrared radiation can also be trapped within the urban area, especially if the sky view factor is low.\\ 
+    The fraction of infrared radiation that is trapped within the urban area, especially if the sky view factor is low, is higher.\\ 
     An additional influx of thermal energy is anthropogenic emission from industrial production.
-
+    \noindent 
     The guiding equation is the equilibrium of incoming solar radiation and the outgoing upwards radiation. 
     The incoming radiation ($R_n$) is matched by
   \begin{itemize}
@@ -271,27 +276,26 @@
     \begin{equation}\label{equ:radiation}
       R_n + lE + H + S + M = 0
     \end{equation}
-    
-    In rural areas, $lE$ and $M$ are bigger due to vegetation, while the $S$ is terms are larger due to surface properties mentioned above.
-    $H$ depends strongly on urban morphology, so urban or rural have higher sensible heat transfer rates.\\
-    \Cref{ssec:mitigation} shows possibilities to influence the amount of stored energy and influence the rate of evaporation within the urban area.
+    \noindent 
+    In rural areas, $lE$ and $M$ are bigger due to vegetation, while the $S$ term is larger due to surface properties mentioned above.
+    $H$ depends strongly on urban morphology, so urban or rural areas can have higher sensible heat transfer rates.\\
+   % \Cref{ssec:mitigation} shows possibilities to influence the amount of stored energy and influence the rate of evaporation within the urban area.
     % The underlying phenomenon is the change of the energy balance of the earth-atmosphere system and the urban energy sub system, where the external energy inflow is larger then the energy transfer out of the system for a given time\autocite[p. 19]{oke2002boundary}.
     % During a day, during daytime the insolation of any earth surface causes incident radiation is higher then the energy transport by long wave thermal emission and reflection. 
     % During the night the energy is radiated away from the heated surfaces and causes the surfaces to reduce temperature.
     % \begin{equation}
 
     % \end{equation}
-    
+   % 
     Since the phenomenon is known for a long time, mitigation strategies have been proposed to reduce the impact on well-being and intensity of the \glspl{UHI} and are touched upon in \cref{ssec:mitigation}.
     \Cref{sec:definition} will go into more detail of the definition of \glspl{UHI} for comparison within the scope of monitoring and remote sensing. 
     \subsubsection{Atmospheric Urban Heat Islands}\label{sec:at_uhi}
-      Atmospheric \glspl{UHI} is the increased air temperature within an urban area. 
-      This are more dependent on weather and local topology and are in part caused by the slower cooling rate of build up land causing responsible for \glspl{SUHI}.
+      Atmospheric \glspl{UHI} are sections with increased air temperatures within an urban area. 
+      These are more dependent on weather and local topology and are in part caused by the slower cooling rate of build up land, responsible for \glspl{SUHI}.
       %Under certain conditions the increased temperature will form a hot air pocket, that will trap the head and reduce airflow from and to the area. \\
       The main factors in forming \glspl{UHI} is the thermal storage capacity of materials used in urban areas like concrete, asphalt and steel, that have a high heat capacity and heat up quickly during the day and emit the stored thermal energy as sensible heat with a delay (eg.~during the night~\autocite{Ramamurthy2014}).
       High surface sealing and lack of vegetation reduce surface water availability and diminish evaporation and the cooling effect of latent heat causing more thermal energy to be available as sensible heat. 
-    
-      \todo[inline,size=\tiny]{Add diagram for heat transfer over time}
+   % 
       Another factor is the heat produced by human activity such as industrial processes and combustion engines.
       As a consequence of higher temperatures, active cooling devices (such as air conditioners) are more frequently used for buildings and vehicles, converting electrical or chemical energy to thermal energy stored in the urban atmosphere. 
       The emitted thermal energy of these heat pumps further increases the surrounding temperature, reinforcing the effect.
@@ -302,16 +306,16 @@
        The \glspl{SUHI} are a small scale phenomenon that has a high seasonal variability and is most intense in summer.
        \glspl{SUHI} are an important factor for the development of atmospheric \glspl{UHI} due to the following factors:
        \begin{itemize}
-         \item Radiates off the heat during the night, increasing urban air temperature
+         \item Surface material radiates off the stored heat during the night, increasing urban air temperature
          \item Surface types are susceptible to regulatory influence allowing direct implementation of countermeasures by local government and direct action of citizens.
-         \item Surface material is one major factor in the development of \glspl{UHI} shown in \cref{sec:LULC}.
+         \item Surface materials are one major factor in the development of \glspl{UHI} shown in \cref{sec:LULC}.
        \end{itemize}
-       Since atmospheric \glspl{UHI} can not be directly observed using remote sensing data and are therefore not in focus of this work, the terms \gls{UHI} and \glspl{SUHI} are used interchangeably in this document. 
+       Since atmospheric \glspl{UHI} can not be directly observed using remote sensing data and are therefore not in focus of this work, the terms \gls{UHI} and \glspl{SUHI} are used interchangeably in later sections of this document. 
     \newpage
     \subsubsection{Air pollution and Urban Heat Islands}\label{ssec:airpollution}
       Air pollution has been a documented problem for the quality of life since the start of the industrialisation. 
-      While in the 19th and first halve of the 20th century the major problem came from unfiltered exhaust of the burning of coal and wood for heating and heavy industry.
-      The major pollutants in urban areas in the 21st come from car exhaust, industrial processes and by-products of industrial Agricultural~(\cite{Leung2015} and~\cite{McDuffie2021}).
+      While in the 19th and first half of the 20th century the major problem came from unfiltered exhaust, burning coal and wood for heating and heavy industry.
+      The major pollutants in urban areas in the 21st century come from car exhaust, industrial processes and by-products of industrial agriculture~(\cite{Leung2015} and~\cite{McDuffie2021}).
       Especially large urbanized areas are susceptible to air pollution due to increased concentration of combustion and industrial activity on a small area \autocite{Kanakidou2011}.
       One major pollutant with a significant health impact is tropospheric ozone, that is produced in larger quantities within environments with elevated temperature (see~\cite{Ebi2008}). \\
       \begin{wrapfigure}{r}{0.5\textwidth}
@@ -323,12 +327,13 @@
       \end{wrapfigure}
       Ozone in the troposphere is mainly produced when (anthropogenic) NO\textsubscript{x} emissions from fossil fuel burning and \glspl{VOC} from anthropogenic or natural sources react with oxygen under UV influence in a photochemical reaction.
       The creation of ozone is dependent on UV intensity (and therefore insolation) and temperature, increasing between 2.2 and 3.2 ppbv/°C depending on NO\textsubscript{x} and \glspl{VOC} availability. 
-      Recent studies found that reduction NO\textsubscript{x} and \glspl{VOC} concentration, reduces O\textsubscript{3} temperature dependence (\cite{Otero2021}).
+      Recent studies found that reduction of NO\textsubscript{x} and \glspl{VOC} concentration, reduces O\textsubscript{3} temperature dependence (\cite{Otero2021}).
       Sources of \glspl{VOC} are mainly of natural origin~\autocite{Kansal2009}, anthropogenic sources are vapours and fumes from solvents and mainly originate from industrial processes while the main natural source of \glsps{VOC} are trees.
       Trees and other plants release VOCs like isoprene and terpenes as a protective mechanism against temperature stress and to protect from insects and pests. 
-      The use of these \glspl{VOC} for trees varies over the year and this gives the \gls{VOC} and the resulting O\textsubscript{3} emission a high seasonal variability. 
+      The usefulness of these \glspl{VOC} for trees varies over the year.
+      This gives the \gls{VOC} and the resulting O\textsubscript{3} emission a high seasonal variability (see \cref{fig:tempVOC}). 
       %
-      The resulting tropospheric ozone, that is major health concern that is directly toxic to humans and is shown to cause lung damage by oxidative stress in the lung lining tissue (see~\cite{Mudway2000}). 
+      The resulting tropospheric ozone, is a major health concern, it is directly toxic to humans and is shown to cause lung damage by oxidative stress in the lung lining tissue (see~\cite{Mudway2000}). 
       With rising global temperatures the number of days with temperatures causing heat stress in trees (e.g.\ with a temperature above 30~°C shown in \cref{fig:tempVOC}) has been increasing even at higher latitudes (~\cref{fig:ubaTemps} shows the German average of days exceeding 30 °C growing from 1950 from an average of 5 to 11.3 in 2023).
       \begin{figure}[htbp]
        \begin{center}
@@ -336,31 +341,35 @@
        \end{center}
        \caption{Days with a maximum temperature of more then 30 °C in Germany~\autocite[Reprinted from]{Wilke2023}\label{fig:ubaTemps}}
       \end{figure}
-      Due to the effect of Urban heat islands that causes a further increase in temperature within urban areas, there is an expected increase of tropospheric ozone due to higher \glspl{VOC} emission from urban and sub-urban trees and higher reaction rates in densely populated areas. 
+      Due to the effect of \glspl{UHI} causing a further increase in temperature within urban areas, there is an expected increase of tropospheric ozone levels due to higher \glspl{VOC} emission from urban and sub-urban trees due. 
       This increases air pollution increases mortality and causes other negative health consequences within urban areas (shown in~\cite{Ebi2008}).\\ 
       Studies have shown, that reduction of \glspl{UHI} by urban greening reduces the amount of ozone by 5--8\% \autocite[p.209]{Fallmann2016}. 
       %
     \subsubsection{Mitigation techniques for Urban Heat Islands}\label{ssec:mitigation}
-      There are multiple adverse effects and possible mitigation techniques for the reduction of \glspl{UHI} (e.g.~\cite{Nichol1994} and~\cite{Stewart2011}) some of these are natural phenomena. % list studies.  . 
-      Advective cooling can be observed when the temperature gradient generated airflow from the cooler surrounding areas towards the hot areas within the city, cooling it down according to the second law of thermodynamics~\autocite{HaegerEugensson1999}. \\
-      Urban areas with no close water body  and with lower average wind speed are more likely to be affected by urban heat islands~\autocite{Ramamurthy2017}, since water reduces severity of heating by sea breezes as well as latent heat transport and acts as a thermal capacity dampening heating effects. 
-      Higher temperatures due to \glspl{UHI} cause stress to animals and humans increasing health risk due to heat stroke and increased surface level ozone concentration~(see~\cite{Santamouris2020}).%
-      The attempt to reduce urban heat build-up and the associated heat related health problems in cities is older then scientific work on this field of study. 
-      In hot areas around the globe different methods where used to create spaces with cooler temperatures for rest and work. 
-      All over the Mediterranean houses are painted white to increase albedo of house surfaces, increasing heat build-up. 
+      There are multiple adverse effects and possible mitigation techniques for the reduction of \glspl{UHI} (e.g.~\cite{Nichol1994} and~\cite{Stewart2011}) some of which are natural phenomena. % list studies.  . 
+      Advective cooling can be observed when the temperature gradient generates airflow from the cooler surrounding areas towards the hot areas within the city, cooling it down according to the second law of thermodynamics~\autocite{HaegerEugensson1999}. \\
+      Urban areas with no close water body  and with low average wind speed are more likely to be affected by urban heat islands~\autocite{Ramamurthy2017}. 
+      Since water reduces the severity of heating, due to sea breezes as well as latent heat transport and acts as a thermal capacity, dampening heating effects. 
+      Higher temperatures due to \glspl{UHI} cause stress to animals and humans, increasing health risks due to heat stroke and increased surface level ozone concentration~(see~\cite{Santamouris2020}).\\
+      The attempt to reduce urban heat build-up and the associated heat related health problems in cities is older than scientific work on this field of study. 
+      In hot areas around the globe different methods were used to create spaces with cooler temperatures for rest and work. 
+      All over the Mediterranean, houses are painted white to increase albedo of roof surfaces, decreasing heat build-up. 
       In newer studies, this traditional painting pattern has shown to be an efficient counter to high solar intensities \autocite{Fayad2021}.
       % Many cultures use passive cooling  roofs TODO find paper also passive ventilation and such 
       Another method of larger scale cooling is the increase of vegetation to increase latent heat transport and water availability.
-      Two basic physical principles make water a well suited for cooling and energy transfer.
-      Water has a latent heat of vaporization of $2440 kJ\cdot \text{kg}^-1 \text{at} 25$ \textdegree\ C and the capacity of water vapor in higher temperature air is increasing exponentially.
-      Saturation vapor concentration increases from $\approx17.5 \text{g}\cdot \text{m}^-3$ at 20 \textdegree\ C  to $\approx 52 \text{g}\cdot \text{m}^-3$ at 40 \textdegree\ C.
-      This means that, given surface water availability high amounts of water can be vaporized and will carry away higher amounts of thermal energy in higher temperature condition, cooling down the surrounding area. 
-      Active evaporative cooling is used and studied in arid climates for the past decades, showing effective at low air humidity providing 10 to 15 K cooling during high heat hours~\autocite{Vanos2022}.
+      Two basic physical principles make water well suited for cooling and energy transfer.
+      Water has a latent heat of vaporization of $2440 kJ\cdot \text{kg}^{-1} \text{ at } 25$ \textdegree\ C and the capacity of water vapor in higher temperature air is increasing exponentially.
+      Saturation vapor concentration increases from $\approx17.5 \text{g}\cdot \text{m}^{-3}$ at 20 \textdegree\ C  to $\approx 52 \text{g}\cdot \text{m}^{-3}$ at 40 \textdegree\ C.
+      This means that, given surface water availability, high amounts of water can be vaporized and will carry away higher amounts of thermal energy in higher temperature condition.
+      Reducing temperature in the surrounding area. 
+      Active evaporative cooling was used and studied in arid climates over the past decades, showing effective at low air humidity providing 10 to 15 K cooling during high heat hours~\autocite{Vanos2022}.
       %
-      While high relative humidity at high temperatures has significant health risks (see \cref{sec:heatIndex}) increases in air humidity reduces temperature.
-      \Cite{Pontes2022} developed a comfort zone based on the Heat Index, field measurements and previous research in a similar direction, this could be used to find an optimum between increase in relative humidity and air temperature e.g.\ by limiting the use of moisture based active cooling or adding evaporation control covers as it is already shown effective in areas with high insolation~\cite{Ghazvinian2021}.\\
+      While high relative humidity, at high temperatures, has significant health risks (see \cref{sec:heatIndex}), evaporation reduces temperature.
+      \Cite{Pontes2022} developed a comfort zone, based on the Heat Index, founded on field measurements and previous research. 
+      This could be used to find an optimum between increase in relative humidity and air temperature e.g.\ by limiting the use of moisture based active cooling or adding evaporation control covers as already shown effective in areas with high insolation~\cite{Ghazvinian2021}.\\
       Green roof concepts, green facades, parks or street trees all show effective in reducing temperatures within the urban environment (see~\cite{Ramamurthy2014, Feyisa2014, Dimoudi2003, Gartland2008}).
-      The study by~\cite{Fallmann2016} mentioned in \cref{ssec:airpollution} also showed that urban greening has a beneficial effect compared to high reflective surfaces, due to the increase in back scattering of high energy radiation crating ozone during high insolation.
+      The study by~\cite{Fallmann2016} mentioned in \cref{ssec:airpollution} also showed that urban greening has a more beneficial effect compared to high reflective surfaces. 
+      Due to the increase in back scattering of high energy radiation of reflective surfaces, ozone is created during high insolation, providing additional health risks.
       The same simulation showed that urban greening can limit boundary layer mixing due to reduced thermal updraft caused by lower turbulent kinetic energy, increasing pollution levels at street level.
       This problem can be solved by employment of established methods for reduction in urban pollution, e.g.\ increase of public transport and regulation or taxation for high pollution vehicles and industries. \\
       Adding water bodies inside the city as well as ``sponge-city''-concepts are also promising approaches to mitigate heat islands (\cite{He2019}).
@@ -375,10 +384,10 @@
       \end{figure}
       \noindent
       Using remote sensing data to detect and analyse \gls{SUHI} requires devices that are able to detect thermal infrared radiation. 
-      Satellites that are equipped with thermal infrared sensors that are able to detect upwelling emission from the surface temperature within the $ 8\mu m < \lambda < 12\ \mu m $ range. 
+      Satellites that are equipped with thermal infrared sensors, are able to detect upwelling emission from the surface within the $ 8\mu\ m < \lambda < 12\ \mu m $ range. 
       Instruments that were previously used for measuring \glspl{UHI} are Landsat, MODIS, ASTER and Sentinel-3. 
-      In the following steps data from the Landsat 8 and Landsat 9 satellites was used. 
-      Landsat 8 and Landsat 9 both have a TIRS (Thermal Infrared Sensor) and an OLI (Operational Lands Imager) instrument on board that measure in two and 9 bands respectively.
+      In the following steps data from the Landsat 8 and Landsat 9 satellites were used. 
+      Landsat 8 and Landsat 9 both have a TIRS (Thermal Infrared Sensor) and an OLI (Operational Lands Imager) instrument on board that measure in two and nine bands respectively.
       Since the start of Landsat 9 the availability of scenes increased and the shorter revisit times allow a denser mapping and reduced risk of cloud cover. \\ 
       The OLI covers a wavelength of 0.43 $\mu m$ to 1.83 $\mu m$ separated into 9 bands with a resolution of 30 m per pixel (see \cref{fig:lsspectral}). 
       For the calculation of thermal infrared emission of the Earth's surface the TIRS instrument contains two bands within the thermal infrared covering wavelength between 10.6 $\mu m$ and 12.51 $\mu m$ with a resolution of 100 m.
@@ -397,20 +406,20 @@
        \end{center}
        \caption{Overview of the Urban Atmosphere \autocite[Figure 1]{Fabrizi2010}\label{fig:canopeylayer}}
      \end{figure}
-    The air temperature within the urban area is warmed differently from the air temperature outside the urban area, due to higher thermal mass that buildings and sealed surfaces have and less latent heat transport.
+    The air temperature within the urban area is warmed differently from the air temperature outside the urban area, due to higher thermal mass that buildings and sealed surfaces have and lower latent heat transport.
     %
-    During the day the air temperature is lower then the surface temperature~\autocite{EPA2008}, during the night the hot surfaces radiate off the energy heating the surrounding air.\\
+    During the day the air temperature is lower than the surface temperature~\autocite{EPA2008}, during the night the hot surfaces radiate off the energy heating the surrounding air.\\
     %
     There are multiple additional factors impacting urban air temperature. 
-    Combustion from traffic and industrial processes produce heat as a by-product that heats the surrounding air. 
+    Combustion from traffic and industrial processes produce heat as a by-product heating the surrounding air. 
     HVAC systems also produce heat, when cooling buildings. 
-    This further increases the air temperature increasing cooling need within the urban area, creating a positive feedback loop. 
+    This further increases the air temperature, increasing cooling need within the urban area, creating a positive feedback loop. 
     \input{ndvi}
     \subsubsection{Heat Index}\label{sec:heatIndex}
     The \gls{HI} is a temperature index that takes sultriness into account and rates the impact of temperature and air humidity of the human body. 
     The output of this temperature scale (given in °C) is the apparent temperature, depending on relative air humidity. 
     The defined range is between 20 °C and 50°C dry bulb temperature and up to 90\% relative humidity~\autocite[p. 862]{Steadman1979}. 
-    The \gls{HI} is based on a \textit{model human} and takes wind chill and clothing into account, to produce a apparent temperature of human. 
+    The \gls{HI} is based on a model human and takes wind chill and clothing into account, to produce a apparent temperature of the model human. 
     The \gls{HI} can be used as a good reference for non-extreme conditions. 
     Its biggest downside is the missing account for direct insolation on body temperature and comfort.
     \Cite{Schoen2005} created an polynomial approximation for the heat index table developed by Steadman \autocite{Steadman1979}, with $\pm 0.7$ \textdegree\ C for temperatures above 27 degrees that was used for rating heat island severity.
@@ -419,16 +428,16 @@
       HI = c_1 + c_2 T + c_3 R + c_4 T R + c_5 T^2 + c_6 R^2 + c_7 T^2 R + c_8 T R^2 + c_9 T^2 R^2
     \end{equation}
     with T being the wet bulb globe temperature and R being the relative humidity. 
-    $c_1$ to $c_9$ are factors for correction depending on minimum temperature, wind chill.
-    \todo[inline]{Add c1-c9? }
+    $c_1$ to $c_9$ are factors for correction depending on minimum temperature, wind chill and where taken from \cite[p.3]{h}.
+    \todo[inline]{Add c1-c9? Fix Reference}
     For extreme conditions the \gls{HI} shows an underestimation during heat waves \autocite{Romps2022}, limiting the usefulness for these scenarios.
     %The \gls{HI} later is used to compare different \glspl{UHI} with each other.
   \subsection{Wet Bulb Globe Temperature}
     To account the impact of insolation on the human body and the effect on heat stress exacerbated on the human body when high heat and insolation are present at the same time, the Wet Bulb Globe Temperature was developed. 
     Working under heat stress poses a serious health issue, for this the \gls{WBGT} was defined as EN ISO 7243:2017 (\cite{Iso7243_2017}) as work place safety standard, calculating the thermal load on the human body.
     Heat exchange between the human body and the environment is dominated by evaporation of secreted sweat.
-    The efficiency of this process is determined by the vapor pressure, that is influenced by temperature difference and the humidity difference.
-    The simpler \gls{HI} is a way of calculating this impact while not taking radiant heat into account, the WBGT does incorporated this effect in the calculation.
+    The efficiency of this process is determined by the vapor pressure, that is influenced by the temperature and humidity difference.
+    The simpler \gls{HI} is a way of calculating this impact while not taking radiant heat into account, the WBGT does incorporate this effect into this calculation.
     It was specially developed to help create safety for workers that work long hours outside with little or no shade, like construction or agricultural workers or soldiers.
 \newpage
 \section{Image Processing}\label{sec:imgProcessing}
@@ -441,18 +450,18 @@
     way of extracting patterns and information from the available dataset.\\
     The field of image processing and machine learning has developed a wide range of tools that are used in many different fields over the past decades. 
     \subsection{Machine Learning}\label{sec:ml}
-      The term machine learning describes a sub-set of artificial intelligence research that focuses on algorithms that uses statistical models to find correlations using different weights to approximate data.
-      Machine Learning encompasses a wide range of techniques, including supervised, unsupervised, and reinforcement learning, as well as more specialized topics such as deep learning and symbolic regression\autocite{Rodrigues2023}. 
+      The term machine learning describes a sub-set of artificial intelligence research, focusing on algorithms that use statistical models to find correlations using different weights to approximate data.
+      Machine Learning encompasses a wide range of techniques, including supervised, unsupervised and reinforcement learning, as well as more specialized topics such as deep learning and symbolic regression\autocite{Rodrigues2023}. 
       In the context of remote sensing, machine learning methods have been utilized for tasks such as classification, biomass and soil moisture retrievals, and crop growth monitoring.
       Flexibility and comparably lower computational requirements of machine learning methods allow processing of large amounts of high-dimensional data and handle non-linear problems, enabling efficient analysis of remote sensing data \autocite{Maxwell2018}.\\
-      Physics-Informed Machine Learning, allows integration of base truth to circumvent \textit{hallucinations} or false results, that can occurs in other \gls{ML} techniques and aims to guide machine learning models towards solutions that are physically plausible.
+      Physics-Informed Machine Learning allows integration of base truth to circumvent ``hallucinations'' or false results, that can occur in other \gls{ML} techniques and aims to guide machine learning models towards solutions that are physically plausible.
       Examples of applications of machine learning in physics include system identification, control, and analysis, as well as the development of physics-informed digital twins. 
-      \gls{ML}, offering powerful tools for data analysis, modelling, and gaining deeper understanding of remote sensing and atmospheric research data.
+      \gls{ML}, offering powerful tools for data analysis, modelling and gaining deeper understanding of remote sensing and atmospheric research data.
       These approximations can be stored and be used to detect the same features within new but similar data.
-      For this analysis the K-means algorithm was used. 
+      For this analysis the k-means algorithm was used. 
       In the next sections the image processing steps are described from a technical perspective and the underlying mathematical frameworks are discussed.
     \subsection{Data Processing Pipeline}\label{sec:pipeline}
-      An image or data processing pipeline is a chained list of processing steps, that allows to feed different data through the same algorithm. 
+      An image or data processing pipeline is a chained list of processing steps, allowing to feed different data through the same algorithm. 
       Many different data processing and machine learning \glslowercase{lib} use these to allow flexibility and modularity of the steps in data processing (e.g.\ the used Scikit-Learn~\autocite{scikit-learn}, Keras~\autocite{keras} or Gluon~\autocite{gluon}). 
       The data processing was done using a \textit{scikit-learn} pipeline for data analysis as well as multiple other \glslowercase{lib} listed in \cref{sec:code}.
       In \cref{fig:pipeline} the overview of the different steps within the data processing can be seen.
@@ -477,9 +486,10 @@
        \end{center}
        \caption{Example kernel with 26$\times$26 pixel kernel size}\label{fig:largeKernel}
       \end{wrapfigure}
-      The Gabor filter is an linear filter, that uses a convolution of an image with a wavelet created by rotating a sine modulated Gaussian, this kernel type is also called the \textit{gabor wavelet}.
+      The Gabor filter is a linear filter using a convolution of an image with a wavelet created by rotating a sine modulated Gaussian. 
+      This kernel type is also called the \textit{gabor wavelet}.
       \Cref{fig:largeKernel} shows an example of a single gabor filter kernel.
-      In image processing this algorithm is used as an feature extraction algorithm to extract and analyse texture and structures with different sizes within the image~\autocite{Cerdan1993}. 
+      In image processing, this algorithm is used as a feature extraction algorithm, to extract and analyse texture and structures of different sizes within the image~\autocite{Cerdan1993}. 
       By rotating the kernel and changing the frequency, different textures are extracted from the image.\\
       %
       Mathematically the Gabor-filter is defined by
@@ -492,13 +502,14 @@
         $\boldsymbol{\phi}$ is the angle of phase shift of the sine component of the kernel. \\
         $\boldsymbol{\theta}$ is the angle of rotation of the kernel, detecting differently oriented features.\\
         $\boldsymbol{\lambda}$ is the wavelength of the sine wave. \\
-        $\boldsymbol{\sigma}$ is the standard deviation of the Gaussian distribution\\ \\
+        $\boldsymbol{\sigma}$ is the standard deviation of the Gaussian distribution.\\ \\
       \noindent
       To detect different structures of different scales within the image, a filter bank can be created by combining multiple filters and varying $\phi$, $\sigma$ and $\theta$.\\
       After the convolution of the image with the filter bank, the resulting set of detected features can be used as an input into different algorithms.
-      \Cref{fig:gaborExample} shows the binary output of different kernel sizes and rotations on an satellite image of Bremen. 
-      It can be seen that the different structures such as fields (seen in \cref{fig:feat02} and \cref{fig:feat05}) or larger structures and water bodies (seen in \cref{fig:feat01} and \cref{fig:feat03}).
-      The output of the filter is an tensor that contains a binary image sized matrix per filter. Each layer provides meta information for each pixel, if it is part of a larger scale texture or pattern. 
+      \Cref{fig:gaborExample} shows the binary output of different kernel sizes and rotations on a satellite image of Bremen. 
+      It can be seen that the different structures such as fields (seen in \cref{fig:feat02} and \cref{fig:feat05}) or larger structures and water bodies (seen in \cref{fig:feat01} and \cref{fig:feat03}) are extracted from the image.
+      The output of the filter is an tensor that contains a binary image sized matrix per filter. 
+      Each layer provides meta information for each pixel, if it is part of a larger scale texture or pattern. 
       This meta information is used to add additional features for the surface classification (\cref{sec:classification}) using k-means %(in training) and 
       to allow better classification.%using the random forest model.
       \begin{figure}[!htbp]
@@ -544,7 +555,7 @@
       \subsection{K-Means Clustering}\label{sec:kmeans}
     K-means clustering is an unsupervised machine learning algorithm that is used to partition $n$ observations into $k$ clusters. 
     Each observation belongs to the cluster with the nearest mean, serving as a prototype of the cluster. 
-    This method has many applications in data mining, image processing, and pattern recognition.\\
+    This method has many applications in data mining, image processing and pattern recognition.\\
     The algorithm consists of three steps:
     \begin{enumerate}
         \item \textbf{Initialization}: Choose $k$ initial centroids from the data points.
@@ -566,12 +577,12 @@
     %
     The pre-trained model is stored to disk and can be used to classify similar images again. 
     Since the class labels are not consistently applied, the labels need to be reassigned to the correct cluster.
-    For this the cluster-centres of the clusters from the trained k-means are saved as a array $n$-tuples for each class, where $n$ is the number of features used for training.
+    For this the cluster-centres from the trained k-means are saved as a array of $n$-tuples for each class, where $n$ is the number of features used for training.
     \newpage
     \subsubsection{Label Reassignment}\label{sec:labelassignment}
     The distance from the cluster centres of the initial training dataset and the centres of the newly classified data is calculated. 
-    To get consistent mapping of class names to classification id, the minimal distance is not sufficient since a assignment of multiple classes to one original class be minimal. 
-    To mitigate this issue a \textit{Hungarian Algorithm} is used, minimizing an overlying metric and creating a bijective assignment. 
+    To get consistent mapping of class names to classification id, the minimal distance is not sufficient since an assignment of multiple classes to one original class has to be minimal. 
+    To mitigate this issue the \textit{Hungarian Algorithm} is used, minimizing an overlying metric and creating a bijective assignment. 
     The distances are then minimized using the sum of distances of all cluster centres as optimization metric.
       \begin{equation}
         \min = \sum_{i}\sum_{j} C_{i,j}X_{i,j}
@@ -580,23 +591,25 @@
 \newpage
 \section{Comparable Definition of Urban Heat Islands}\label{sec:definition}
     \subsection{Introduction}
-      The definitions of \glspl{SUHI} in the literature are varying slightly and do not take into account that, most definitions do not allow easy comparison between different areas or times.
+      The definitions of \glspl{SUHI} in literature are varying slightly and do not take into account that most definitions do not allow easy comparison between different areas or times.
       Local studies often use a single reference measurement station and use the absolute temperature difference as a measure of intensity.
-      Other use the surface temperature of surrounding rural areas like forests as a reference.
-      The definition of the U.S.~EPA (~\cite{EPA2008}) and the German Weather Service (\gls{DWD}) both define it as an feature defined by increased temperature between the urbanized areas compared to the surrounding.\\ 
-      Different studies analysing \glspl{UHI} use difference reference temperatures.
+      Others use the surface temperature of surrounding rural areas like forests as a reference.
+      The definition of the U.S.~EPA (~\cite{EPA2008}) and the German Weather Service (\gls{DWD}) both define \gls{SUHI} as an area of increased temperature between the urbanized areas compared to the surrounding.\\ 
+      Different studies analysing \glspl{UHI} use different reference temperatures.
       The first goal of this work is defining a systematic reproducible approach to measure \gls{UHI} intensity.
     \subsection{Approach}
       As a starting point the method of~\cite{Sobrino2020} was adapted, where \gls{SUHI} where compared in different cities around the world using Sentinel-3 images. 
       For each city a buffer zone was calculated around the city border, using the average temperatures of the different areas as a comparison point.
-      This was then used to identify and measure the intensity of the heat islands within the city area.\\ 
+      This was then used to identify and measure the intensity of heat islands within the city area.\\ 
       This work uses the same basic approach but Landsat 8/9 data was used. 
       In~\cite{Sobrino2020} urban adjacent, future urban adjacent and peri-urban areas are defined as buffers.
       These where adapted by removing the urban growth projection (since the scope of the paper was the investigation of \glspl{SUHI} in 2050 that does not match the goal for this work).
       The urban area is identified by detecting land cover classes indicating a larger area of build up classes. 
-      These Areas are then converted into a polygon that are extended by buffer zones as shown in \cref{fig:bufferedBremen}.
-      The classification was done using the same dataset and larger urban areas are removed from within the reference temperature area. For the processing of the images and techniques for surface classification (see \cref{sec:classification}). 
-      Additionally an approach is discussed where the relative (statistical) intensity is used compared to the absolute temperature difference to compensate for seasonal temperature spread within certain areas.
+      These areas are then converted into a polygon that is extended by buffer zones as shown in \cref{fig:bufferedBremen}.
+      The classification was done using the same dataset.
+      Larger urban areas are removed from within the reference temperature area.
+      For the processing of the images and techniques for surface classification see \cref{sec:classification}. 
+      Additionally, an approach is discussed where the relative (statistical) intensity is used compared to the absolute temperature difference to compensate for seasonal temperature spread within certain areas.
       \newpage
     \subsection{Definition of Urban Heat Islands}\label{ssec:definition}
       The following \gls{UHI} definition is proposed and used throughout this document.\\
@@ -605,26 +618,25 @@
       \parbox{\linewidth}{%
         \vspace{0.2cm}
         An \gls{SUHI} is an area with increased surface temperature within an urban space, 
-        where the temperature is at least 3 standard deviations above the average temperature of the urban adjacent rural buffer zone, 
-        corrected for larger settlements. \vspace{0.2cm}
+        where the temperature is at least 3 standard deviations above the average temperature of the urban adjacent rural buffer zone, corrected for larger settlements. 
        }
       }\\ \\
       %
-      For comparability a statistical metric is used, since the absolute intensity as well as the daily temperature spread varies with the seasons \todo[inline,size=\tiny]{source}
-      and is easily altered by water bodies or other thermal masses in the image.\\ 
-      The proposed threshold of at least three standard deviations above the average temperature was chosen since this gave consistent results over the seasons. \todo[inline,size=\tiny]{ verify!}
-      The reference measurement is done using the surface temperature of the peri-urban buffer zone and removing all larger urban areas within it. 
-      This will get rid of other cities or larger industrial sides close to the area of interest.
+      For comparability a statistical metric is used, since the absolute intensity as well as the daily temperature spread varies with the seasons and is easily altered by water bodies or other thermal masses in the image.\\ 
+      The proposed threshold of at least three standard deviations above the average temperature was chosen since this gave consistent results over the seasons. \\
+      The reference measurement is calculated using the surface temperature of the peri-urban buffer zone and removing all larger urban areas within it. 
+      The removal will get rid of the temperature influence of other cities or larger industrial sides close to the area of interest.
       The mean temperature and variation within the peri-urban area is then calculated and used as reference.
       % Assuming that temperature is normal distributed the temperature should lie outside of the 95%ile 
-      Depending on season the temperature distribution will vary, due to the definition using the standard deviation the detection of \glspl{UHI} is coupled to the range of temperatures observed within the image. 
-      During processing single outlier areas as well as clouds, cloud shadows are removed and holes within the urban area are closed, this allows to include parks and other urban green areas to be processed and only includes larger areas of elevated temperatures as urban heat islands. 
+      Depending on the season the temperature distribution will vary.
+      Due to the definition using the standard deviation, the detection of \glspl{UHI} is coupled to the range of temperatures observed within the image. 
+      During processing single outlier areas as well as clouds, cloud shadows are removed.
+      Holes within the urban area are closed, this allows to include parks and other urban green areas to be processed and only includes larger areas of elevated temperatures as urban heat islands. 
       This will increase robustness of \gls{UHI} detection to reduce the influence of single hot surfaces (such as solar panels or industrial tanks) during detection.
-      \todo[inline,size=\tiny]{ normal dist? }
-      \todo[inline,size=\tiny]{ IMAGES for each step / marked with temps to make it easier to understand  }
 
     \subsubsection{Urban Buffer Zones}\label{sec:urbanBufferzone}
-      To generate the different temperature statistics buffer zones must be created, to do this multiple areas are defined using \cref{equ:areas}.
+      To generate the different temperature statistics, buffer zones must be created.
+      This is done by defining multiple areas using \cref{equ:areas}.
       \begin{equation}\label{equ:areas}
         \begin{split}
           W_U = & \frac{A_U^{\frac{1}{2}}}{4} \\
@@ -632,13 +644,13 @@
         \end{split}
       \end{equation}
       Where $A_U$ is the urban area, extracted from the classification (see \cref{sec:urbanAreaExtraction}), $W_U$ is the suburban buffer zone and $W_P$ the peri-urban area.
-      These definitions where used in~\cite{Sobrino2020} and were initially developed in the 90s for modelling urban development and are used in different areas of urban planning and analysis~\autocite[see]{AlkanBala2014}.
+      These definitions were used in~\cite{Sobrino2020} and were initially developed in the 90s for modelling urban development and are used in different areas of urban planning and analysis~\autocite[see]{AlkanBala2014}.
       These models follow the idea that cities have an influence space surrounding them and grow in all directions if not obstructed by borders or natural barriers. 
       The practical implementation used the results of the classification for urban area detection and buffer zone creation and is described in more details in \cref{sec:urbanAreaExtraction}. \\
-      The heat island is then defined as area that is more then $3~\cdot~\sigma$ above the mean temperature of the surrounding area $W_P$, while the surrounding area is defined as a fixed buffer based on the size of the urban area and clean the area of larger settlements. 
+      The heat island is then defined as area that is more then $3\sigma$ above the mean temperature of the surrounding area $W_P$, while the surrounding area is defined as a fixed buffer based on the size of the urban area and clean the area of larger settlements. 
     \subsection{Conclusions}
     The definition of \glspl{UHI} using reference regions and a statistical threshold for identifying areas is a methodology that has multiple advantages compared to using absolute values and single reference points. 
-    The impact of seasonal and geographic variations in temperature spread as well as weather and other metrological effects are reduced, since the peri urban area has a mixed composition. 
+    The impact of seasonal and geographic variations in temperature spread as well as weather and other metereological effects are reduced, since the peri urban area has a mixed composition. 
     \todo[inline,size=\tiny]{ link to the findings later }
     \todo[inline,size=\tiny]{ expand}
 \newpage
@@ -657,6 +669,7 @@
     \newpage
     \subsection{Impact of Land cover/ Surface type on Heat Build-up}
       \begin{wrapfigure}{r}{0.40\textwidth}
+        \vspace{-0.5cm}
         \centering
         \begin{subfigure}[b]{0.38\textwidth}
           \includegraphics[width=\textwidth]{img/Features_swir10.png}
@@ -673,7 +686,7 @@
           \subcaption{Convolution of NIR Band and kernel 6}
         \end{subfigure}
        \caption{Examples of the convolution of different bands and gabor filters\label{fig:gaborresults}}
-       \vspace{-3cm}
+       \vspace{-2.5cm}
       \end{wrapfigure} 
       The change of the urban surface properties is one of the major factors causing \glspl{SUHI}.  
       Multiple studies have shown that land cover has a significant impact on land surface temperature and \glspl{UHI} (e.g.~\cite{Karakus2019},~\cite{Weng2004} and~\cite{Stewart2011}). 
@@ -682,7 +695,7 @@
       %Water and Vegetation have a high emissivity with > 0.9 compared to 0.2 -0.9 of metal, brick, concrete and bare soil. 
       Build up surfaces have lower water availability for evaporation and thus more heat is heating up the material itself.
       Forests and other vegetated areas are permanently cooled by evaporative cooling and transpiration of trees, increasing vapor content and heat capacity of the air.
-      \todo[inline]{maybe elaborate, add emissivity in chapter 1?}
+      \todo[inline]{maybe elaborate}
     \subsubsection{Classification }\label{sec:classification}
       The methodology employed for land cover classification involved the multi-step process utilizing satellite imagery, feature enhancement and machine learning techniques shown in \cref{fig:pipeline} and described in \cref{sec:pipeline}.
       The primary data source for classification were 8-band Landsat images, which provided a comprehensive spectral view of the area to be classified.
@@ -758,11 +771,11 @@
       \caption{Filter bank of 12 gabor filters with 4 rotations and a $\sigma_x=1\ ,\sigma_y = 0.5\ $ and $\ f = 0.15, 0.35 \text{ and } 0.4$\label{fig:gaborbank}}%
     \end{figure}
     \noindent
-    The filter with these kernels act as a edge and structure detection algorithm shown in \cref{fig:gaborresults}, that shows extracted features of some example bands.
+    The filter bank with these kernels act as a edge and structure detection algorithm shown in \cref{fig:gaborresults}, that shows extracted features of some example bands.\\
     In structured areas with fields or buildings on a street raster, the filter amplifies the structures, for smaller structures the filter detects edges for change in building material, due to different reflectivity and response for the different frequency bands. 
     \noindent 
       The result of the convolution of all bands of the image with the gabor filter was then used as feature vector. 
-      By variation of parameters, a minimal error to the reference data was archived using 4 rotations an asymmetric kernel with a 2:1 ratio, two frequencies and two sigma sizes (see below).
+      By variation of parameters, a minimal error to the reference data was archived using 4 rotations an asymmetric kernel with a 2:1 ratio, two frequencies and two sigma sizes (see error calculation below).
       Since the classification was done using a reproducible randomness, the parameters influencing the result where:
       \begin{itemize}
         \item the selected images
@@ -774,19 +787,18 @@
       \begin{equation}
         N_{feat} = |\theta| \cdot |\sigma| \cdot |f| 
       \end{equation}
-      with an increase of any parameter the data set size increased significantly, creating a limit of the parameter variation. 
+      with an increase of any parameter the dataset size increased significantly, creating a limit of the parameter variation. 
     The $1833 \times 1833$ pixel sized image of Bremen (covering a square of $\approx 55$ km around the city centre), has a size of 13 MB per Band\footnote{%
     After feature detection the resulting dataset would be 107 MB per Band resulting in around 1.2 GB for each 8 band Image for each time point within the used classification training dataset.}.
     The optimal sigma was found using systematic variation to be between 1.0 and 1.5. 
     The frequencies of the sine wave where varied between 0.05 and 0.5. 
     A trade-off between computation time and results was found using 3 frequencies shown in \cref{fig:gaborbank}. \\ 
     This step was crucial in extracting and emphasizing spatial patterns and textures, thereby facilitating more distinct classification of land cover types.
-      For classifying surfaces an unsupervised machine learning was used, the number of classes was varied between 8 and 12 classes, giving best results in terms of minimal \gls{MSE} and \gls{SSIM} when using 11 classes.
+      For classifying surfaces the k-means unsupervised machine learning algorithm was used, the number of classes was varied between 8 and 12 classes, giving best results in terms of minimal \gls{MSE} and highest \gls{SSIM} when using 11 classes.
       The quality of the feature vectors was judged by the output of the classification that is covered below. 
-      The feature enhanced data of images of Bremen%, Valencia and TODO 
-      were used of multiple years to create an unsupervised k-means clustering model.\todo[inline,size=\tiny]{ add more }
+      The feature enhanced data of images of Bremen were used of multiple years to create the unsupervised k-means clustering model.\todo[inline,size=\tiny]{add more}
       The classified image has 11 classes that are shown in \cref{tab:land_cover_classes}.
-      \begin{table}[ht]
+      \begin{table}[!htbp]
       \centering
       \renewcommand{\arraystretch}{1.4}
       \caption{Land Cover Classes Identified\label{tab:land_cover_classes}}
@@ -809,26 +821,32 @@
       \end{tabular}
       
       \end{table}
-      \newpage
-    \subsection{Validation of Classification results}\label{sec:references}
+
       \begin{wrapfigure}{l}{0.48\textwidth}
          \begin{center}
          \includegraphics[width=0.46\textwidth]{img/DiffLULC}
        \end{center}
        \caption{Change between reference product and k-means \gls{LULC} classification}\label{fig:lulcDiff}
       \end{wrapfigure}
+      In \cref{fig:lulcDiff} this difference is shown between the 2019 \gls{LULC} and 2022.
+      The major differences are all seen outside of the city area and can be attributed to changes on agricultural land, that is harvested or has a different vegetation type.
+      During the available time neither classification nor reference data showed significant land use changes within the urban area of Bremen. The majority of changes where at the interfaces between two classes that are caused by errors in georeferencing, naturally occurring changes in vegetation growth and uncertainties due to spacial resolution.
+      Due to the missing \gls{LULC} changes within the given time frame, the analysis of the impact of 
+      \newpage
+    \subsection{Validation of Classification results}\label{sec:references}
+      
       % and (only circular kernel where used) with a $\lambda$ of 2 and 4. \todo[inline,size=\tiny]{ check }
       % 
       %After the features were added the data was passed through the trained (random forest model \cref{sec:randomForrest}) for classification. \\
       This model was validated using the Sentinel-2 10 m Land Use/Land Cover product~\autocite{Sentiel10mLULC}. 
-      Since the reference data only uses 8 classes, the used classes where mapped to the best fitting class (indicated in \cref{tab:land_cover_classes}). 
-      Clouds, cloud shadows and snow/ice where not used for verification and removed for the analysis.
+      Since the reference data only uses 8 classes, the used classes where mapped to the best fitting class (as indicated in \cref{tab:land_cover_classes}). 
+      Clouds, cloud shadows and snow/ice where not used for training and verification and removed for the analysis, since reference images do not contain clouds and images were selected to not contain ice, snow and clouds within relevant areas.
       %Since the datasets used for this analysis where selected to have no cloud cover over the analysis area, cloud pixel in the peri urban area where just excluded from the temperature calculation . 
-      The Esri 10m-Land Use Dataset was obtained using the ESRI Land cover explorer~\autocite{Zhang} that was scaled up to the used image resolution. \\
+      The Esri 10m-Land Use Dataset was obtained using the ESRI Land cover explorer~\autocite{Zhang} that was scaled to the 30 m resolution of the Landsat images.\\
       It can be seen from the difference between the \gls{LULC} classification and the main difference in categorization is along the edges between different class patches. 
       This can be explained by differences in the categorization approach, where the reference dataset is using averages for the whole year while the classification for the data is done at a single point in time. 
       This can lead to an over detection of vegetation or water classes due to season or weather impact on the single point in time classification.
-      In \cref{fig:lulcDiff} this difference is shown between the 2019 \gls{LULC} reference and the (filtered) classification of the image taken at the 26-06-2019. \\ 
+      %In \cref{fig:lulcDiff} this difference is shown between the 2019 \gls{LULC} reference and the (filtered) classification of the image taken at the 26-06-2019. \\ 
       % VALIDATION OF CLASSIFICATION
       A simple comparison of difference can be done by calculating the \gls{MSE} for each classification of the image using \cref{equ:mse}, where  $m$ and $n$ are the sizes of the image and reference image respectively. Where I and K images with the pixel values at index i and j. 
       \begin{equation}\label{equ:mse}
@@ -839,9 +857,9 @@
       \begin{equation}\label{equ:ssim}
       SSIM = \frac{(2\mu_{x}\mu_{y}+c_{1})(2\sigma_{xy}+c_{2})}{(\mu_{x}^2+\mu_{y}^2+c_{1})(\sigma_{x}^2\sigma_{y}^2+c_{2})}
       \end{equation}
-      $\mu$ are the mean values of each image, $\sigma$ is the variance of each image and $\sigma_{xy}$ the covariance of each image. $c_{1}$ and $c_{2}$ are stabilizing constants derived from the dynamic range of the image.
+      $\mu$ are the mean values of each image, $\sigma$ is the variance of each image and $\sigma_{xy}$ the covariance of each image. $c_{1}$ and $c_{2}$ are stabilizing constants derived from the dynamic range of the image\cite[Equation 6]{Wang2003}.
       For the SSIM the scikit-image implementation was used \autocite{Walt2014}.
-      \Gls{SSIM} returns a value between 1 (identical images) and -1 (inverted images) with 0 for images with no similarity. 
+      \Gls{SSIM} returns a value between 1 (identical images) and -1 (inverted images) with 0 for images with no similarity \autocite{Wang2003}. 
       The \gls{SSIM} of the images was calculated as 0.98 $\pm 0.001$ showing very high similarity.
 
       %Feeding the enhanced data into the random forests model was then used to determine the land cover classes for the next step of the analysis.
@@ -851,7 +869,7 @@
       %These indices were instrumental in differentiating vegetated areas from built-up regions, thereby aiding in the accurate categorization of land cover types.
       \noindent
       The classification labels were assigned based on the proximity of the cluster centres of the trainings data to the cluster centres of the K-means fit (see \cref{sec:labelassignment}).
-      This approach ensured that each land cover class was consistently labelled independent of the study area.\\
+      This approach ensured that each land cover class was consistently labelled independent of the study area.
     %
     \subsubsection{Urban Area Extraction}\label{sec:urbanAreaExtraction}
       The resulting classified image was then processed to extract urban areas.
@@ -862,14 +880,23 @@
       After this preprocessing step the areas are enumerated and all areas that cover at least 1\% of the image area where used to create buffer zones. 
       Buffer zones where defined as described in \cref{sec:urbanBufferzone}. 
       The result for this for the urban area of Bremen can be seen in \cref{fig:bufferedBremen}.\\
-      \begin{figure}
+      \begin{figure}[!htbp]
         \includegraphics[width=\textwidth]{img/UrbanAreaBremen.png}
         \caption{Urban Area of Bremen, with buffer zones for Adjacent and Peri Urban Area\label{fig:bufferedBremen}}
       \end{figure}
+      For comparison the same buffer zones for a smaller urban area in the same image can be seen in \cref{fig:appxStuhr}
+      
     \subsection{Analysis}\label{sec:landcoverAnalysis} 
-      The results of the clustering shown in \cref{fig:ndvilst01} and \cref{fig:ndvilst02} show the different pixel values and the measured LST and NDVI values. 
+      The results of this classification can be seen in \cref{fig:classification}. 
+      \begin{figure}[!htbp]
+       \begin{center}
+         \includegraphics[width=\textwidth]{img/Classification.png}
+       \end{center}
+       \caption{Classification result}\label{fig:classification}
+      \end{figure}
+      In \cref{fig:ndvilst01} and \cref{fig:ndvilst02} the different pixel values and the measured LST and NDVI values are plotted of the classified results. 
       Especially the \textit{Water} and \textit{Dense Vegetation} classes are distinctly separated from the rest of the clusters. 
-      The scatter plot also shows that the principle components of the classifications are not simply NDVI and LST but higher order feature dimentions play a significant role in separation of classes. 
+      The scatter plot also shows that the principle components of the classifications are not simply \gls{NDVI} and \gls{LST} but higher order feature dimensions play a significant role in separation of classes. 
       % 
       \begin{figure}[!htbp]
       \begin{subfigure}[b]{\textwidth}
@@ -885,7 +912,6 @@
       \caption{Result of clustering plotted with \gls{NDVI} and \gls{LST} values and cluster centres (coloured squares)\label{fig:kmeansclusters}}
       \end{figure}
 
-     \todo[inline]{explain correlation of clusters, what can be seen}
       The urban area shown in \cref{fig:bufferedBremen} yielded a usable output shape following the Bremen city borders, this was manually verified using the visible images and third party visible satellite images. 
       \Cref{fig:classesPeri} shows the classification of pixels within the peri urban area.
       It can be seen, that the pixel the peri urban area has a mixed surface classes dominated by vegetation classes. 
@@ -937,7 +963,7 @@
        \end{landscape}
        \Cref{fig:ndviclusters2019} and \cref{fig:ndviclusters2022} shows the NDVI values of the same classes.
        One unexpected observation is the wide spread of the water class over the whole range of the NDVI, where it is expected to be $\le$ 0. 
-       This can be explained when looking at the feature images showing that the highly vegetated riverbank areas are also classified as water based on the additional feature images, changing the NDVI of this class.
+       This can be explained when looking at the feature images showing that the highly vegetated riverbank areas are also classified as water based on the additional features, changing the NDVI of this class.
        %and overlaying the classification with a visible image.
        \begin{landscape}
          \begin{figure}[!p]
@@ -955,8 +981,13 @@
 
        \todo[inline]{explain violin charts} 
       \noindent
-      To calculate the diff between \gls{LULC} at different points in time, a median filter is applied to reduce
+      To calculate the diff between \gls{LULC} at different points in time, a median filter is applied to reduce single pixel changes at class interfaces.
+       \todo[inline]{add violin with class differences } 
+
+
       %After referencing the  data it was shown that there where no significant LULC changes within the city area of Bremen.  
+    Industrial and sealed surfaces are the most common class found within areas affected by \gls{UHI}.
+    No \glspl{UHI} where dominated by any class associated with high vegetation. 
       
  \subsection{Conclusions}
 
@@ -970,6 +1001,12 @@
     One way of increasing accuracy of the results is an increase in resolution, that allows the gabor filter bank to have a wider range for usable values. 
     In \cref{fig:gaborbank} it can be seen that the first kernel of each rotation is nearly identical, due to to missing resolution. 
     This would allow to detect smaller features.
+    Another improvement might be the implementation of weights for the feature and original image values.
+    Due to the missing changes within the image time frame no impact on the urban heat islands within Bremen due to urbanization or construction can be seen. 
+    The analysis of the classes dominant in the \gls{UHI} clearly show that the surface type does have an significant influence on the creation of urban heat islands. 
+    Industrial and sealed surfaces are the most common class found within areas affected by \gls{UHI}.
+    No \glspl{UHI} where dominated by any class associated with high vegetation. 
+    
     %TODO maybe add check if really identical or off by a bit
     
   \newpage
@@ -1005,7 +1042,7 @@
     \subsubsection{Data Handling}
       One of the challenges that arised during the processing of multiple images where the large amount of data of the images (each fully loaded image with all 11 bands including classification is around 1.5 GB).
       To reduce the memory footprint of the processing chain, xarray \autocite{hoyer2017xarray} was used. 
-      Xarray allows lazy loading from disk, this only loads parts of the complete data set. 
+      Xarray allows lazy loading from disk, this only loads parts of the complete dataset. 
       Another feature of xarray that was used are labelled data. Each loaded image used latitude and longitude as coordinates allowing to accessing sub areas by reference coordinates. 
       Another axis was added for the time dimension, so that each area could be stored in a single data file, but access is done loading only the relevant data for a specific time or a selected time frame.
   
@@ -1046,7 +1083,7 @@
       %#Using the~\autocite{wetterdienst2024} library, that allows locating the nearest weather station having sufficiently high resolution weather data. 
       One indicator interesting in the research on \glspl{UHI} is the number of days with high temperature.
       There are multiple threshold days that are used to classify seasons in comparison to the average.
-      Hot days (defined by the \gls{DWD} as days with a maximum temperature over 30 °C), summer days (maximum temperature over 25 °C) and tropical nights (days with daily minimal temperature over 20 °C), are tracked by metrological organisations~\autocite{dwdklimalexikon}.
+      Hot days (defined by the \gls{DWD} as days with a maximum temperature over 30 °C), summer days (maximum temperature over 25 °C) and tropical nights (days with daily minimal temperature over 20 °C), are tracked by meteorological organisations~\autocite{dwdklimalexikon}.
       Another measurement to visualize a rise in average temperature is the amount of frost days (where the minimal temperature is below 0 °C). 
     \subsection{Analysis}\label{sec:tempanalysis}
     %\subsubsection{Bremen}
@@ -1139,7 +1176,7 @@
       \Cref{fig:AnalysisBre} shows two summer days in Bremen with different temperatures and the influence of temperature onto the \glspl{UHI} size and shapes. 
       In the image from 2019 (\cref{fig:uhis2019}), the average temperature was much higher at the time. 
       It can be seen that the heat islands, while statistically the same difference to the peri urban temperature, increase in size and combine into larger structures. 
-      In \cref{tab:UHIBremenStats} the statistical properties of the \gls{UHI} for the days are shown.
+      In \cref{tab:UHIBremenStats} the statistical properties of the \gls{UHI} for different days within the urban area is shown.
 %   
 \begin{landscape}
   \begin{table}[ht]
@@ -1155,8 +1192,8 @@
                                                    & $T_{\min}$ & $T_{mean}$ & $T_{\max}$ & $T_{\min}$ & $T_{mean}$ & $T_{\max}$ & & 
       $T_{\min}$ & $T_{mean}$ (std) & $T_{\max}$ & Num. UHIs & $T_{\min}$ & $T_{mean} (std)$ & $T_{\max}$ \\
       \midrule
-      2022--06--21 & 6.9  & 15.7 & 22.3 & 7.6 & 15.6 & 23.0 & -1.0 & 4.4 & 29.0 (4.4) & 56.7 & 39 & 4.7& 29.7 (4.4)& 56.7 \\
-      2019--06--29 & 15.9 & 24.7 & 31.9 & 17.7 & 25.4 & 30.7 & -0.7 & 22.9 & 34.2 (3.5) & 61.4 & 120 & 22.92 & 35.2(3.77) & 61.4 \\
+      2019--06--29 & 15.9 & 24.7 & 31.9 & 17.7 & 25.4 & 30.7 & -0.7 & 22.9 & 34.2 (3.5) & 61.4 & 102 & 22.92 & 35.2(3.77) & 61.4 \\
+      2022--06--21 & 6.9  & 15.7 & 22.3 & 7.6 & 15.6 & 23.0 & -1.0 & 4.4 & 29.0 (4.4) & 56.7 & 34 & 4.7& 29.7 (4.4)& 56.7 \\
       %.... TBC & & & & & & & & & &&&&&\\
       \bottomrule
     \end{tabular}
@@ -1170,19 +1207,49 @@
         \toprule
         \textbf{Date}& Number UHIs & min area [$m^2$]& mean area [$m^2$]& max area [$m^2$]& $\text{UHI}_{\text{max}}~\text{T}_{mean}$ [°C]& $\text{UHI}_{max}~T_{max}$ [°C]\\
              \midrule
-        2022--06--21 & 135 & 4500 & 77440 & 1199700  & 47.45 & 52.00 \\ 
-        2019--06--29 &  45 & 4500 & 50900 &  390600  & 46.28 & 51.60 \\
+        2019--06--29 & 102 & 4500 & 74691 & 962100  & 47.7 & 52.0 \\
+        2022--06--21 & 34 & 4500   & 58950 & 370800  & 46.4 & 51.6 \\ 
         %.... TBC & & & & & & & & & &&&&&\\
         \bottomrule
       \end{tabular}
     \end{table}
 \end{landscape}
-  
+      \begin{wrapfigure}{r}{0.5\textwidth}
+        \vspace{-1cm}
+         \begin{center}
+         \includegraphics[width=0.48\textwidth]{img/sizeVsTempmax2019-06-29 00:00:00.png}
+       \end{center}
+       \caption{Maximum Temperatures of the detected \glspl{UHI} and area above threshold}\label{fig:tempvssize}
+      \end{wrapfigure}
+    
+    The analysis of the \glspl{UHI} at the analysed dates, shows a strong increase in maximum and average heat island size, with rising temperatures. 
+    \Glspl{UHI} smaller then 5 pixel (4500 m$^2$) where excluded, to mitigate impact of outliers. 
+    \Cref{fig:tempvssize} shows the distribution of sizes and maximum temperatures within the \gls{UHI}.
+    Most heat islands are small with a wide range of temperatures, the few very big heat islands are within the mid range of temperatures. 
+  \todo[inline]{.... more findings?}
+    
+
+     
   %
 \newpage
 \section{Conclusion}\label{sec:conclusion}
+    Due to the limited remote sensing data availability at summer dates with similar weather, statistical analysis is not conclusive. 
+    There is an increase in number, mean size and maximum size visible with rising average temperatures. 
+    The maximum temperatures are very similar and do not increase linearly with average temperatures. 
+
     
+    Analysing each \gls{UHI} for more parameter and using measurements from different sources, e.g.\ ground measurement campaigns to refine and verify measurements.
+    The data indicates size increases of \glspl{SUHI} with rising temperatures, due to lack of measurement stations there is no data on the impact of the inner city air temperature distribution.
+    The use of indices like the \gls{HI} (see \cref{sec:heatIndex}) are useful tools 
 \subsection{Summary}
+    The study shows that even in higher latitudes the surface temperatures caused by anthropogenic surface modification causes high surface temperatures. 
+    The impact of climate change indicates an increase of hot days and tropical nights in temperate climate zones, increasing the risk of negative health effects and dangerous air temperatures during summer and heat waves.\\% 
+    It was also shown that Landsat data can independently be used for surface classification with high accuracy compared for single day classification, when combined with feature engineering such as gabor filters using unsupervised machine learning.
+    At time of the study the availability of cloud free remote sensing data posed a severe hurdle. 
+    The proposed statistical definition could be helpful to compare \glspl{UHI} in different climate zones and seasons. 
+    Urban area extraction, adapted from the suggestion of~\cite{Sobrino2020} approach, has shown to follow the natural borders of the city well.
+  \todo[inline]{final sentence}
+    
 
 % Summary of the findings 
 % contributions to research
@@ -1213,10 +1280,15 @@ It has was developed with adaptability in mind so that the
   \begin{itemize}
     \item OpenAIs ChatGPT \autocite{chatgpt} for aid during programming, help with formulations, getting topic overviews and aid in finding keywords for further research.
     \item Kagi's summerizer \autocite{kagi}, to deem papers relevant.
-    \item scienceOS \autocite{scienceOS} to find research papers for topics and questions. 
+    \item scienceOS \autocite{scienceos} to find research papers for topics and questions. 
     \end{itemize}
     All informations from these tools where used as an aid and where always cross-checked with primary sources. 
   \subsection{Additional Figures}
+    \begin{figure}[!htbp]
+        \includegraphics[width=\textwidth]{img/UrbanAreaStuhr.png}
+        \caption{Urban Area of Stuhr near Bremen, with buffer zones for Adjacent and Peri Urban Area\label{fig:appxStuhr}}
+    \end{figure}
+
   \missingfigure{}
   \subsection{Content of the Data Storage device}
     All data and the software used to create the figures and images for this document are available on the storage device.
@@ -1227,9 +1299,19 @@ It has was developed with adaptability in mind so that the
     The data is stored in multiple subfolders. 
     The \texttt{Data} folder contains the different cities as subfolders, within each of these folders, there is a \texttt{dataset} folder, containing a \texttt{xarray} dataset named \textit{dataXarrayCITY\_NAME.nc} of the used area of interest, including all bands and the classifiction at all times analysed during this project. 
     The \texttt{dataXarrayCITY\_NAME\_feat.nc} contains the extracted feature bands from the gabor feature extraction.
-    The \texttt{ML\_Model} folder contains a ``pickeled'' k-means model, a file containing a numpy array with cluster centres for the label assignment and the random forest model. \todo[inline,size=\tiny]{CHECK for rf}
+    The \texttt{ML\_Model} folder contains a ``pickeled'' k-means model, a file containing a numpy array with cluster centres for the label assignment. 
   \subsubsection{Code}\label{sec:code}
       The folder app contains the python code used for generating the data, the documentation of the code is located within the doc folder.
+      The main.py is documented using the --help option. This file provides download and classification of Landsat data.\\ 
+      The LST2.py file can be run to detect urban heat islands when the classification was done previously. 
+      The integration of this part into the main.py functionality is still outstanding. 
+      The following folder structure was used for the code artefacts:
+      \begin{itemize}
+        \item The main folder contains scripts that run and process data directly
+        \item The folder \textit{preprocessing} contains scripts for processing and preparing land sat images
+        \item The \textit{processing} folder contains scripts to calculate different indices and prepare the surface classification of the Landsat Data
+        \item The \textit{visualisation} folder contains helper functions for plotting images 
+      \end{itemize}
   %
   %
 \newpage
@@ -1239,7 +1321,6 @@ It has was developed with adaptability in mind so that the
 \newgeometry{top=2cm, bottom=2cm, left=2cm, right=2cm, head=18pt}
 \addcontentsline{toc}{section}{\nameref{sec:eigenstaendigkeit}}
 \section*{Eigenständigkeitserklärung}\label{sec:eigenstaendigkeit}
-%\todo[inline]{make it two figures with includegraphics instead of includepdf}
 \begin{figure}[!b]
     \includegraphics[width=0.92\textwidth,page=1]{res/eigenstaendigkeitserklaerung_f.pdf}
 \end{figure}

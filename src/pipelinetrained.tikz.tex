@@ -1,6 +1,6 @@
 \begin{tikzpicture}[node distance=2cm, auto, scale=.5, on grid]
   \node (start) [startstop, text width =0.7\textwidth] {Start};
-  \node (input) [io, below of=start, text width =0.6\textwidth]{Landsat 8\& 9 Image};
+  \node (input) [io, below of=start, text width =0.6\textwidth]{Landsat 8\ \& 9 Image};
   \node (cut) [process, below of=input, text width = 0.9\textwidth]{Cut to AOI};
   \node (features) [process, below of=cut, text width = 0.9\textwidth]{Gabor Feature Extraction};
   \node (kmeans) [process, below of=features, text width = 0.9\textwidth]{Surface Classification \\using the pre-trained model};
