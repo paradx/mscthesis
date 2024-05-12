@@ -27,23 +27,23 @@
 %\defaultfontfeatures{Ligatures=TeX}
 %\setsansfont{Calibri}
 %\setmainfont{Times New Roman}
-\renewcommand\sectionmark[1]{\markright{\MakeMarkcase {\thesection\hskip .5em\relax#1}}}
+\renewcommand\sectionmark[1]{\markright{\MakeUppercase {\thesection\hskip .5em\relax#1}}}
 \ihead*{}%\leftmark}
 \ohead*{\rightmark}
 \chead{}
 
 \cfoot[]{}
-\ifoot[Linus Andrae]{Linus Andrae}
+\ifoot[]{}
 \ofoot[\thepage]{\thepage}%\ of \pageref*{LastPage}]{\thepage \ of \pageref*{LastPage}}
 
 
 % Set page size and margins
-\usepackage[top=2cm,
-            bottom=2cm,
+\usepackage[top=2.5cm,
+            bottom=2.2cm,
             left=3.5cm,
-            right=3cm,
-            headsep=18pt,
-            headheight= 2cm,
+            right=2cm,
+            %headsep=18pt,
+            %headheight= 2cm,
             ]{geometry}
 %% images
 \usepackage{graphicx}
@@ -65,7 +65,7 @@
 %% links and refs and citations 
 \usepackage{setspace}
 \usepackage[colorlinks=true, allcolors=black]{hyperref}
-\usepackage{cleveref}
+\usepackage[nameinlink]{cleveref}
 % make figures always uppercase
 \crefname{figure}{Figure}{Figures}
 \usepackage[backend=biber, style=authoryear-comp]{biblatex} %% alphabetic

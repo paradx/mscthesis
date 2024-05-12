@@ -1,8 +1,6 @@
 %FOR DESKTOP READING 
-%\documentclass[12pt,a4paper, english]{article}
+%\documentclass[12pt,a4paper, english,twoside]{scrartcl}
 % FOR PRINTING 
-%\documentclass[12pt,a4paper, english,twoside]{scrreprt}
-%\documentclass[12pt,a4paper, english,twoside]{article}
 \documentclass[12pt,a4paper, english,twoside]{scrartcl}
    
 \input{res/settings.tex} % all the packets and such
@@ -663,29 +661,29 @@
       Followed by how \gls{LULC} can be detected using Landsat data and how surface classification was done within this work. 
       \\
       This section then goes into detail how the classification of land cover was conducted using Landsat 8 and 9 images, the analysis of spatial and temporal patterns of \glspl{UHI} in relation to the detected land cover classes follows.
-      To answer the question (\creflabelformat{Question}{q2}) of the influence of land cover change on intensity and size of \glspl{UHI}, statistical analysis is conducted on the \glspl{UHI} within the area of Bremen. \\
+      To answer the question \labelcref{q2} of the influence of land cover change on intensity and size of \glspl{UHI}, statistical analysis is conducted on the \glspl{UHI} within the area of Bremen. \\
     \newpage
     \subsection{Impact of Land Cover/ Surface Type on Heat Build-up}
-      \begin{wrapfigure}{r}{0.40\textwidth}
-        \vspace{-0.5cm}
-        \centering
-        \begin{subfigure}[b]{0.38\textwidth}
-          \includegraphics[width=\textwidth]{img/Features_swir10.png}
-          \subcaption{Convolution of SWIR Band and kernel 10}
-        \end{subfigure}
+      %\begin{wrapfigure}{r}{0.40\textwidth}
+      %  \vspace{-0.7cm}
+      %  \centering
+      %  \begin{subfigure}[b]{0.38\textwidth}
+      %    \includegraphics[width=\textwidth]{img/Features_swir10.png}
+      %    \subcaption{Convolution of SWIR Band and kernel 10}
+      %  \end{subfigure}
 
-        \begin{subfigure}[b]{0.38\textwidth}
-          \includegraphics[width=\textwidth]{img/Features_blue3.png}
-          \subcaption{Convolution of blue band and kernel 3}
-        \end{subfigure}
+      %  \begin{subfigure}[b]{0.38\textwidth}
+      %    \includegraphics[width=\textwidth]{img/Features_blue3.png}
+      %    \subcaption{Convolution of blue band and kernel 3}
+      %  \end{subfigure}
 
-        \begin{subfigure}[b]{0.38\textwidth}
-          \includegraphics[width=\textwidth]{img/Features_nir_6.png}
-          \subcaption{Convolution of NIR Band and kernel 6}
-        \end{subfigure}
-       \caption{Examples of the convolution of different bands and Gabor filters\label{fig:gaborresults}}
-       \vspace{-2cm}
-      \end{wrapfigure} 
+      %  \begin{subfigure}[b]{0.38\textwidth}
+      %    \includegraphics[width=\textwidth]{img/Features_nir_6.png}
+      %    \subcaption{Convolution of NIR Band and kernel 6}
+      %  \end{subfigure}
+      % \caption{Examples of the convolution of different bands and Gabor filters\label{fig:gaborresults}}
+      % \vspace{-2.1cm}
+      %\end{wrapfigure} 
       The change of the urban surface properties is one of the major factors causing \glspl{SUHI}.  
       Multiple studies have shown that land cover has a significant impact on land surface temperature and \glspl{UHI} (e.g.~\cite{Karakus2019},~\cite{Weng2004} and~\cite{Stewart2011}). 
       This is mainly caused by the physical thermal properties of the different materials found in the different land cover classes. 
@@ -693,7 +691,6 @@
       %Water and Vegetation have a high emissivity with > 0.9 compared to 0.2 -0.9 of metal, brick, concrete and bare soil. 
       Build up surfaces have lower water availability for evaporation and thus more heat is heating up the material itself.
       Forests and other vegetated areas are permanently cooled by evaporative cooling and transpiration of trees, increasing vapor content and heat capacity of the air.
-      \todo[inline]{maybe elaborate}
     \subsubsection{Classification }\label{sec:classification}
       The methodology employed for land cover classification involved the multi-step process utilizing satellite imagery, feature enhancement and machine learning techniques shown in \cref{fig:pipeline} and described in \cref{sec:pipeline}.
       The primary data source for classification were 8-band Landsat images, which provided a comprehensive spectral view of the area to be classified.
@@ -704,7 +701,7 @@
       % Classification: 
       The Gabor filter used for feature engineering was varied using different $\sigma$, $\theta$ and $f$ values.
       Due to computational restrictions the number of rotations ($\theta$) was limited to 5, a value of 4 yielded in best results. 
-      For ease of variation the $\sigma_x$ value was varied while the $\sigma_y = \frac{\sigma_x}{2}$, giving a 2:1 kernel ratio (shown in \cref{fig:gaborbank} 
+      For ease of variation the $\sigma_x$ value was varied while the $\sigma_y = \frac{\sigma_x}{2}$, giving a 2:1 kernel ratio (shown in \cref{fig:gaborbank}).\\
       For $\sigma_x > 2$ the classification degraded showing stripes very large patterns were detected, a value of $\sigma_x = 1$ resulted in a kernel size of 7 $\times$ 7 pixel and good results.
       The usable frequencies are limited by the size of the kernel and the image resolution shown in \cref{fig:gaborbank}.
       Due to the low resolution, a large kernel size would detect features that are repeated with a features size in the range of 200 m that do not occur in large quantities in urban areas. 
@@ -769,7 +766,7 @@
       \caption{Filter bank of 12 Gabor filters with 4 rotations and a $\sigma_x=1\ ,\sigma_y = 0.5\ $ and $\ f = 0.15, 0.35 \text{ and } 0.4$\label{fig:gaborbank}}%
     \end{figure}
     \noindent
-    The filter bank with these kernels act as an edge and structure detection algorithm shown in \cref{fig:gaborresults}, that shows extracted features of some example bands.\\
+    The filter bank with these kernels act as an edge and structure detection algorithm.\\
     In structured areas with fields or buildings on a street raster, the filter amplifies the structures, for smaller structures the filter detects edges for change in building material. 
     The detection is working due to the different specific albedo of the different frequency bands, depending on material properties. 
     \noindent 
@@ -828,6 +825,7 @@
         \end{center}
         \caption{Change between reference product and k-means \gls{LULC} classification}\label{fig:lulcDiff}
       \end{wrapfigure}
+      \noindent
       In \cref{fig:lulcDiff} this difference is shown between the 2019 \gls{LULC} and 2022 \gls{LULC}.
       The major differences are all seen outside of the city area and can be attributed to changes on agricultural land, e.g.\ harvesting or change in vegetation type.
       During the available time neither classification nor reference data showed significant land use changes within the urban area of Bremen. 
@@ -883,19 +881,19 @@
         \includegraphics[width=\textwidth]{img/UrbanAreaBremen.png}
         \caption{Urban Area of Bremen, with buffer zones for Adjacent and Peri Urban Area\label{fig:bufferedBremen}}
       \end{figure}
-      For comparison the same buffer zones for a smaller urban area in the same image can be seen in \cref{fig:appxStuhr}
+      %For comparison the same buffer zones for a smaller urban area in the same image can be seen in \cref{fig:appxStuhr}
       
     \subsection{Analysis}\label{sec:landcoverAnalysis} 
-      The results of this classification can be seen in \cref{fig:classification}. 
+      The results of this classification can be seen in \cref{fig:classification}. \\ 
       \begin{figure}[!htbp]
        \begin{center}
          \includegraphics[width=\textwidth]{img/Classification.png}
        \end{center}
        \caption{Classification result}\label{fig:classification}
       \end{figure}
-      In \cref{fig:ndvilst01} and \cref{fig:ndvilst02} the different pixel values and the measured LST and NDVI values are plotted of the classified results. 
-      Especially the \textit{Water} and \textit{Dense Vegetation} classes are distinctly separated from the rest of the clusters. 
-      The scatter plot also shows that the principle components of the classifications are not simply \gls{NDVI} and \gls{LST} but higher order feature dimensions play a significant role in separation of classes. 
+    In \cref{fig:ndvilst01} and \cref{fig:ndvilst02} the different pixel values and the measured \gls{LST} and \gls{NDVI} values are plotted of the classified results. 
+    Especially the \textit{Water} and \textit{Dense Vegetation} classes are distinctly separated from the rest of the clusters within the \gls{NDVI} and \gls{LST} plane. 
+      The scatter plot also shows that the principle components of the classifications are not simply \gls{NDVI} and \gls{LST} but the added feature dimensions play a significant role in separation of classes.\\
       % 
       \begin{figure}[!htbp]
       \begin{subfigure}[b]{\textwidth}
@@ -910,19 +908,20 @@
       \end{subfigure}
       \caption{Result of clustering plotted with \gls{NDVI} and \gls{LST} values and cluster centres (coloured squares)\label{fig:kmeansclusters}}
       \end{figure}
-
+      %
+      \noindent
       The urban area shown in \cref{fig:bufferedBremen} yielded a usable output shape following the Bremen city borders, this was manually verified using the visible images and third party visible satellite images. 
-      \Cref{fig:classesPeri} shows the classification of pixels within the peri urban area.
+      \Cref{fig:classesPeri} shows the classification of pixels within the peri urban area.\\
       It can be seen, that the pixel of the peri urban area has a mixed surface classes dominated by vegetation classes. 
-      Parts of these are removed (\textit{Residential}, \textit{Vegetated Residential}, \textit{Industrial \& Industry Halls} and \textit{Bare Soil}) if in a linked area of more than $\approx$ 25 ha of size, to remove other larger settlements that could distort the measurement.
+      Parts of these are removed (\textit{Residential}, \textit{Vegetated Residential}, \textit{Industrial \& Industry Halls} and \textit{Bare Soil}) if in a linked area of more than $\approx$ 25 ha of size, to remove other larger settlements that could distort the measurement.\\
       The temperature values of the different areas are calculated by overlaying the masks on the thermal band of the Landsat data. 
-%
+      %
         \begin{figure}[!htbp]
          \centering
          \includegraphics[width=\textwidth]{img/ClassDistributionPU2019-06-29.png}
          \caption{Distribution of surface types within the peri urban area (prior to filtering)}\label{fig:classesPeri}
         \end{figure}
-
+      %
         The average temperature and variance is calculated for the peri urban and the urban area.
         Using the average temperature, \glspl{UHI} are detected using the definition from \cref{ssec:definition} within the area defined by the urban mask. 
         The areas that are above the threshold are then detected within the urban mask, the resulting \glspl{UHI} are shown in \cref{fig:AnalysisBre}. 
@@ -940,14 +939,21 @@
        \end{subfigure}
          \caption{Overview of Bremen \glspl{UHI} at different times}\label{fig:AnalysisBre}
    \end{figure}
-
+   The white area is the urban mask of Bremen and the detected \glspl{UHI}, are circled in black. 
+   \Cref{fig:uhiAffected} shows areas with urban heat islands at both times. 
+   The found areas could be further investigated, if health risks or high heat have negative side effects within these areas.\\
+      %
+      \begin{figure}[!p]
+          \centering
+          \includegraphics[width=\textwidth]{img/overlap.png}
+         \subcaption{Areas overlap of detected UHIs}\label{fig:uhiAffected}
+      \end{figure}
+      %
       In \cref{fig:lstclusters19} and \cref{fig:lstclusters22}, the temperature distributions within the different classes is shown (the whole image was used for the statistic). 
       Confirming previous research, classes with high vegetation and water are lower in temperature. 
       The 2022 day was colder, with mixed cloud cover, explaining the significantly lower temperature of PV / Cloud classes.
       The PV / Clouds class also included some cumulus clouds outside of the city area further decreasing the temperature values within this class. 
-      \todo[inline]{maybe add weather chart for bremen of this day here?}
-
-
+      This distribution matched the expected peri urban distribution, prior to removal of close by larger settlements. 
        \begin{landscape}
          \begin{figure}[!p]
            \centering
@@ -961,10 +967,12 @@
            \caption{Distribution of pixel \gls{LST} [°C] values per class June 2022 \label{fig:lstclusters22}}
          \end{figure}
        \end{landscape}
-       \Cref{fig:ndviclusters2019} and \cref{fig:ndviclusters2022} show the NDVI values of the same classes.
-       One unexpected observation is the wide spread of the water class over the whole range of the NDVI, where it is expected to be $\le$ 0. 
-       This can be explained by the fact that the highly vegetated riverbank areas are also classified as water based on the additional features, changing the NDVI values assigned to this class.
-       %and overlaying the classification with a visible image.
+       %
+       \noindent
+       \Cref{fig:ndviclusters2019} and \cref{fig:ndviclusters2022} show the \gls{NDVI} values of the same classes.
+       One unexpected observation is the wide spread of the water class over the whole range of the \gls{NDVI}, where it is expected to be $\le$ 0. 
+       This can be explained by the fact that the highly vegetated riverbank areas are also classified as water based on the additional features, changing the \gls{NDVI} values assigned to this class.
+      To calculate the diff between \gls{LULC} at different points in time, a median filter is applied to reduce single pixel changes at class interfaces. 
        \begin{landscape}
          \begin{figure}[!p]
            \centering
@@ -978,16 +986,27 @@
            \caption{Distribution of pixel \gls{NDVI} values per class 2022\label{fig:ndviclusters2022}}
          \end{figure}
        \end{landscape}
-
-       \todo[inline]{explain violin charts} 
       \noindent
-      To calculate the diff between \gls{LULC} at different points in time, a median filter is applied to reduce single pixel changes at class interfaces.
-       \todo[inline]{add violin with class differences } 
+      Each detected \gls{UHI} was further investigated by detecting the dominating class within the \gls{UHI} area. 
+      The separated classes are plotted against \gls{UHI} $T_{max}$ in \cref{fig:tempInUHIs}
+      Industrial and sealed surfaces are the most common class found within areas affected by \gls{UHI}.
+      Very few \glspl{UHI} classes were dominated by any class associated with high vegetation.
+      The image shows, that the residential area includes the hottest \gls{UHI} while Industrial UHI have a higher average max temperature. 
+      %After referencing the  data it was shown that there where no significant LULC changes within the city area of Breme
+      \begin{figure}[!htbp]
+      \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/Temperature and majority surface type in UHIs (2019-06-29).png}
+        \subcaption{2019}\label{fig:majorityClasses}
+      \end{subfigure}
 
-
-      %After referencing the  data it was shown that there where no significant LULC changes within the city area of Bremen.  
-    Industrial and sealed surfaces are the most common class found within areas affected by \gls{UHI}.
-    No \glspl{UHI} were dominated by any class associated with high vegetation. 
+      \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{img/Temperature and majority surface type in UHIs (2022-06-21).png}
+        \subcaption{2022}\label{fig:majorityClasses2}
+      \end{subfigure}
+      \caption{Analysis of the majority classes within areas of \glspl{UHI} and the associated temperature distribution\label{fig:tempInUHIs}}
+      \end{figure}  
       
  \subsection{Conclusions}
 
@@ -1014,15 +1033,9 @@
     \subsection{Introduction}
       The interaction between global and local climate is a complicated process that has multiple parameters, and is not yet fully understood or directly measurable (see \cref{sec:intro}).  
       While rural areas and the global south is most effected in terms of temperature increase and drought, the excess mortality of heat waves is greatest within city areas~\autocite{Gabriel2011}. During high temperatures the threshold of negative health effect shows to be lower in northern European cities compared to Mediterranean cities~\autocite{Baccini2008}. 
-      \todo[inline,size=\tiny]{ One possible reason might be the lack of resilience of cities that are not encountering severe heat regularly. }
       The negative health consequences and increased mortality is affecting elderly the most and the excess mortality is an immediate effect \autocite{Baccini2008}. 
       In western Europe the climate is governed by a transitional climate, with attributes from maritime and continental climate.
       The summer is, compared to southern Europe, milder and not regularly affected by burning and heat waves. 
-      %The temperature in winter is mostly mild and seldom below freezing.  TODO 
-      %According to multiple studies global rise of temperature due to climate change is also increasing temperatures in northern Europe~\autocite{Benestad2005}  \todo[inline,size=\tiny]{ this is not really what I want...}
-      %A climate tipping point (see~\cite{Lenton2008}) that could cause severe cooling in northern Europe is the breakdown of the Atlantic Thermohaline circulation\cite{Rahmstorf1999}.
-      \todo[inline,size=\tiny]{add a sentence for why}
-      %But since the European climate is still under influence by the warm ocean currents, 
       The temperatures in major European cities have increased at a similar pace than the global mean temperatures. 
       In Bremen, the 5-year-average temperature has risen from 1990 (13.79\textdegree\ C)  by 1.4\textdegree\ C to 15.20\textdegree\ C in 2020.
       The change over the past 20 years in monthly averages is shown in \cref{fig:monthAvg}.
@@ -1031,7 +1044,6 @@
           \includegraphics[width=\textwidth]{img/BremenClimateAvgDiff2023.png}
           \caption{Change of monthly air temperature average compared to average of 1981--2010~\autocite{DWD2024a}\label{fig:monthAvg}}
       \end{figure}
-      \todo[inline,size=\tiny]{ Especially the rise in winter temperature is \ldots}
       %The hypothesis is that the rising temperatures observed over the past 30 years have increased heat island severity and size. 
     \subsection{Methodology}
       Measurement of the impact of rising temperatures have to be done after correcting for other variables such as urban development and meteorological impact factors such as wind and rain. 
@@ -1120,27 +1132,28 @@
       \end{figure}
 \end{landscape}
     \subsection{Analysis}\label{sec:tempanalysis}
-      Bremen was selected as the base area of the study, to be able to verify classification results and due to personal local knowledge. 
+      Bremen was selected as the base area of the study, to be able to verify classification results using personal local knowledge. 
       The study area covers the city centre of Bremen and an area of 27 km in all directions covering an area of approximately $3000\ km^2$. 
-      The study area is at sea level elevation and has a temperate-oceanic climate according to the~\cite{koppen1930handbuch} classification.% and it's location is shown in .
+      The study area is at sea level elevation and has a temperate-oceanic climate according to the~\cite{koppen1930handbuch} classification.
       An overview of the climate of Bremen is shown in \cref{tab:statsBremen}.
-            The development of threshold days over time are shown in \cref{fig:breTempExtr1}, the strongest change can be seen in \cref{fig:breTempExtr2}'s frost days, where there is a clear downward trend can be seen after 2010. 
-      Together with the increase in tropical nights over the past five yearn and the increased appearance of hot days for the past 3 years after 6 decades with no or one hot day per decade.
-      %This indicates an upward trend seen worldwide,
+            The development of threshold days over time are shown in \cref{fig:breTempExtr1}, the strongest change can be seen in \cref{fig:breTempExtr2} and the downward trend in frost days. 
+      Together with the increase in tropical nights over the past five years and the increased appearance of hot days for the past 3 years after 6 decades with no or one hot day per decade, this fits the trend of global rise in temperatures.\\ \\ 
       % 
       The weather station in Bremen is located at the airport on the edge of the city area. 
       % 
-      For comparison of air temperature with a more rural area the \gls{DWD} weather station ``Worpswede-Hüttenbusch'' located roughly 30 km north-north-east of the weather station and is located in a rural area (show \cref{fig:mapWeatherstationsBremen}).
+      For comparison of air temperature with a more rural area the \gls{DWD} weather station ``Worpswede-Hüttenbusch'' located roughly 30 km north-north-east of the weather station and is located in a rural area (see \cref{fig:mapWeatherstationsBremen}).
   \begin{figure}[!htbp]
          \centering
             \includegraphics[width=\textwidth]{img/MapWetterstationenBremen.jpeg}
              \caption{Location of the weather stations in Bremen and the rural reference station in Worpswede-Hüttenbusch}\label{fig:mapWeatherstationsBremen}
       \end{figure}
       % 
-      To verify that the measurements of the urban and rural stations are correlated the absolute temperature difference for daily values is shown in \cref{fig:diff2015Bre} and \cref{fig:diff20222Bre}, it can be seen that the atmospheric \gls{UHI} over Bremen is affecting the Bremen airport station. 
-      In the period from April to October in 2015 the daily mean temperature was 0.6 °C lower at the rural station. 
-      In the same period in 2022 the daily mean temperature was 0.85 °C lower at the rural station. 
-      The Stations are calibrated to provide comparable weather data with high levels of accuracy (error smaller $\pm 0.2°C$ \autocite{LES2024}) \cref{fig:tempurbvsrural} shows the offset of minimum, maximum and mean temperature daily temperature over the year. 
+      To verify that the measurements of the urban and rural stations, the difference in daily measurement values of both stations is shown in \cref{fig:diff2015Bre} and \cref{fig:diff20222Bre}. 
+      It can be seen that the atmospheric \gls{UHI} over Bremen is affecting the Bremen airport station. 
+      In the period from April to October in 2015 the daily mean temperature was 0.6 \textdegree\ C lower at the rural station. 
+      In the same period in 2022 the daily mean temperature was 0.85 \textdegree\ C lower at the rural station. 
+      The Stations are calibrated to provide comparable weather data with high levels of accuracy (error smaller $\pm 0.2$\textdegree\ C \autocite{LES2024}). 
+      \Cref{fig:tempurbvsrural} shows the offset of minimum, maximum and mean temperature daily temperature over the year. 
       This indicates that the atmospheric heat island of Bremen is affecting the airport weather station.
     \begin{figure}[!htbp]
       \begin{center}
@@ -1148,30 +1161,43 @@
          \end{center}
          \caption{Mean yearly station offset urban rural station}\label{fig:tempurbvsrural}
       \end{figure}
+      \noindent
+      \Cref{fig:diff2015Bre} and \cref{fig:diff20222Bre} exemplary show the lack of usable satellite imagery for Bremen in green. 
+      Especially finding cloud free cover of the area with similar seasonal and weather patterns was difficult.
       
-          \Cref{fig:diffBre} also shows exemplary the lack of usable satellite imagery for Bremen in green. 
-      Especially finding cover of the area with similar seasonal and weather patterns was difficult.
-      
+      \begin{landscape}
       \begin{figure}[!p]
          \centering
-         \begin{subfigure}[b]{\textwidth}
-          \includegraphics[width=\textwidth]{img/BremenDifference2019.png}
-          \subcaption{Absolute Differences between measurement stations [°C] and days with satellite coverage (green) in 2015}\label{fig:diff2015Bre}
-         \end{subfigure}
-
-         \begin{subfigure}[b]{\textwidth}
-          \includegraphics[width=\textwidth]{img/BremenDifferences2022.png}
-          \subcaption{Absolute Differences between measurement stations [°C] and days with satellite coverage (green) in 2022}\label{fig:diff20222Bre}
-         \end{subfigure}
-         \caption{Differences of weather station measurements in urban and rural areas near Bremen}\label{fig:diffBre}
+          \includegraphics[width=0.89\linewidth]{img/BremenDifference2019.png}
+          \caption{Absolute Differences between measurement stations [°C] and days with satellite coverage (green) in 2015}\label{fig:diff2015Bre}
       \end{figure}
+
+      \begin{figure}[!p]
+          \includegraphics[width=0.89\linewidth]{img/BremenDifferences2022.png}
+          \caption{Absolute Differences between measurement stations [°C] and days with satellite coverage (green) in 2022}\label{fig:diff20222Bre}
+        \end{figure}
+      \end{landscape}
       %To test if the temperature in the weather stations was significantly offset a \gls{WilMannWhitTe} was performed on the datasets.
       %The test showed a significant offset for the minimum and mean temperature.
-   
+      % 
+      \noindent
       \Cref{fig:AnalysisBre} shows two summer days in Bremen with different temperatures and the influence of temperature onto the \glspl{UHI} size and shapes. 
       In the image from 2019 (\cref{fig:uhis2019}), the average temperature was much higher at the time. 
       It can be seen that the heat islands, while statistically the same difference to the peri urban temperature, increase in size and combine into larger structures. 
       In \cref{tab:UHIBremenStats} the statistical properties of the \gls{UHI} for different days within the urban area is shown.
+      \begin{figure}[!htbp]
+        \centering
+         \begin{subfigure}[b]{0.80\textwidth}
+           \includegraphics[width=\textwidth]{img/sizeVsTempmean2019-06-29 00:00:00.png}
+           \subcaption{2019}
+         \end{subfigure}
+
+         \begin{subfigure}[b]{0.80\textwidth}
+           \includegraphics[width=\textwidth]{img/sizeVsTempmean2022-06-21 00:00:00.png}
+           \subcaption{2022}
+         \end{subfigure}
+         \caption{Maximum Temperatures of the detected \glspl{UHI} and area above threshold}\label{fig:tempvssize}
+      \end{figure}
 %   
 \begin{landscape}
   \begin{table}[ht]
@@ -1189,7 +1215,6 @@
       \midrule
       2019--06--29 & 15.9 & 24.7 & 31.9 & 17.7 & 25.4 & 30.7 & -0.7 & 22.9 & 34.2 (3.5) & 61.4 & 102 & 22.92 & 35.2(3.77) & 61.4 \\
       2022--06--21 & 6.9  & 15.7 & 22.3 & 7.6 & 15.6 & 23.0 & -1.0 & 4.4 & 29.0 (4.4) & 56.7 & 34 & 4.7& 29.7 (4.4)& 56.7 \\
-      %.... TBC & & & & & & & & & &&&&&\\
       \bottomrule
     \end{tabular}
   \end{table}
@@ -1204,25 +1229,15 @@
              \midrule
         2019--06--29 & 102 & 4500 & 74691 & 962100  & 47.7 & 52.0 \\
         2022--06--21 & 34 & 4500   & 58950 & 370800  & 46.4 & 51.6 \\ 
-        %.... TBC & & & & & & & & & &&&&&\\
         \bottomrule
       \end{tabular}
     \end{table}
   \end{landscape}
-    \begin{wrapfigure}{r}{0.5\textwidth}
-          \vspace{-1cm}
-           \begin{center}
-           \includegraphics[width=0.48\textwidth]{img/sizeVsTempmax2019-06-29 00:00:00.png}
-         \end{center}
-         \caption{Maximum Temperatures of the detected \glspl{UHI} and area above threshold}\label{fig:tempvssize}
-    \end{wrapfigure}
-    
+   % 
     The analysis of the \glspl{UHI} at the analysed dates, shows a strong increase in maximum and average heat island size, with rising temperatures. 
     \Glspl{UHI} smaller then 5 pixel (4500 m$^2$) were excluded, to mitigate impact of outliers. 
     \Cref{fig:tempvssize} shows the distribution of sizes and maximum temperatures within the \gls{UHI}.
     Most heat islands are small with a wide range of temperatures, the few very big heat islands are within the mid range of temperatures. 
-
-     
   %
 \newpage
 \section{Conclusion}\label{sec:conclusion}
@@ -1232,6 +1247,7 @@
   % 
   Analysing each \gls{UHI} for more parameter and using measurements from different sources, e.g.\ ground measurement campaigns to refine and verify measurements.
   The data indicates size increases of \glspl{SUHI} with rising temperatures, due to lack of measurement stations there is no data on the impact of the inner city air temperature distribution.
+  In the following sections the answers to the research questions are recapitulated.
 
   \subsection{What definition can be used to define \glspl{UHI} comparably?}\label{a1} 
    An \gls{SUHI} is an area with increased surface temperature within an urban space. 
@@ -1304,7 +1320,6 @@
   \begin{itemize}
     \item OpenAIs ChatGPT \autocite{chatgpt} for aid during programming, help with formulations, getting topic overviews and aid in finding keywords for further research.
     \item Kagi's summerizer \autocite{kagi}, to deem papers relevant.
-    \item scienceOS \autocite{scienceos} to find research papers for topics and questions. 
     \end{itemize}
     All informations from these tools were used as an aid and were always cross-checked with primary sources. 
   \subsection{Content of the Data Storage device}
