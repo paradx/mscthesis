@@ -106,7 +106,6 @@
   \setcounter{page}{1}
   \pagenumbering{roman}
   \input{abstact}
-  \newpage
 
   \tableofcontents
   \newpage
@@ -145,8 +144,8 @@
   This type of measurement were repeated in multiple cities around the globe at the time.\\
   The term \gls{UHI} was coined in the 1960s in publications regarding case studies in London~\autocite{Chandler1961} and Montreal~\autocite{Oke1968}.
   During this time the influences and understanding of the interaction between the human industrial activity, the land change by urbanisation and industrialization and the influence of these factors on temperatures was investigated by numerous case studies using fixed or mobile weather stations.
-  Health problems within industrial areas or incidents like the 1930 Meuse valley fog catastrophe, in which exhaust gases, including fluorine gas, combined with an inversion weather condition, forming a cloud over the area causing the death of at least 60 people~\autocite{Nemery2001}.
-
+  Health problems within industrial areas or incidents like the 1930 Meuse valley fog catastrophe, in which exhaust gases, including fluorine gas, combined with an inversion weather condition, forming a cloud over the area causing the death of at least 60 people~\autocite{Nemery2001}.\\
+%
   The \textit{Great Smog of London} in 1952, a similar event lasting four days, causing 4000 direct deaths and between 10000 and 12000 deaths from consequences of the fog in the months after~\autocite{Bell2004}, triggered scientific interest in the interaction between human settlement, pollution and meteorological phenomena on human health and the environment. 
   The investigation of incidents like this using scientific methods shaped the idea of an man made urban climate.\\ \\ 
 %
@@ -485,6 +484,7 @@
       \Cref{fig:largeKernel} shows an example of a single Gabor filter kernel.
       In image processing, this algorithm is used as a feature extraction algorithm, to extract and analyse texture and structures of different sizes within the image~\autocite{Cerdan1993}. 
       By rotating the kernel and changing the frequency, different textures are extracted from the image.\\ \\ 
+      \vspace{-0.05cm}
       %
       Mathematically the Gabor-filter is defined by
       \begin{equation}
@@ -496,7 +496,7 @@
         $\boldsymbol{\phi}$ is the angle of phase shift of the sine component of the kernel. \\
         $\boldsymbol{\theta}$ is the angle of rotation of the kernel, detecting differently oriented features.\\
         $\boldsymbol{\lambda}$ is the wavelength of the sine wave. \\
-        $\boldsymbol{\sigma}$ is the standard deviation of the Gaussian distribution.\\ \\
+        $\boldsymbol{\sigma}$ is the standard deviation of the Gaussian distribution.\\ 
       \noindent
       To detect different structures of different scales within the image, a filter bank can be created by combining multiple filters and varying $\phi$, $\sigma$ and $\theta$.\\
       After the convolution of the image with the filter bank, the resulting set of detected features can be used as an input into different algorithms.
